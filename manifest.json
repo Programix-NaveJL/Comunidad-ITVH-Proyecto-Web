@@ -1,0 +1,16 @@
+{
+  "name": "Comunidad ITVH",
+  "short_name": "Comunidad ITVH",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0B0B0F",
+  "theme_color": "#0B0B0F",
+  "icons": [
+    {
+      "src": "assets/icons/splash_foreground.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+/* seleccionar-media.css
+   Ruta real sugerida: css/social/historias/seleccionar-media.css
+
+   NOTA DE VARIABLES: var(--nombre, #hexDelDart) — fallback exacto
+   mientras se confirma el nombre real en variables.css. Esta
+   pantalla es de fondo negro fijo en el Dart original (no cambia
+   con el tema claro/oscuro), así que aquí se usan valores fijos en
+   vez de variables de tema donde el Dart también los tenía fijos. */
+
+.seleccionar-media-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1400;
+  background: #000;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.seleccionar-media-overlay.visible {
+  opacity: 1;
+}
+
+.seleccionar-media {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-top: env(safe-area-inset-top, 0);
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+.seleccionar-media__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 4px;
+}
+
+.seleccionar-media__icono-btn {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: none;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.seleccionar-media__titulo {
+  flex: 1;
+  margin: 0;
+  text-align: center;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.seleccionar-media__hub {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px 10px 4px;
+}
+
+.sm-icono-hub {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 0 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.sm-icono-hub__circulo {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  background: #2c2c2e;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.sm-icono-hub__etiqueta {
+  font-size: 11px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.seleccionar-media__picker {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 24px;
+}
+
+.seleccionar-media__opcion {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 320px;
+  padding: 16px;
+  border-radius: 14px;
+  background: #1c1c1e;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.seleccionar-media__opcion-icono {
+  font-size: 20px;
+}
+
+.seleccionar-media__input-oculto {
+  display: none;
+}

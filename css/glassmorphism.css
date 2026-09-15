@@ -1,0 +1,297 @@
+/* ═════════════════════════════════════════════════════════════════
+   glassmorphism.css
+
+   Estilos base reutilizables en toda la app: tarjeta con efecto de
+   vidrio esmerilado, campos de texto estilo "glass", botones,
+   checkbox y toast — el mismo lenguaje visual que _GlassField /
+   _GlassDropdown definen en Flutter (ver iniciar_sesion.dart y
+   crear_cuenta.dart).
+
+   Estas clases son GLOBALES a propósito: cualquier pantalla nueva
+   (chat, marketplace, perfil, admin, etc.) las reutiliza en vez de
+   redefinir su propia versión del mismo efecto visual. Los archivos
+   CSS dentro de cada carpeta de módulo (ej. css/auth/) solo deben
+   contener ajustes específicos de esa pantalla, apoyándose en estas
+   clases base.
+   ═════════════════════════════════════════════════════════════════ */
+
+/* ── Fondo con imagen + overlay oscuro, detrás de cada pantalla
+   (equivalente al Stack + Positioned.fill de Flutter) ────────────── */
+.pantalla-fondo {
+  position: fixed;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: -2;
+}
+
+.pantalla-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.65),
+    rgba(0, 0, 0, 0.45),
+    rgba(0, 0, 0, 0.85)
+  );
+}
+
+/* ── Tarjeta glassmorphism (ClipRRect + BackdropFilter + Container) ── */
+.glass-card {
+  background: var(--glass-card-bg);
+  border: 1.2px solid var(--glass-card-border);
+  border-radius: var(--radius-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 32px 28px;
+}
+
+/* ── Campo de texto glassmorphism (_GlassField) ──────────────────── */
+.glass-field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 14px;
+  background: var(--glass-bg);
+  border: 1.2px solid var(--glass-border);
+  border-radius: var(--radius-field);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.glass-field:focus-within {
+  background: var(--glass-bg-focus);
+  border-color: rgba(0, 198, 255, 0.7);
+}
+
+.glass-field__icon {
+  flex-shrink: 0;
+  color: var(--color-text-38);
+  transition: color 0.2s ease;
+  font-size: 16px;
+}
+
+.glass-field:focus-within .glass-field__icon {
+  color: var(--color-accent);
+}
+
+.glass-field input,
+.glass-field select {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--color-text);
+  font-size: 15px;
+  padding: 14px 0;
+  font-family: var(--font-family);
+}
+
+.glass-field input::placeholder {
+  color: var(--color-text-30);
+}
+
+/* El popup nativo del <select> lo pinta el navegador con fondo
+   blanco por defecto — sin esto, el texto blanco de .glass-field
+   select queda invisible (blanco sobre blanco) al desplegar las
+   opciones. Chrome/Edge/Firefox respetan background-color/color en
+   <option>; Safari en iOS no permite estilizar el popup nativo. */
+.glass-field select option {
+  background-color: var(--color-surface);
+  color: var(--color-text);
+}
+
+.glass-field__trailing {
+  flex-shrink: 0;
+  cursor: pointer;
+  color: var(--color-text-38);
+  font-size: 16px;
+}
+
+/* Texto de ayuda debajo de un campo (ej. reglas del nombre de usuario) */
+.field-hint {
+  margin-top: 6px;
+  margin-left: 4px;
+  color: var(--color-text-38);
+  font-size: 11px;
+}
+
+/* ── Botones ──────────────────────────────────────────────────────── */
+.btn-primary {
+  width: 100%;
+  height: 52px;
+  border: none;
+  border-radius: var(--radius-field);
+  background: var(--color-accent);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  font-family: var(--font-family);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-outline {
+  width: 100%;
+  height: 50px;
+  border-radius: var(--radius-field);
+  background: transparent;
+  border: 1px solid var(--color-text-38);
+  color: var(--color-text);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font-family);
+}
+
+/* Spinner simple para el estado "cargando" dentro de un botón */
+.btn-spinner {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  border: 2.5px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: girar 0.7s linear infinite;
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Checkbox de Términos y Condiciones ──────────────────────────── */
+.glass-checkbox-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.glass-checkbox-row input[type='checkbox'] {
+  width: 22px;
+  height: 22px;
+  accent-color: var(--color-accent);
+  margin-top: 1px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.glass-checkbox-row label {
+  font-size: 12.5px;
+  color: var(--color-text-60);
+  line-height: 1.4;
+  cursor: pointer;
+}
+
+.glass-checkbox-row a {
+  color: var(--color-accent);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+/* ── Toast flotante (equivalente a SnackBar) ─────────────────────── */
+.toast {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: 24px;
+  max-width: 420px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 14px;
+  z-index: 1000;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  animation: toast-in 0.2s ease;
+  font-family: var(--font-family);
+}
+
+.toast--error {
+  background: var(--color-error);
+}
+
+.toast--success {
+  background: var(--color-success);
+}
+
+@keyframes toast-in {
+  from {
+    transform: translateY(12px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ── Etiqueta de sección (Datos personales / Información académica) ── */
+.section-label {
+  text-transform: uppercase;
+  color: var(--color-text-38);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  margin-bottom: 10px;
+}
+
+/* ── Hoja de bloqueo (cuenta suspendida/expulsada) ───────────────── */
+.bloqueo-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.bloqueo-hoja {
+  width: 100%;
+  max-width: 480px;
+  background: var(--color-surface);
+  border-radius: 24px 24px 0 0;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+}
+
+.bloqueo-icono {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border: 1.5px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.bloqueo-hoja h2 {
+  color: var(--color-text);
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.bloqueo-hoja p {
+  color: var(--color-text-60);
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0 0 12px;
+}

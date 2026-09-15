@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comunidad ITVH</title>
+
+  <!--
+    CSS del splash, inline y antes que cualquier <link>: así se pinta
+    de inmediato sin esperar a que terminen de bajar las demás hojas
+    de estilo. Se queda visible un mínimo de 3s (ver router.js →
+    programarCierreSplash) y luego hace fade-out.
+  -->
+  <style>
+    #splash {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      background: #0B0B0F;
+      transition: opacity 0.5s ease;
+    }
+    #splash.splash--oculto {
+      opacity: 0;
+      pointer-events: none;
+    }
+    #splash .splash-logo {
+      width: 160px;
+      height: 160px;
+      object-fit: contain;
+    }
+    #splash .splash-spinner {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 3px solid rgba(255, 255, 255, 0.15);
+      border-top-color: #007AFF;
+      animation: splash-girar 0.8s linear infinite;
+    }
+    #splash .splash-marca {
+      position: absolute;
+      bottom: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      opacity: 0.55;
+    }
+    #splash .splash-marca__label {
+      color: #fff;
+      font-size: 11px;
+      letter-spacing: 0.4px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    #splash .splash-marca img {
+      width: 130px;
+      height: auto;
+      object-fit: contain;
+    }
+    @keyframes splash-girar {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+
+  <!-- Estilos globales -->
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/glassmorphism.css" />
+  <link rel="stylesheet" href="css/shell.css" />
+
+  <!-- Estilos del módulo de Auth -->
+  <link rel="stylesheet" href="css/auth/auth-layout.css" />
+
+  <!-- Estilos de las pantallas del Drawer -->
+  <link rel="stylesheet" href="css/drawer/plantel.css" />
+  <link rel="stylesheet" href="css/drawer/historia.css" />
+  <link rel="stylesheet" href="css/drawer/carreras.css" />
+  <link rel="stylesheet" href="css/drawer/pdf-viewer.css" />
+  <link rel="stylesheet" href="css/drawer/oferta-educativa.css" />
+  <link rel="stylesheet" href="css/drawer/donaciones.css" />
+  <link rel="stylesheet" href="css/drawer/soporte.css" />
+  <link rel="stylesheet" href="css/drawer/ajustes.css" />
+  <link rel="stylesheet" href="css/drawer/historial-reacciones.css" />
+  <link rel="stylesheet" href="css/drawer/historial-comentarios.css" />
+
+  <!-- Estilos de las pantallas de Social -->
+  <link rel="stylesheet" href="css/social/buscador-usuarios.css" />
+  <link rel="stylesheet" href="css/social/notificaciones.css" />
+  <link rel="stylesheet" href="css/social/pantalla-principal.css" />
+  <link rel="stylesheet" href="css/social/publicaciones/crear-publicaciones/crear-publicacion.css" />
+  <link rel="stylesheet" href="css/bottom-sheet.css" />
+  <link rel="stylesheet" href="css/social/publicaciones/mencion-autocomplete.css" />
+  <link rel="stylesheet" href="css/social/publicaciones/tarjeta-publicaciones/item-comentario.css" />
+  <link rel="stylesheet" href="css/social/publicaciones/tarjeta-publicaciones/hoja-etiquetados.css" />
+  <link rel="stylesheet" href="css/social/publicaciones/tarjeta-publicaciones/hoja-reacciones.css" />
+  <link rel="stylesheet" href="css/social/publicaciones/tarjeta-publicaciones/hoja-comentarios.css" />
+  <link rel="stylesheet" href="css/social/publicaciones/tarjeta-publicaciones/tarjeta-publicacion.css" />
+  <link rel="stylesheet" href="css/social/publicaciones/tarjeta-publicaciones/galeria-multimedia.css" />
+  <link rel="stylesheet" href="css/social/publicaciones/visor-media.css" />
+  <link rel="stylesheet" href="css/social/publicaciones/tarjeta-publicaciones/pill-button.css" />
+  <link rel="stylesheet" href="css/social/publicaciones/tarjeta-publicaciones/reacciones.css" />
+  <link rel="stylesheet" href="css/social/publicaciones/reportar-publicacion.css" />
+  <link rel="stylesheet" href="css/social/publicaciones/ver-publicacion.css" />
+  <link rel="stylesheet" href="css/social/historias/historias-texto/historia-texto.css" />
+  <link rel="stylesheet" href="css/social/historias/seleccionar-media.css" />
+  <link rel="stylesheet" href="css/social/historias/servicio-musica/seleccionar-musica.css" />
+  <link rel="stylesheet" href="css/social/historias/historias-musica/historia-musica.css" />
+  <link rel="stylesheet" href="css/social/historias/historias-diseno/historia-diseno.css" />
+  <link rel="stylesheet" href="css/social/historias/historias-audio/historia-audio.css" />
+  <link rel="stylesheet" href="css/social/historias/ver-historias/ver-historia.css" />
+  <link rel="stylesheet" href="css/social/historias/publicar-historia.css" />
+  <link rel="stylesheet" href="css/perfil/mi-perfil/mi-perfil.css" />
+
+  <!-- Estilos de Historias Destacadas (Mi Perfil) -->
+  <link rel="stylesheet" href="css/perfil/destacadas/seccion-destacadas.css" />
+  <link rel="stylesheet" href="css/perfil/destacadas/seleccionar-historias-destacada.css" />
+  <link rel="stylesheet" href="css/perfil/destacadas/nombre-portada-destacada.css" />
+  <link rel="stylesheet" href="css/perfil/destacadas/ver-destacada.css" />
+
+  <link rel="stylesheet" href="css/perfil/seguidores-sheet.css" />
+  <link rel="stylesheet" href="css/perfil/editar-perfil.css" />
+  <link rel="stylesheet" href="css/perfil/mi-perfil/mi-perfil-feed-detalle.css" />
+  <link rel="stylesheet" href="css/perfil/perfil-publico.css" />
+
+  <link rel="stylesheet" href="css/marketplace/marketplace-shell.css" />
+  <link rel="stylesheet" href="css/marketplace/marketplace-inicio.css" />
+  <link rel="stylesheet" href="css/marketplace/marketplace-publicar.css" />
+  <link rel="stylesheet" href="css/marketplace/marketplace-editar-perfil.css" />
+  <link rel="stylesheet" href="css/marketplace/marketplace-editar-publicacion.css" />
+  <link rel="stylesheet" href="css/marketplace/mi-negocio-personal.css" />
+  <link rel="stylesheet" href="css/marketplace/mi-negocio-publico.css" />
+
+  <link rel="stylesheet" href="css/mapa/ubicatecnm.css" />
+  <link rel="stylesheet" href="css/mapa/mapa-interactivo.css" />
+
+  <link rel="stylesheet" href="css/chat/jaguar-chat.css" />
+  <link rel="stylesheet" href="css/chat/chats/chats-list.css" />
+  <link rel="stylesheet" href="css/chat/chats/conversacion.css" />
+  <link rel="stylesheet" href="css/chat/chats/avatar-con-estado.css" />
+  <link rel="stylesheet" href="css/chat/maestros/maestros.css" />
+  <link rel="stylesheet" href="css/chat/perdidas/cosas-perdidas.css" />
+
+  <link rel="stylesheet" href="css/admin/panel-admin.css" />
+
+  <!-- Leaflet (mapa de UbicaTecNM) — debe cargar antes que
+       js/features/mapa/mapa-interactivo.js, que usa el global L. -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- SDK de Supabase (debe cargar ANTES que core/supabase-client.js) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+  <!--
+    Splash de arranque — HTML puro, se pinta de inmediato sin esperar
+    el bundle de módulos. Se queda visible un mínimo de 3s (ver
+    router.js → programarCierreSplash, que lee window.__splashInicio
+    de abajo) y luego hace fade-out.
+  -->
+  <div id="splash">
+    <img src="assets/icons/splash_foreground.png" alt="" class="splash-logo" />
+    <span class="splash-spinner"></span>
+    <div class="splash-marca">
+      <span class="splash-marca__label">por</span>
+      <img src="assets/icons/logo_programix_navejl.png" alt="Programix NaveJL" />
+    </div>
+  </div>
+  <script>window.__splashInicio = Date.now();</script>
+
+  <!-- Contenedor único donde el router pinta la pantalla activa -->
+  <div id="app"></div>
+
+  <!--
+    Punto de entrada de la app. Se declara como módulo ES para poder
+    usar import/export entre archivos. El orden de los imports no
+    importa: cada pantalla se auto-registra en el router al cargarse
+    (ver el final de cada archivo en js/auth/ y js/features/).
+  -->
+  <script type="module">
+  import './js/core/router.js';
+  import './js/auth/iniciar-sesion.js';
+  import './js/auth/crear-cuenta.js';
+  import './js/auth/recuperar-contrasena.js';
+  import './js/features/shell/shell.js';
+  import './js/features/drawer/plantel.js';
+  import './js/features/drawer/carreras/carreras.js';
+  import './js/features/drawer/oferta-educativa.js';
+  import './js/features/drawer/donaciones.js';
+  import './js/features/drawer/soporte.js';
+  import './js/features/drawer/ajustes.js';
+  import './js/features/drawer/historial-reacciones.js';
+  import './js/features/drawer/historial-comentarios.js';
+  import './js/features/social/buscador-usuarios.js';
+  import './js/features/social/notificaciones.js';
+  import './js/features/social/historias/seleccionar-media.js';
+  import './js/features/social/publicaciones/crear-publicaciones/crear-publicacion.js';
+  import './js/features/social/historias/historias-texto/historias-texto.js';
+  import './js/features/social/historias/historias-musica/historias-musica.js';
+  import './js/features/social/publicaciones/ver-publicacion.js';
+  import './js/features/social/historias/historias-diseno/historias-diseno.js';
+  import './js/features/social/historias/historias-audio/historias-audio.js';
+  import './js/features/perfil/editar-perfil.js';
+  import './js/features/perfil/perfil-publico.js';
+  import './js/features/perfil/mi-perfil/mi-perfil-feed-detalle.js';
+  import './js/features/chat/chats/conversacion/conversacion-nav.js';
+  import './js/features/marketplace/mi-negocio-publico.js';
+  import './js/features/admin/admin-shared-widgets.js';
+</script>
+
+</body>
+</html>

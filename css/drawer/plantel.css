@@ -1,0 +1,458 @@
+/* ═════════════════════════════════════════════════════════════════
+   plantel.css
+
+   Estilos de la pantalla "Conoce el plantel" del Drawer
+   (js/features/drawer/plantel.js). Réplica de conoce_plantel.dart:
+   encabezado con logo institucional, ficha rápida, secciones tipo
+   tarjeta, galería de fotos con carrusel deslizable, misión/visión
+   con acento de color, chips de valores y tiles de contacto.
+
+   El color de acento de esta pantalla es fijo en Flutter
+   (Color(0xFF007AFF), sin cambiar entre tema claro/oscuro), así que
+   aquí se usa var(--color-primary-light) directamente en vez de una
+   variable que reaccione a [data-theme].
+   ═════════════════════════════════════════════════════════════════ */
+
+.plantel {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-family);
+}
+
+/* ── Encabezado ───────────────────────────────────────────────── */
+
+.plantel-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 16px 24px;
+  background: var(--color-surface);
+  position: relative;
+}
+
+.plantel-hero__volver {
+  position: absolute;
+  top: 14px;
+  left: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: var(--glass-bg);
+  color: var(--color-text);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.plantel-hero__logo {
+  height: 90px;
+  object-fit: contain;
+  margin-top: 24px;
+}
+
+.plantel-hero__nombre {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text);
+  text-align: center;
+}
+
+/* ── Secciones tipo tarjeta ───────────────────────────────────── */
+
+.plantel-seccion {
+  background: var(--color-surface);
+  padding: 20px;
+  margin-top: 8px;
+}
+
+.plantel-titulo-principal {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.plantel-subtitulo-marca {
+  color: var(--color-primary-light);
+  font-size: 13px;
+  font-weight: 600;
+  margin: 6px 0 16px;
+}
+
+.plantel-divisor {
+  height: 1px;
+  background: var(--glass-border);
+  margin-top: 8px;
+}
+
+.plantel-titulo-seccion {
+  margin-bottom: 12px;
+}
+
+.plantel-titulo-seccion h2 {
+  color: var(--color-primary-light);
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.plantel-titulo-seccion__barra {
+  display: block;
+  width: 40px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--color-primary-light);
+  margin-top: 6px;
+}
+
+.plantel-parrafo {
+  color: var(--color-text-60);
+  font-size: 14px;
+  line-height: 1.65;
+  text-align: justify;
+  margin: 0 0 10px;
+}
+
+.plantel-parrafo:last-child {
+  margin-bottom: 0;
+}
+
+/* ── Ficha rápida ─────────────────────────────────────────────── */
+
+.plantel-ficha {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding-bottom: 10px;
+  font-size: 13px;
+}
+
+.plantel-ficha__icono {
+  color: var(--color-primary-light);
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.plantel-ficha__etiqueta {
+  width: 80px;
+  flex-shrink: 0;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.plantel-ficha__valor {
+  color: var(--color-text-60);
+}
+
+.plantel-ficha__valor--link {
+  color: var(--color-primary-light);
+  text-decoration: none;
+}
+
+/* ── Galería del campus ───────────────────────────────────────── */
+
+.plantel-galeria__viewport {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--color-surface);
+}
+
+.plantel-galeria__track {
+  display: flex;
+  height: 100%;
+  transition: transform 0.28s ease;
+}
+
+.plantel-galeria__slide {
+  flex: 0 0 100%;
+  height: 100%;
+  position: relative;
+}
+
+.plantel-galeria__slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.plantel-galeria__fallback {
+  display: none;
+  position: absolute;
+  inset: 0;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  background: var(--glass-bg);
+  color: var(--color-text-38);
+}
+
+.plantel-galeria__contador {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.plantel-galeria__flecha {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.35);
+  color: #fff;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.15s ease;
+}
+
+.plantel-galeria__flecha--izq {
+  left: 8px;
+}
+
+.plantel-galeria__flecha--der {
+  right: 8px;
+}
+
+.plantel-galeria__flecha.oculta {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.plantel-galeria__descripcion {
+  color: var(--color-text-54);
+  font-size: 12px;
+  font-style: italic;
+  margin: 8px 0 12px;
+}
+
+.plantel-galeria__miniaturas {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  scrollbar-width: none;
+}
+
+.plantel-galeria__miniaturas::-webkit-scrollbar {
+  display: none;
+}
+
+.plantel-galeria__miniatura {
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  padding: 2.5px;
+  border-radius: 10px;
+  border: 2.5px solid transparent;
+  background: none;
+  cursor: pointer;
+  transition: border-color 0.18s ease;
+}
+
+.plantel-galeria__miniatura.activa {
+  border-color: var(--color-primary-light);
+}
+
+.plantel-galeria__miniatura img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  opacity: 0.55;
+  transition: opacity 0.18s ease;
+}
+
+.plantel-galeria__miniatura.activa img {
+  opacity: 1;
+}
+
+.plantel-galeria__puntos {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.plantel-galeria__punto {
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--color-text-38);
+  cursor: pointer;
+  transition: width 0.2s ease, background 0.2s ease;
+}
+
+.plantel-galeria__punto.activo {
+  width: 16px;
+  background: var(--color-primary-light);
+}
+
+/* ── Misión y Visión ──────────────────────────────────────────── */
+
+.plantel-mision-vision {
+  padding: 16px;
+  border-radius: 14px;
+  margin-bottom: 12px;
+  background: color-mix(in srgb, var(--color-tarjeta) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-tarjeta) 20%, transparent);
+}
+
+.plantel-mision-vision__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.plantel-mision-vision__header span {
+  color: var(--color-tarjeta);
+  font-size: 18px;
+}
+
+.plantel-mision-vision__header h3 {
+  color: var(--color-tarjeta);
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.plantel-mision-vision p {
+  color: var(--color-text-60);
+  font-size: 13px;
+  line-height: 1.6;
+  text-align: justify;
+  margin: 10px 0 0;
+}
+
+.plantel-subtitulo-valores {
+  color: var(--color-text);
+  font-size: 14px;
+  font-weight: 600;
+  margin: 4px 0 12px;
+}
+
+.plantel-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.plantel-chip {
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--color-primary-light) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-primary-light) 25%, transparent);
+  color: var(--color-primary-light);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* ── Contacto y ubicación ─────────────────────────────────────── */
+
+.plantel-contacto {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding-bottom: 14px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.plantel-contacto__icono {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  background: color-mix(in srgb, var(--color-contacto) 12%, transparent);
+}
+
+.plantel-contacto__texto {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.plantel-contacto__titulo {
+  color: var(--color-text);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.plantel-contacto__subtitulo {
+  color: var(--color-contacto);
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+.plantel-contacto__flecha {
+  color: var(--color-text-38);
+  font-size: 15px;
+  align-self: center;
+}
+
+.plantel-mapa {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 120px;
+  border-radius: 14px;
+  background: var(--glass-bg);
+  overflow: hidden;
+  text-decoration: none;
+  margin-top: 4px;
+}
+
+.plantel-mapa__fondo {
+  position: absolute;
+  font-size: 56px;
+  opacity: 0.12;
+}
+
+.plantel-mapa__boton {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  background: var(--color-primary-light);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* ── Pie de página ────────────────────────────────────────────── */
+
+.plantel-pie {
+  color: var(--color-text-38);
+  font-size: 11px;
+  text-align: center;
+  padding: 24px 20px;
+  margin: 0;
+}

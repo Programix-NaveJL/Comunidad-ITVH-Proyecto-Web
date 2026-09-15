@@ -1,0 +1,171 @@
+/* ═════════════════════════════════════════════════════════════════
+   marketplace-shell.css
+   Contenedor raíz del módulo Market (marketplace-screen.js) + su
+   barra de navegación inferior flotante. Usa las variables globales
+   de variables.css — nada de color hardcodeado aquí.
+
+   La pantalla de Inicio (buscador, chips, feed, tarjetas) vive en
+   marketplace-inicio.css, aparte, porque cambia con más frecuencia
+   y no tiene relación con el layout del shell/tabbar.
+   ═════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* Azul Telegram — acento propio del Marketplace (igual que
+     JaguarChat), fijo sin importar el tema, igual que --color-secondary
+     o --color-area-quimica en variables.css. Se define aquí porque
+     tanto este archivo como marketplace-inicio.css lo usan. */
+  --mkt-accent: #3390ec;
+  --mkt-accent-rgb: 51, 144, 236;
+}
+
+/* ── Contenedor raíz ─────────────────────────────────────────── */
+.market-shell {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0; /* evita que el contenido interno fuerce overflow del flex */
+  position: relative;
+  background: var(--color-bg);
+}
+
+.market-header {
+  padding: 14px 16px 8px;
+  flex-shrink: 0;
+}
+
+.market-header__titulo {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+  color: var(--color-text);
+}
+
+.market-header__titulo span {
+  color: var(--mkt-accent);
+}
+
+.market-contenido {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.market-panel {
+  display: none;
+  height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.market-panel.visible {
+  display: block;
+}
+
+.market-placeholder {
+  text-align: center;
+  padding: 60px 24px;
+  color: var(--color-text-54);
+  font-size: 14px;
+}
+
+/* ── Barra inferior flotante ─────────────────────────────────────
+   position: sticky + bottom: 0 la ancla explícitamente al fondo de
+   .market-shell, además de flex-shrink: 0. No debería moverse con
+   el scroll interno de .market-panel bajo ningún escenario, incluso
+   si algo más arriba en la cadena de flex/altura llegara a fallar
+   (como pasó antes con .shell-contenido) — sticky no depende de que
+   esa cadena esté perfecta, solo de que .market-shell sea su propio
+   contenedor de scroll o de que no haya un ancestro con overflow
+   que la corte antes de tiempo. */
+.market-tabbar {
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
+  flex-shrink: 0;
+  display: flex;
+  margin: 0 24px 16px;
+  padding: 6px;
+  border-radius: 20px;
+  background: var(--glass-card-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-card-border);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.market-tabbar__pill {
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  left: 0;
+  width: calc(100% / 3);
+  border-radius: 16px;
+  background: var(--mkt-accent);
+  box-shadow: 0 3px 14px rgba(var(--mkt-accent-rgb), 0.35);
+  transition: left 0.28s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.market-tabbar__btn {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 8px 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-54);
+  font-size: 10px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.market-tabbar__btn.activa {
+  color: #fff;
+  font-weight: 700;
+}
+
+.market-tabbar__icono {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.market-tabbar__label {
+  line-height: 1;
+}
+
+/* ── Ajuste al panel host para que Market ocupe el alto real ──────
+   .shell-contenido no tenía display:flex — sus hijos (.shell-panel)
+   eran bloques normales cuya altura real dependía solo de su
+   contenido, así que un "height:100%" no tenía una base porcentual
+   confiable de la que heredar (el alto que flexbox le da a
+   .shell-contenido no se propaga de forma fiable a un hijo normal
+   que solo usa height:100%; por eso el panel de Market se quedaba
+   del tamaño de su contenido y sobraba espacio en blanco debajo de
+   la tabbar).
+
+   Convertir a .shell-contenido en un contenedor flex resuelve esto
+   sin porcentajes: cada .shell-panel pasa a ser un ítem flex, y el
+   de Market usa flex:1 para tomar exactamente el espacio sobrante.
+   Los demás paneles (Comunidad, Mi Perfil, etc.) no cambian de
+   aspecto: siguen sin flex-grow propio, así que se siguen
+   dimensionando por su contenido como bloques normales. */
+.shell-contenido {
+  display: flex;
+  flex-direction: column;
+}
+
+.shell-panel[data-panel="market"] {
+  padding: 0;
+}
+
+.shell-panel[data-panel="market"].visible {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0; /* evita que el contenido fuerce más alto del disponible */
+}

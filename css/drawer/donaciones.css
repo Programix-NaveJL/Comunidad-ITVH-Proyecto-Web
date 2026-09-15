@@ -1,0 +1,251 @@
+/* ═════════════════════════════════════════════════════════════════
+   donaciones.css
+
+   Estilos de la pantalla de donación por transferencia bancaria
+   (js/features/drawer/donaciones.js). El acento ámbar/café (#9c6b3e)
+   es fijo, igual que en Flutter — no depende del tema.
+   ═════════════════════════════════════════════════════════════════ */
+
+.donaciones {
+  min-height: 100vh;
+  background: var(--color-bg);
+}
+
+.donaciones-header {
+  display: flex;
+  align-items: center;
+  padding: 14px 16px;
+}
+
+.donaciones-cerrar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: var(--glass-bg);
+  color: var(--color-text);
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.donaciones-cuerpo {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 20px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.donaciones-logo {
+  position: relative;
+  width: 84px;
+  height: 84px;
+  margin-bottom: 20px;
+}
+
+.donaciones-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 10px;
+  border-radius: 20px;
+  background: var(--color-surface);
+  border: 1px solid var(--glass-border);
+  box-sizing: border-box;
+}
+
+.donaciones-logo__badge {
+  position: absolute;
+  bottom: -6px;
+  right: -6px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #9c6b3e;
+  border: 3px solid var(--color-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+}
+
+.donaciones-titulo {
+  color: var(--color-text);
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.donaciones-texto {
+  color: var(--color-text-70);
+  font-size: 14px;
+  line-height: 1.45;
+  margin-bottom: 12px;
+}
+
+.donaciones-aviso {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: rgba(52, 199, 89, 0.1);
+  border: 1px solid rgba(52, 199, 89, 0.25);
+  margin-bottom: 28px;
+  box-sizing: border-box;
+}
+
+.donaciones-aviso p {
+  margin: 0;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--color-text-70);
+  text-align: left;
+}
+
+.donaciones-seccion {
+  width: 100%;
+  text-align: left;
+  color: var(--color-text-38);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin: 0 0 10px;
+}
+
+.donaciones-campo {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  border-radius: 12px;
+  background: var(--color-surface);
+  border: 1px solid var(--glass-border);
+  cursor: pointer;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.donaciones-campo--destacado {
+  padding: 16px 14px;
+  border-color: rgba(156, 107, 62, 0.4);
+  border-width: 1.4px;
+}
+
+.donaciones-campo__label {
+  margin: 0 0 3px;
+  font-size: 11px;
+  color: var(--color-text-38);
+}
+
+.donaciones-campo__valor {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.donaciones-campo__valor--mono {
+  font-family: monospace;
+  font-size: 17px;
+  letter-spacing: 0.5px;
+}
+
+.donaciones-campo__icono {
+  flex-shrink: 0;
+  font-size: 16px;
+}
+
+.donaciones-fila-simple {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--color-surface);
+  border: 1px solid var(--glass-border);
+  box-sizing: border-box;
+  font-size: 13.5px;
+}
+
+.donaciones-fila-simple span {
+  color: var(--color-text-38);
+  width: 50px;
+  flex-shrink: 0;
+}
+
+.donaciones-fila-simple strong {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.donaciones-caja-usuario {
+  width: 100%;
+  text-align: left;
+  padding: 14px;
+  margin-top: 10px;
+  border-radius: 14px;
+  background: rgba(156, 107, 62, 0.08);
+  border: 1px solid rgba(156, 107, 62, 0.25);
+  box-sizing: border-box;
+}
+
+.donaciones-caja-usuario__titulo {
+  margin: 0 0 8px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.donaciones-caja-usuario__texto {
+  margin: 0 0 12px;
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: var(--color-text-70);
+}
+
+.donaciones-input-usuario {
+  margin-bottom: 10px;
+}
+
+.donaciones-campo--concepto {
+  margin-bottom: 0;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.donaciones-campo--concepto span:nth-child(2) {
+  flex: 1;
+}
+
+.donaciones-btn-copiar-todo {
+  width: 100%;
+  margin-top: 16px;
+  border-color: rgba(156, 107, 62, 0.4);
+  color: #9c6b3e;
+}
+
+.donaciones-btn-listo {
+  width: 100%;
+  margin-top: 24px;
+  background: #9c6b3e;
+}
+
+.donaciones-btn-ahora-no {
+  margin-top: 10px;
+  background: none;
+  border: none;
+  color: var(--color-text-38);
+  font-size: 14px;
+  cursor: pointer;
+  font-family: var(--font-family);
+}

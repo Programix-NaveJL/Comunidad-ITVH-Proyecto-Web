@@ -1,0 +1,201 @@
+/* ═════════════════════════════════════════════════════════════════
+   seleccionar-historias-destacada.css
+   Equivalente visual a SeleccionarHistoriasDestacada.dart.
+   z-index 2000, igual que los demás overlays a pantalla completa
+   (visor-media.js, ver-historia.js).
+   ═════════════════════════════════════════════════════════════════ */
+
+.sel-destacadas-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: var(--color-bg-app, #f2f2f7);
+  display: flex;
+  flex-direction: column;
+}
+
+[data-theme="dark"] .sel-destacadas-overlay,
+:root:not([data-theme="light"]) .sel-destacadas-overlay {
+  background: #000;
+}
+
+.sel-destacadas-appbar {
+  flex: 0 0 auto;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px;
+  background: var(--color-bg-card);
+  border-bottom: 0.5px solid var(--color-border);
+}
+
+.sel-destacadas-atras,
+.sel-destacadas-siguiente {
+  background: none;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-primary);
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.sel-destacadas-atras {
+  font-size: 24px;
+  color: var(--color-text-primary);
+}
+
+.sel-destacadas-siguiente:disabled {
+  color: var(--color-text-secondary);
+  cursor: default;
+}
+
+.sel-destacadas-titulo {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.sel-destacadas-cuerpo {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding-bottom: 24px;
+}
+
+.sel-destacadas-cargando {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.sel-destacadas-subtitulo {
+  padding: 12px 16px;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+.sel-destacadas-fecha {
+  padding: 8px 16px 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.sel-destacadas-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  padding: 0 2px;
+}
+
+.sel-destacadas-thumb {
+  position: relative;
+  aspect-ratio: 0.75;
+  background: var(--color-bg-card);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.sel-destacadas-thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.sel-destacadas-thumb--sel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 132, 255, 0.35);
+}
+
+.sel-destacadas-thumb-fecha {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  background: rgba(0, 0, 0, 0.54);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 600;
+  padding: 2px 5px;
+  border-radius: 4px;
+}
+
+.sel-destacadas-circulo {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.24);
+  border: 1.5px solid #fff;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sel-destacadas-circulo--sel {
+  background: var(--color-primary);
+}
+
+.sel-destacadas-vacio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 24px;
+  text-align: center;
+  color: var(--color-text-secondary);
+}
+
+.sel-destacadas-vacio-icono {
+  font-size: 40px;
+  margin-bottom: 12px;
+  opacity: 0.5;
+}
+
+.sel-destacadas-vacio-titulo {
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+
+.sel-destacadas-vacio-texto {
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+.sel-destacadas-bottombar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+  background: var(--color-bg-card);
+  border-top: 0.5px solid var(--color-border);
+}
+
+.sel-destacadas-contador {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+.sel-destacadas-btn-siguiente {
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 24px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}

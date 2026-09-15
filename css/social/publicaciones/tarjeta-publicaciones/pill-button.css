@@ -1,0 +1,21 @@
+/* pill-button.css
+   Píldora reutilizada: ícono + label opcional dentro de un
+   contenedor redondeado (botón de comentar en tarjeta-publicacion.js
+   y visor-media.js). */
+
+.pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 20px;
+  background: var(--glass-bg);
+  color: var(--color-text-54);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pill-btn__icono {
+  font-size: 15px;
+}

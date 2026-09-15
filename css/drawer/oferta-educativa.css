@@ -1,0 +1,297 @@
+/* ═════════════════════════════════════════════════════════════════
+   oferta-educativa.css
+
+   Estilos de la pantalla de listado de carreras: appbar simple,
+   barra de búsqueda, chips de filtro por área, tarjetas de
+   estadística y las cards de carrera agrupadas por área (algunas
+   bloqueadas con "Próximamente" mientras se migran).
+
+   Cada área usa una variable CSS --color-area fijada inline por
+   oferta-educativa.js (equivalente a area.color(cs) en Dart), igual
+   que --color-carrera en carreras.css.
+   ═════════════════════════════════════════════════════════════════ */
+
+.oferta {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* ── Appbar simple (no expandible, a diferencia del hero de carreras) ── */
+
+.oferta-appbar {
+  display: flex;
+  align-items: center;
+  height: 52px;
+  padding: 0 8px;
+  flex-shrink: 0;
+  background: var(--color-surface);
+}
+
+.oferta-appbar__volver {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: none;
+  color: var(--color-text);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.oferta-appbar__titulo {
+  flex: 1;
+  text-align: center;
+  margin: 0 32px 0 0; /* compensa el botón de volver para centrar de verdad */
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+/* ── Barra de búsqueda ────────────────────────────────────────────── */
+
+.oferta-busqueda {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 4px 16px 0;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--color-text) 8%, transparent);
+  flex-shrink: 0;
+}
+
+.oferta-busqueda__icono {
+  flex-shrink: 0;
+  font-size: 16px;
+  opacity: 0.6;
+}
+
+.oferta-busqueda__input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: none;
+  outline: none;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--color-text);
+}
+
+.oferta-busqueda__input::placeholder {
+  color: var(--color-text-38);
+}
+
+.oferta-busqueda__limpiar {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: none;
+  background: none;
+  color: var(--color-text-60);
+  font-size: 14px;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.oferta-busqueda--con-texto .oferta-busqueda__limpiar {
+  display: flex;
+}
+
+/* ── Chips de filtro por área ────────────────────────────────────── */
+
+.oferta-chips {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 8px 16px;
+  flex-shrink: 0;
+  scrollbar-width: none;
+}
+
+.oferta-chips::-webkit-scrollbar {
+  display: none;
+}
+
+.oferta-chip {
+  flex-shrink: 0;
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--glass-border);
+  background: none;
+  font-family: inherit;
+  font-size: 12px;
+  color: var(--color-text-54);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+
+.oferta-chip--activo {
+  font-weight: 700;
+  color: var(--color-chip);
+  background: color-mix(in srgb, var(--color-chip) 15%, transparent);
+  border-color: color-mix(in srgb, var(--color-chip) 50%, transparent);
+}
+
+/* ── Stats resumen ────────────────────────────────────────────────── */
+
+.oferta-stats {
+  display: flex;
+  gap: 10px;
+  padding: 0 16px 8px;
+  flex-shrink: 0;
+}
+
+.oferta-stat {
+  flex: 1;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--color-stat) 45%, var(--color-surface));
+}
+
+.oferta-stat__valor {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.oferta-stat__etiqueta {
+  font-size: 13px;
+  color: var(--color-text-70);
+}
+
+/* ── Lista agrupada por área ──────────────────────────────────────── */
+
+.oferta-lista {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 16px 32px;
+}
+
+.oferta-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 8px 0 10px;
+}
+
+.oferta-area__pastilla {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--color-area) 15%, transparent);
+  color: var(--color-area);
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.oferta-area__divisor {
+  flex: 1;
+  height: 1px;
+  background: var(--glass-border);
+}
+
+/* ── Card de carrera ──────────────────────────────────────────────── */
+
+.oferta-carrera {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 13px 16px;
+  margin-bottom: 10px;
+  border-radius: 16px;
+  border: 1px solid var(--glass-border);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.oferta-carrera:hover {
+  background: var(--glass-bg);
+}
+
+.oferta-carrera--bloqueada {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.oferta-carrera--bloqueada:hover {
+  background: none;
+}
+
+.oferta-carrera__icono {
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--color-area) 15%, transparent);
+  color: var(--color-area);
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.oferta-carrera__texto {
+  flex: 1;
+  min-width: 0;
+}
+
+.oferta-carrera__nombre {
+  margin: 0 0 3px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--color-text);
+}
+
+.oferta-carrera__siglas {
+  margin: 0;
+  font-size: 12px;
+  color: var(--color-text-38);
+}
+
+.oferta-carrera__estado {
+  flex-shrink: 0;
+  font-size: 18px;
+  color: var(--color-text-38);
+}
+
+/* ── Estado vacío (sin resultados de búsqueda) ────────────────────── */
+
+.oferta-vacio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.oferta-vacio__icono {
+  font-size: 36px;
+  opacity: 0.25;
+  margin-bottom: 12px;
+}
+
+.oferta-vacio__texto {
+  margin: 0;
+  font-size: 14px;
+  color: var(--color-text-38);
+}

@@ -1,0 +1,600 @@
+/* ═════════════════════════════════════════════════════════════════
+   mi-negocio-publico.css
+
+   Estilos de la pantalla pública de un negocio del Marketplace
+   (js/features/marketplace/mi-negocio-publico.js), montada como
+   ruta real ('/negocio/<id>') — no como panel embebido del tabbar
+   de Market, por eso sigue el mismo patrón de layout centrado que
+   editar-perfil.css / ajustes.css en vez del ancho completo que usan
+   los paneles internos de marketplace-inicio.css.
+
+   Incluye también .mkt-pill, .mkt-expira y .mkt-spinner: son clases
+   compartidas con el resto del módulo Marketplace (marketplace-
+   inicio.js, mi-negocio-personal.js las usan igual) — se redeclaran
+   aquí a propósito para que esta pantalla no dependa del orden de
+   carga de los otros CSS del módulo.
+   ═════════════════════════════════════════════════════════════════ */
+
+:root {
+  --mkt-accent: #3390EC; /* azul Telegram, acento propio del Marketplace */
+}
+
+.mkt-negpub {
+  min-height: 100vh;
+  background: var(--color-bg);
+}
+
+/* ── Spinner de carga (compartido) ─────────────────────────────── */
+
+.mkt-spinner {
+  width: 28px;
+  height: 28px;
+  margin: 60px auto;
+  border: 3px solid var(--glass-border);
+  border-top-color: var(--mkt-accent);
+  border-radius: 50%;
+  animation: mkt-spin 0.7s linear infinite;
+}
+
+@keyframes mkt-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Pills compartidas (categoría / tipo) ──────────────────────── */
+
+.mkt-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 9px;
+  border-radius: 20px;
+  background: var(--glass-bg);
+  color: var(--color-text-54);
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.mkt-pill--tipo-producto {
+  background: rgba(34, 197, 94, 0.14);
+  color: #22c55e;
+}
+
+.mkt-pill--tipo-servicio {
+  background: rgba(168, 85, 247, 0.14);
+  color: #a855f7;
+}
+
+/* ── Expiración (compartida) ───────────────────────────────────── */
+
+.mkt-expira {
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.mkt-expira--ok { color: #22c55e; }
+.mkt-expira--pronto { color: #f59e0b; }
+.mkt-expira--vencida { color: var(--color-error); }
+
+/* ── Header de navegación (sticky, "‹" + título) ────────────────── */
+
+.mkt-negpub__header-nav {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 52px;
+  padding: 0 8px;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.mkt-negpub__volver {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: none;
+  color: var(--mkt-accent);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.mkt-negpub__titulo-nav {
+  flex: 1;
+  margin: 0;
+  color: var(--color-text);
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── Header del negocio (avatar + nombre + estrellas) ───────────── */
+
+.mkt-negpub__header {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 20px 20px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.mkt-negpub__avatar-zona {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  margin-bottom: 14px;
+}
+
+.mkt-negpub__avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--glass-bg);
+  font-size: 40px;
+}
+
+.mkt-negpub__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mkt-negpub__medalla {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid var(--color-surface);
+  background: var(--mkt-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+}
+
+.mkt-negpub__nombre {
+  margin: 0;
+  color: var(--color-text);
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.mkt-negpub__usuario {
+  margin: 4px 0 0;
+  color: var(--color-text-54);
+  font-size: 13px;
+}
+
+.mkt-negpub__badge-verificado {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 10px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  background: rgba(51, 144, 236, 0.12);
+  border: 0.8px solid rgba(51, 144, 236, 0.3);
+  color: var(--mkt-accent);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.mkt-negpub__estrellas {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+}
+
+.mkt-negpub__estrellas-texto {
+  color: var(--color-text-54);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.mkt-negpub__descripcion {
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 14px;
+  padding: 14px;
+  border-radius: 14px;
+  background: var(--glass-bg);
+  border: 0.8px solid var(--glass-border);
+  color: var(--color-text-70);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* ── Botón calificar ─────────────────────────────────────────────── */
+
+.mkt-negpub__calificar-zona {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 0 20px 16px;
+}
+
+.mkt-negpub__calificar-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(51, 144, 236, 0.4);
+  background: none;
+  color: var(--mkt-accent);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: var(--font-family);
+}
+
+/* ── Tabs (Publicaciones / Opiniones) ───────────────────────────── */
+
+.mkt-negpub__tabs {
+  position: sticky;
+  top: 52px;
+  z-index: 4;
+  display: flex;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.mkt-negpub__tab {
+  flex: 1;
+  padding: 12px 8px;
+  border: none;
+  background: none;
+  color: var(--color-text-38);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: var(--font-family);
+  border-bottom: 2.5px solid transparent;
+}
+
+.mkt-negpub__tab.activa {
+  color: var(--mkt-accent);
+  border-bottom-color: var(--mkt-accent);
+}
+
+.mkt-negpub__contenido {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 16px 16px 60px;
+}
+
+/* ── Estados vacíos ──────────────────────────────────────────────── */
+
+.mkt-negpub__vacio {
+  padding: 60px 32px;
+  text-align: center;
+}
+
+.mkt-negpub__vacio-icono {
+  font-size: 48px;
+  margin-bottom: 14px;
+}
+
+.mkt-negpub__vacio-titulo {
+  margin: 0 0 8px;
+  color: var(--color-text-54);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.mkt-negpub__vacio-subtitulo {
+  margin: 0;
+  color: var(--color-text-38);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.mkt-negpub__vacio-tab {
+  padding: 48px 20px;
+  text-align: center;
+}
+
+.mkt-negpub__vacio-tab-icono {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.mkt-negpub__vacio-tab-texto {
+  margin: 0;
+  color: var(--color-text-38);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* ── Lista de publicaciones (mini-cards) ────────────────────────── */
+
+.mkt-negpub__pub-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mkt-negpub-mini {
+  display: flex;
+  border-radius: 16px;
+  background: var(--color-surface);
+  border: 0.8px solid var(--glass-border);
+  overflow: hidden;
+}
+
+.mkt-negpub-mini__imagen {
+  flex-shrink: 0;
+  width: 90px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--glass-bg);
+  font-size: 24px;
+}
+
+.mkt-negpub-mini__imagen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mkt-negpub-mini__info {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mkt-negpub-mini__pills {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.mkt-negpub-mini__categoria {
+  color: var(--color-text-38);
+  font-size: 11px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mkt-negpub-mini__titulo {
+  margin: 0;
+  color: var(--color-text);
+  font-size: 14px;
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.mkt-negpub-mini__pie {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mkt-negpub-mini__precio {
+  color: var(--mkt-accent);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+/* ── Tarjetas de valoración ──────────────────────────────────────── */
+
+.mkt-negpub__val-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mkt-val-card {
+  padding: 14px;
+  border-radius: 16px;
+  background: var(--color-surface);
+  border: 0.8px solid var(--glass-border);
+}
+
+.mkt-val-card__cabecera {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mkt-val-card__avatar {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--glass-bg);
+  font-size: 16px;
+}
+
+.mkt-val-card__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mkt-val-card__quien {
+  flex: 1;
+  min-width: 0;
+}
+
+.mkt-val-card__nombre {
+  margin: 0;
+  color: var(--color-text);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.mkt-val-card__fecha {
+  margin: 1px 0 0;
+  color: var(--color-text-38);
+  font-size: 11px;
+}
+
+.mkt-val-card__promedio {
+  flex-shrink: 0;
+  padding: 4px 9px;
+  border-radius: 10px;
+  background: rgba(245, 166, 35, 0.15);
+  color: #f5a623;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.mkt-val-card__criterios {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mkt-val-card__criterio {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mkt-val-card__criterio-label {
+  width: 90px;
+  flex-shrink: 0;
+  color: var(--color-text-54);
+  font-size: 12px;
+}
+
+.mkt-val-card__criterio-estrellas {
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+.mkt-val-card__comentario {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  background: var(--glass-bg);
+  color: var(--color-text-70);
+  font-size: 13px;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+/* ── Hoja de calificar (dentro de abrirHojaInferior) ─────────────── */
+
+.mkt-calificar {
+  padding: 4px 4px 12px;
+}
+
+.mkt-calificar__titulo {
+  margin: 0 0 4px;
+  color: var(--color-text);
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.mkt-calificar__subtitulo {
+  margin: 0 0 18px;
+  color: var(--color-text-38);
+  font-size: 13px;
+}
+
+.mkt-calificar__criterios {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.mkt-calificar__fila {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mkt-calificar__label {
+  width: 104px;
+  flex-shrink: 0;
+  color: var(--color-text-70);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.mkt-calificar__estrellas {
+  display: flex;
+  gap: 4px;
+}
+
+.mkt-calificar__estrella {
+  border: none;
+  background: none;
+  padding: 0;
+  font-size: 24px;
+  line-height: 1;
+  color: var(--glass-border);
+  cursor: pointer;
+}
+
+.mkt-calificar__estrella.activa {
+  color: #f5a623;
+}
+
+.mkt-calificar__comentario {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  background: var(--glass-bg);
+  color: var(--color-text);
+  font-size: 14px;
+  font-family: var(--font-family);
+  resize: vertical;
+  margin-bottom: 14px;
+}
+
+.mkt-calificar__comentario::placeholder {
+  color: var(--color-text-38);
+}
+
+.mkt-calificar__confirmar {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: var(--mkt-accent);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: var(--font-family);
+}
+
+.mkt-calificar__confirmar:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}

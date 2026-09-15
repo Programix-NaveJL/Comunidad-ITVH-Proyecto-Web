@@ -1,0 +1,170 @@
+/* ═════════════════════════════════════════════════════════════════
+   soporte.css
+
+   Estilos del formulario de Quejas y sugerencias
+   (js/features/drawer/soporte.js). El acento azul (#007aff) es fijo,
+   igual que en Flutter — coincide con --color-primary-light.
+   ═════════════════════════════════════════════════════════════════ */
+
+.soporte {
+  position: relative;
+  min-height: 100vh;
+  background: var(--color-bg);
+  overflow: hidden;
+}
+
+.soporte-glow {
+  position: absolute;
+  top: -80px;
+  left: -60px;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: rgba(0, 122, 255, 0.16);
+  pointer-events: none;
+}
+
+.soporte-cuerpo {
+  position: relative;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 16px 20px 32px;
+}
+
+.soporte-volver {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: none;
+  color: var(--color-text);
+  font-size: 22px;
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+
+.soporte-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 32px;
+}
+
+.soporte-header__icono {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #007aff, rgba(0, 122, 255, 0.65));
+  box-shadow: 0 6px 16px rgba(0, 122, 255, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.soporte-titulo {
+  margin: 0 0 4px;
+  color: var(--color-text);
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+}
+
+.soporte-subtitulo {
+  margin: 0;
+  color: var(--color-text-54);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.soporte-label {
+  display: block;
+  margin: 0 0 8px 4px;
+  color: var(--color-text-70);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.soporte-requerido {
+  color: #ff3b30;
+}
+
+.soporte-campo {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 4px 14px;
+  border-radius: 16px;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  margin-bottom: 6px;
+}
+
+.soporte-campo:focus-within {
+  border-color: #007aff;
+  border-width: 1.6px;
+  box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.15);
+}
+
+.soporte-campo textarea {
+  flex: 1;
+  min-width: 0;
+  resize: none;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--color-text);
+  font-size: 14.5px;
+  font-family: var(--font-family);
+  padding: 14px 0;
+}
+
+.soporte-campo textarea::placeholder {
+  color: var(--color-text-30);
+}
+
+.soporte-campo__icono {
+  padding-top: 15px;
+  font-size: 14px;
+  color: var(--color-text-30);
+}
+
+.soporte-nota {
+  margin: 0 0 22px 4px;
+  color: var(--color-text-38);
+  font-size: 11.5px;
+}
+
+.soporte-contador {
+  margin: 6px 4px 0 0;
+  text-align: right;
+  color: var(--color-text-30);
+  font-size: 11.5px;
+  font-variant-numeric: tabular-nums;
+}
+
+.soporte-btn-enviar {
+  width: 100%;
+  height: 54px;
+  margin-top: 30px;
+  border: none;
+  border-radius: 27px;
+  background: linear-gradient(135deg, #007aff, rgba(0, 122, 255, 0.75));
+  box-shadow: 0 8px 18px rgba(0, 122, 255, 0.35);
+  color: #fff;
+  font-size: 15.5px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: var(--font-family);
+}
+
+.soporte-btn-enviar:disabled {
+  box-shadow: none;
+  opacity: 0.7;
+  cursor: not-allowed;
+}

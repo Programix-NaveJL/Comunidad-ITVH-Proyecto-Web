@@ -1,0 +1,142 @@
+/* publicar-historia.css
+   Ruta real sugerida: css/social/historias/publicar-historia.css
+
+   Fondo negro fijo, igual que seleccionar-media.css — el Dart
+   original tampoco cambia con el tema aquí. */
+
+.publicar-historia-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1450;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.publicar-historia-overlay.visible {
+  opacity: 1;
+}
+
+.publicar-historia {
+  width: 100%;
+  max-width: 340px;
+  padding: 32px;
+}
+
+.publicar-historia__contenido {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 4px;
+}
+
+.publicar-historia__spinner {
+  width: 56px;
+  height: 56px;
+  margin-bottom: 20px;
+  border-radius: 50%;
+  border: 3px solid rgba(10, 132, 255, 0.25);
+  border-top-color: #0a84ff;
+  animation: publicar-historia-girar 0.8s linear infinite;
+}
+
+@keyframes publicar-historia-girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.publicar-historia__mensaje {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.publicar-historia__barra {
+  width: 180px;
+  height: 4px;
+  margin-top: 14px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+
+.publicar-historia__barra-relleno {
+  height: 100%;
+  background: #0a84ff;
+  transition: width 0.15s ease;
+}
+
+.publicar-historia__track {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.publicar-historia__submensaje {
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.publicar-historia__icono {
+  width: 72px;
+  height: 72px;
+  margin-bottom: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  color: #fff;
+}
+
+.publicar-historia__icono--exito {
+  background: #30d158;
+}
+
+.publicar-historia__icono--limite {
+  background: #ff9f0a;
+  font-size: 30px;
+}
+
+.publicar-historia__icono--error {
+  background: #ff453a;
+}
+
+.publicar-historia__titulo {
+  margin: 0 0 6px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.publicar-historia__btn {
+  width: 100%;
+  margin-top: 22px;
+  padding: 14px;
+  border: none;
+  border-radius: 14px;
+  background: #0a84ff;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.publicar-historia__btn-texto {
+  margin-top: 12px;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 14px;
+  cursor: pointer;
+}

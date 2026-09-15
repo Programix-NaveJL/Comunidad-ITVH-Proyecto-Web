@@ -1,0 +1,539 @@
+/* mi-perfil.css
+   Ruta real: css/perfil/mi-perfil/mi-perfil.css
+
+   Pantalla "Mi Perfil" (mi-perfil-screen.js). .mp-tarjeta es el
+   equivalente de decoracionTarjeta() del Dart — esquinas de 20 +
+   sombra difusa, reutilizada tal cual por mi-perfil-header.js y por
+   este archivo (headers de sección, destacadas). */
+
+.mp-screen {
+  min-height: 100%;
+  padding: 6px 14px 24px;
+  background: var(--color-bg);
+}
+
+.mp-cargando {
+  display: flex;
+  justify-content: center;
+  padding: 60px 0;
+}
+
+.mp-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 4px 14px;
+}
+
+.mp-topbar__titulo {
+  font-size: 25px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  color: var(--color-text);
+}
+
+.mp-topbar__titulo span:first-child {
+  margin-right: 4px;
+}
+
+.mp-topbar__acento {
+  color: var(--color-primary);
+}
+
+.mp-topbar__ajustes {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: var(--color-text-05, rgba(127, 127, 127, 0.08));
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* ── Tarjeta flotante compartida ──────────────────────────────── */
+
+.mp-tarjeta {
+  background: var(--color-surface);
+  border-radius: 20px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  margin-bottom: 10px;
+}
+
+.mp-tarjeta--header {
+  padding: 22px 18px 18px;
+}
+
+.mp-publicaciones-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-54);
+}
+
+/* ── Destacadas (stub) ────────────────────────────────────────── */
+
+.mp-destacadas {
+  padding: 14px 16px;
+}
+
+.mp-destacadas__header {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-54);
+  margin-bottom: 10px;
+}
+
+.mp-destacadas__fila {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+}
+
+.mp-destacadas__nueva {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  border: none;
+  background: none;
+  color: var(--color-text-54);
+  font-size: 11px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.mp-destacadas__nueva-icono {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 1.5px dashed var(--glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: var(--color-text-54);
+}
+
+/* ── Grid de publicaciones ────────────────────────────────────── */
+
+.mp-vacio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 40px 0;
+  color: var(--color-text-54);
+  font-size: 14px;
+}
+
+.mp-vacio__icono {
+  font-size: 40px;
+  opacity: 0.35;
+}
+
+.mp-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+}
+
+.mp-celda {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border: none;
+  padding: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  background: var(--color-surface-alt, #2c2c2e);
+  /* Evita el "grid blowout": sin esto, el ancho intrínseco de la
+     <img>/<video> fuerza a la columna a crecer y colapsa a las
+     demás — mismo bug que ya resolvimos hoy en historia-diseno.css. */
+  min-width: 0;
+}
+
+.mp-celda img,
+.mp-celda__video-thumb,
+.mp-celda__video-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.mp-celda__video-thumb {
+  background: var(--color-surface-alt, #2c2c2e);
+}
+
+.mp-celda__play {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: #fff;
+  pointer-events: none;
+}
+
+.mp-celda__placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-24, rgba(127, 127, 127, 0.3));
+  font-size: 26px;
+}
+
+.mp-celda__multi {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  color: #fff;
+  font-size: 14px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+/* ── Mini action-sheet del avatar ──────────────────────────────── */
+
+.mp-hoja-avatar-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2300;
+  background: rgba(0, 0, 0, 0);
+  transition: background-color 0.2s ease;
+  display: flex;
+  align-items: flex-end;
+}
+
+.mp-hoja-avatar-overlay.visible {
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.mp-hoja-avatar {
+  width: 100%;
+  background: var(--color-surface);
+  border-radius: 20px 20px 0 0;
+  padding: 14px 0 max(14px, env(safe-area-inset-bottom));
+  transform: translateY(100%);
+  transition: transform 0.2s ease;
+}
+
+.mp-hoja-avatar-overlay.visible .mp-hoja-avatar {
+  transform: translateY(0);
+}
+
+.mp-hoja-avatar__item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 14px 20px;
+  border: none;
+  background: none;
+  font-size: 15px;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.mp-hoja-avatar__item--accent {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+
+
+/* ── Header de perfil (mi-perfil-header.js) ─────────────────────── */
+
+.mp-header {
+  display: flex;
+  flex-direction: column;
+}
+
+.mp-header__fila-superior {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.mp-header__avatar-btn {
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  flex-shrink: 0;
+  line-height: 0;
+}
+
+.mp-header__stats {
+  flex: 1;
+  display: flex;
+  justify-content: space-around;
+}
+
+.mp-stat-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  color: inherit;
+}
+
+.mp-header__nombre {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 14px 0 0;
+}
+
+.mp-header__usuario {
+  font-size: 13px;
+  color: var(--color-text-54);
+  margin: 2px 0 0;
+}
+
+.mp-header__carrera {
+  font-size: 13px;
+  color: var(--color-text-54);
+  margin: 6px 0 0;
+}
+
+.mp-header__bio {
+  font-size: 13px;
+  color: var(--color-text);
+  line-height: 1.4;
+  margin: 8px 0 0;
+  white-space: pre-line;
+}
+
+.mp-header__redes {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.mp-header__btn-editar {
+  width: 100%;
+  margin-top: 16px;
+  padding: 10px;
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  background: none;
+  color: var(--color-text);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* ── Stat (mi-perfil-widgets.js → renderStatCol) ────────────────── */
+
+.mp-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.mp-stat__valor {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.mp-stat__label {
+  font-size: 12px;
+  color: var(--color-text-54);
+  margin: 0;
+}
+
+/* ── Botón de red social (renderBotonRed) ───────────────────────── */
+
+.mp-boton-red {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* ── Insignias (renderInsigniasRow) ─────────────────────────────── */
+
+.mp-insignias {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.mp-insignia {
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: var(--color-primary-12, rgba(59, 130, 246, 0.12));
+  color: var(--color-primary);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* ── Avatar con/sin contorno de historia (renderAvatar) ─────────── */
+
+.mp-avatar {
+  display: inline-flex;
+}
+
+.mp-avatar--sin-historia .mp-avatar-nucleo {
+  border: 2px solid var(--color-surface);
+}
+
+.mp-avatar__anillo {
+  padding: 3px;
+  border-radius: 50%;
+  display: flex;
+}
+
+.mp-avatar--activa .mp-avatar__anillo {
+  background: linear-gradient(135deg, #4f8cff, #34d399);
+}
+
+.mp-avatar--vista .mp-avatar__anillo {
+  background: var(--color-text-24, rgba(127, 127, 127, 0.3));
+}
+
+.mp-avatar-nucleo {
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--color-surface-alt, #2c2c2e);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.mp-avatar-nucleo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.mp-avatar-nucleo__icono {
+  font-size: 32px;
+  color: var(--color-text-54);
+}
+
+/* ── Overlay de foto completa (abrirFotoCompleta) ───────────────── */
+
+.mp-foto-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, background-color 0.2s ease;
+}
+
+.mp-foto-overlay.visible {
+  background: rgba(0, 0, 0, 0.9);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mp-foto-overlay__cerrar {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.mp-foto-overlay__img {
+  max-width: 92vw;
+  max-height: 92vh;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+}
+
+.mp-foto-overlay__img--zoom {
+  transform: scale(2.5);
+}
+
+.mp-boton-red img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+/* ── Topbar con volver — compartido por mi-perfil-feed-detalle.js
+   y perfil-publico.js (pantallas de detalle, no la pestaña raíz) ── */
+
+.mp-topbar-detalle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 4px 14px;
+  position: sticky;
+  top: 0;
+  background: var(--color-bg);
+  z-index: 10;
+}
+
+.mp-topbar-detalle__volver {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: var(--color-text-05, rgba(127, 127, 127, 0.08));
+  color: var(--color-text);
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.mp-topbar-detalle__titulo {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+/* ── Estado de error genérico (post/perfil no encontrado) ───────── */
+
+.mp-error-estado {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 60px 24px;
+  color: var(--color-text-54);
+  text-align: center;
+}
+
+.mp-error-estado button {
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: 100px;
+  padding: 10px 22px;
+  font-weight: 600;
+  cursor: pointer;
+}

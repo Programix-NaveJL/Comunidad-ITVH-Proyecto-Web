@@ -1,0 +1,430 @@
+/* ═══════════════════════════════════════════════════════════════
+   marketplace-publicar.css — agregar al final de marketplace.css
+   Usa las mismas variables de variables.css + --mkt-accent ya
+   definido arriba. Patrón "tarjeta agrupada" estilo Ajustes de iOS.
+   ═══════════════════════════════════════════════════════════════ */
+
+.mkt-pub-scroll {
+  padding: 16px 16px 40px;
+}
+
+/* ── Solicitar verificación ─────────────────────────────────────── */
+.mkt-pub-insignia {
+  width: 84px;
+  height: 84px;
+  margin: 8px auto 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 38px;
+  background: linear-gradient(135deg, #0a84ff, #64d2ff);
+  box-shadow: 0 10px 24px rgba(var(--mkt-accent-rgb), 0.35);
+}
+
+.mkt-pub-titulo-hero {
+  margin: 0 0 8px;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  line-height: 1.25;
+  text-align: center;
+  color: var(--color-text);
+}
+
+.mkt-pub-subtitulo-hero {
+  margin: 0 auto 34px;
+  max-width: 320px;
+  font-size: 14.5px;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--color-text-54);
+}
+
+.mkt-pub-nota-centro {
+  margin: 14px 0 0;
+  text-align: center;
+  font-size: 12px;
+  color: var(--color-text-38);
+}
+
+/* ── Encabezados de sección ───────────────────────────────────────── */
+.mkt-pub-seccion-header {
+  margin: 0 0 8px 4px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--color-text-38);
+}
+
+.mkt-pub-seccion-header-fila {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.mkt-pub-contador {
+  margin-bottom: 8px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--color-text-38);
+}
+
+/* ── Tarjeta agrupada ──────────────────────────────────────────────── */
+.mkt-pub-tarjeta {
+  border-radius: 16px;
+  background: var(--color-surface);
+  border: 0.8px solid var(--glass-border);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  margin-bottom: 22px;
+}
+
+.mkt-pub-fila {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+}
+
+.mkt-pub-fila__label {
+  flex-shrink: 0;
+  min-width: 80px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.mkt-pub-fila__input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 15px;
+  color: var(--color-text);
+}
+
+.mkt-pub-fila__input::placeholder {
+  color: var(--color-text-30);
+}
+
+.mkt-pub-precio-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+.mkt-pub-precio-signo {
+  font-size: 15px;
+  color: var(--color-text-54);
+}
+
+.mkt-pub-divisor {
+  height: 0.6px;
+  margin-left: 16px;
+  background: var(--glass-border);
+}
+
+.mkt-pub-fila-accion {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 14px 16px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.mkt-pub-fila-accion__valor {
+  margin-left: auto;
+  margin-right: 6px;
+  font-size: 15px;
+  color: var(--color-text-60);
+}
+
+.mkt-pub-fila-accion__valor.placeholder {
+  color: var(--color-text-30);
+}
+
+.mkt-pub-fila-accion__chevron {
+  font-size: 16px;
+  color: var(--color-text-30);
+}
+
+.mkt-pub-textarea {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  border: none;
+  outline: none;
+  resize: none;
+  background: transparent;
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--color-text);
+  font-family: inherit;
+}
+
+.mkt-pub-textarea::placeholder {
+  color: var(--color-text-30);
+}
+
+/* ── Segmented control (Producto / Servicio) ──────────────────────── */
+.mkt-pub-segmented {
+  position: relative;
+  display: flex;
+  height: 44px;
+  padding: 4px;
+  margin-bottom: 26px;
+  border-radius: 13px;
+  background: var(--glass-bg);
+}
+
+.mkt-pub-segmented__thumb {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 4px;
+  width: calc(50% - 4px);
+  border-radius: 10px;
+  background: var(--color-surface);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12);
+  transition: left 0.24s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.mkt-pub-segmented__btn {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-54);
+}
+
+.mkt-pub-segmented__btn.activo {
+  color: var(--color-text);
+}
+
+/* ── Avisos (info / warning) ───────────────────────────────────────── */
+.mkt-pub-aviso {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 12px 14px;
+  margin-bottom: 22px;
+  border-radius: 14px;
+  font-size: 12.5px;
+  line-height: 1.4;
+}
+
+.mkt-pub-aviso--info {
+  background: rgba(var(--mkt-accent-rgb), 0.08);
+  color: var(--color-text-60);
+}
+
+.mkt-pub-aviso--warning {
+  background: rgba(255, 149, 0, 0.1);
+  color: var(--color-warning);
+}
+
+/* ── Fotografías ───────────────────────────────────────────────────── */
+.mkt-pub-fotos {
+  display: flex;
+  gap: 10px;
+  padding: 14px;
+  overflow-x: auto;
+}
+
+.mkt-pub-foto {
+  position: relative;
+  flex-shrink: 0;
+  width: 96px;
+  height: 96px;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.mkt-pub-foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.mkt-pub-foto__badge {
+  position: absolute;
+  left: 6px;
+  bottom: 6px;
+  padding: 3px 8px;
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: 600;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.mkt-pub-foto__eliminar {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.54);
+  color: #fff;
+  font-size: 11px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.mkt-pub-foto-agregar {
+  flex-shrink: 0;
+  width: 96px;
+  height: 96px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  border: none;
+  border-radius: 14px;
+  background: var(--glass-bg);
+  color: var(--mkt-accent);
+  cursor: pointer;
+  font-size: 11.5px;
+  font-weight: 600;
+}
+
+.mkt-pub-foto-agregar span:first-child {
+  font-size: 22px;
+  line-height: 1;
+}
+
+/* ── Botón principal ───────────────────────────────────────────────── */
+.mkt-pub-boton-principal {
+  width: 100%;
+  height: 52px;
+  border: none;
+  border-radius: 14px;
+  background: var(--mkt-accent);
+  color: #fff;
+  font-size: 15.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.mkt-pub-boton-principal:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+/* ── Pantalla de estado (pendiente / suspendido) ──────────────────── */
+.mkt-pub-estado {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 32px;
+  text-align: center;
+}
+
+.mkt-pub-estado__icono {
+  width: 88px;
+  height: 88px;
+  margin-bottom: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 42px;
+}
+
+.mkt-pub-estado__icono--pendiente {
+  background: rgba(255, 149, 0, 0.12);
+}
+
+.mkt-pub-estado__icono--suspendido {
+  background: rgba(255, 59, 48, 0.12);
+}
+
+.mkt-pub-estado__titulo {
+  margin: 0 0 10px;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.2px;
+  color: var(--color-text);
+}
+
+.mkt-pub-estado__mensaje {
+  margin: 0;
+  max-width: 300px;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--color-text-54);
+}
+
+/* ── Selector de categoría (contenido dentro de bottom-sheet.js) ──── */
+.mkt-cat-sheet__header {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px 8px 20px;
+}
+
+.mkt-cat-sheet__titulo {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.mkt-cat-sheet__listo {
+  margin-left: auto;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--mkt-accent);
+}
+
+.mkt-cat-sheet__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 8px 16px 24px;
+  overflow-y: auto;
+}
+
+.mkt-cat-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 14px;
+  background: var(--glass-bg);
+  color: var(--color-text-70, var(--color-text));
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.mkt-cat-chip.activo {
+  background: var(--mkt-accent);
+  color: #fff;
+}

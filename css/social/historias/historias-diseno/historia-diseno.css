@@ -1,0 +1,348 @@
+/* historia-diseno.css
+   Ruta real: css/social/historias/historias-diseno/historia-diseno.css
+
+   Pantalla de diseño de historia (historias-diseno.js): siempre en
+   fondo negro fijo, igual que el Dart (Scaffold negro sin importar
+   el tema activo — es una pantalla tipo editor de cámara, no sigue
+   var(--color-*)). */
+
+.historia-diseno {
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: #000;
+  color: #fff;
+  overflow: hidden;
+}
+
+.hd-header {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 12px 6px 4px;
+  gap: 8px;
+}
+
+.hd-header--plantilla {
+  padding-right: 16px;
+}
+
+.hd-icono-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: none;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hd-icono-btn--activo {
+  color: #0A84FF;
+}
+
+.hd-titulo {
+  flex: 1;
+  text-align: center;
+  margin: 0;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.hd-siguiente {
+  border: none;
+  background: none;
+  color: #0A84FF;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.hd-siguiente:disabled {
+  color: rgba(255, 255, 255, 0.24);
+  cursor: default;
+}
+
+.hd-subtitulo {
+  flex-shrink: 0;
+  margin: 0 16px 10px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.54);
+}
+
+.hd-subtitulo--activo {
+  color: #0A84FF;
+}
+
+/* ── Fase 1 ─────────────────────────────────────────────────── */
+
+.hd-vacio {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.hd-elegir-btn {
+  padding: 14px 22px;
+  border-radius: 14px;
+  border: none;
+  background: #0A84FF;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.hd-vacio__nota {
+  margin: 0;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.hd-grid {
+  flex: 1;
+  overflow-y: auto;
+  display: grid;
+  /* Columnas de tamaño fijo tipo miniatura (no 1fr al tercio del
+     ancho): así las celdas se ven igual de compactas sin importar
+     cuántas fotos haya ni el ancho real de la pantalla — con 1 sola
+     foto ya no ocupa casi media pantalla, y el layout no cambia
+     entre celular y escritorio salvo por cuántas columnas caben. */
+  grid-template-columns: repeat(auto-fill, minmax(100px, 100px));
+  justify-content: start;
+  align-content: start;
+  gap: 4px;
+  padding: 8px;
+}
+
+.hd-celda-sel {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  min-width: 0; /* evita el "grid blowout": sin esto, el ancho intrínseco de la <img> fuerza a esta columna a crecer y colapsa a las demás */
+  min-height: 0; /* misma corrección que min-width, pero en el eje vertical: sin esto, el alto intrínseco de la <img> gana sobre aspect-ratio y la celda deja de ser cuadrada (mismo bug ya corregido en galeria-multimedia.css) */
+}
+
+.hd-celda-sel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hd-celda-sel__orden {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #0A84FF;
+  border: 1.4px solid rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.hd-celda-sel__quitar {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.hd-celda-agregar {
+  aspect-ratio: 1 / 1;
+  border: none;
+  background: #1C1C1E;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 26px;
+  cursor: pointer;
+}
+
+/* ── Fase 2 ─────────────────────────────────────────────────── */
+
+.hd-header__acciones {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.hd-ok-btn {
+  padding: 10px 18px;
+  border-radius: 22px;
+  border: none;
+  background: #fff;
+  color: rgba(0, 0, 0, 0.87);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  min-width: 44px;
+}
+
+.hd-ok-btn:disabled {
+  background: rgba(255, 255, 255, 0.24);
+  cursor: default;
+}
+
+.hd-spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(0, 0, 0, 0.3);
+  border-top-color: rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+  animation: hd-spin 0.7s linear infinite;
+}
+
+@keyframes hd-spin {
+  to { transform: rotate(360deg); }
+}
+
+.hd-lienzo-wrap {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+}
+
+.hd-lienzo {
+  position: relative;
+  height: 100%;
+  aspect-ratio: 9 / 16;
+  max-width: 100%;
+  background: #000;
+  overflow: hidden;
+}
+
+.hd-hint {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 10px;
+  margin: 0 auto;
+  width: fit-content;
+  padding: 7px 12px;
+  background: rgba(0, 0, 0, 0.87);
+  border-radius: 10px;
+  font-size: 11px;
+  pointer-events: none;
+}
+
+.hd-celda {
+  position: absolute;
+  overflow: hidden;
+  outline: 0.5px solid rgba(255, 255, 255, 0.06);
+}
+
+.hd-celda-ajustable {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  cursor: grab;
+  touch-action: none;
+}
+
+.hd-celda-ajustable:active {
+  cursor: grabbing;
+}
+
+.hd-celda-ajustable img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform-origin: center;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.hd-celda__vacia {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: #1C1C1E;
+  color: rgba(255, 255, 255, 0.38);
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.hd-pildora-musica {
+  flex-shrink: 0;
+  align-self: center;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 20px;
+  font-size: 12px;
+  max-width: calc(100% - 48px);
+}
+
+.hd-pildora-musica span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hd-pildora-musica button {
+  border: none;
+  background: none;
+  color: rgba(255, 255, 255, 0.54);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.hd-plantillas {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  padding: 16px 12px 20px;
+  overflow-x: auto;
+}
+
+.hd-plantilla-btn {
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.hd-plantilla-btn--activo {
+  background: #0A84FF;
+  border-color: #0A84FF;
+}

@@ -1,0 +1,194 @@
+/* hoja-comentarios.css
+   Ruta real sugerida: css/social/publicaciones/tarjeta-publicaciones/hoja-comentarios.css
+
+   NOTA: .confirm-dialog-overlay/.confirm-dialog al final de este
+   archivo son genéricos (no tienen nada específico de comentarios)
+   — se definen aquí porque es donde se necesitaron primero, pero
+   son buen candidato a moverse a glassmorphism.css cuando otra
+   pantalla los vuelva a necesitar, para no duplicarlos. */
+
+.hoja-comentarios__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px 10px;
+}
+
+.hoja-comentarios__icono {
+  font-size: 18px;
+}
+
+.hoja-comentarios__titulo {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.hoja-comentarios__divisor {
+  height: 0.5px;
+  background: var(--glass-border);
+}
+
+.hoja-comentarios__lista {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 8px;
+}
+
+.hoja-comentarios__spinner {
+  display: flex;
+  justify-content: center;
+  padding: 24px 0;
+}
+
+.hoja-comentarios__vacio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 40px 0;
+  color: var(--color-text-60);
+  font-size: 14px;
+}
+
+.hoja-comentarios__vacio-icono {
+  font-size: 40px;
+}
+
+.hoja-comentarios__footer {
+  flex-shrink: 0;
+  padding: 8px 12px 12px;
+  border-top: 1px solid var(--glass-border);
+  background: var(--color-surface);
+}
+
+.hoja-comentarios__banner {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 2px 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-accent);
+}
+
+.hoja-comentarios__banner--respuesta {
+  color: var(--color-accent);
+}
+
+.hoja-comentarios__banner-cerrar {
+  margin-left: auto;
+  background: none;
+  border: none;
+  font-size: 13px;
+  color: var(--color-text-60);
+  cursor: pointer;
+  padding: 4px;
+}
+
+.hoja-comentarios__campo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hoja-comentarios__input {
+  flex: 1;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 20px;
+  background: var(--glass-bg);
+  color: var(--color-text);
+  font-size: 14px;
+}
+
+.hoja-comentarios__input:focus {
+  outline: none;
+  background: var(--glass-bg-focus);
+}
+
+.hoja-comentarios__enviar {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: #fff;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.hoja-comentarios__enviar:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+/* ── Diálogo genérico de confirmación (ver NOTA al inicio) ──────── */
+
+.confirm-dialog-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0);
+  transition: background-color 0.15s ease;
+}
+
+.confirm-dialog-overlay.visible {
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.confirm-dialog {
+  width: 100%;
+  max-width: 320px;
+  padding: 20px;
+  background: var(--color-surface);
+  border-radius: var(--radius-card);
+  opacity: 0;
+  transform: scale(0.96);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.confirm-dialog-overlay.visible .confirm-dialog {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.confirm-dialog__titulo {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.confirm-dialog__texto {
+  margin: 0 0 18px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--color-text-60);
+}
+
+.confirm-dialog__acciones {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.confirm-dialog__eliminar {
+  border: none;
+  background: none;
+  padding: 8px 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-danger);
+  cursor: pointer;
+}

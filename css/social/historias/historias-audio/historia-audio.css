@@ -1,0 +1,286 @@
+/* historia-audio.css
+   Pantalla de historia de audio (historias-audio.js): fondo elegible
+   de color/degradado, botón de micrófono con pulso animado mientras
+   graba, onda de voz real (barras dirigidas por AnalyserNode),
+   preview de reproducción con progreso, selector de fondo, disco
+   girando mientras se publica, y barra inferior. Pantalla de
+   creación a pantalla completa, sin relación con el tema claro/
+   oscuro de la app — mismo criterio que historia-texto.css y
+   visor-media.css. */
+
+.historia-audio {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+}
+
+.historia-audio__fondo {
+  position: absolute;
+  inset: 0;
+  transition: background 0.3s ease;
+}
+
+/* ── Header ───────────────────────────────────────────────────── */
+
+.historia-audio__header {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  padding: max(10px, env(safe-area-inset-top, 10px)) 8px 6px;
+}
+
+.historia-audio__cerrar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: none;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.historia-audio__titulo {
+  flex: 1;
+  margin: 0;
+  text-align: center;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.historia-audio__spacer {
+  width: 40px;
+  flex-shrink: 0;
+}
+
+/* ── Contenido central ────────────────────────────────────────── */
+
+.historia-audio__central {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.historia-audio__mic {
+  position: relative;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  border: none;
+  background: #fff;
+  color: rgba(0, 0, 0, 0.87);
+  font-size: 38px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.historia-audio__mic--grabando {
+  background: #ff5252;
+  color: #fff;
+}
+
+.historia-audio__mic--grabando::before {
+  content: '';
+  position: absolute;
+  inset: -12px;
+  border-radius: 50%;
+  background: rgba(255, 82, 82, 0.35);
+  animation: historia-audio-pulso 0.9s ease-in-out infinite;
+  z-index: -1;
+}
+
+@keyframes historia-audio-pulso {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+}
+
+.historia-audio__tiempo {
+  margin: 0;
+  color: #fff;
+  font-size: 22px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.historia-audio__tiempo--chico {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.historia-audio__preview-btn {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.24);
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Onda de voz ──────────────────────────────────────────────── */
+/* Cada barra refleja la amplitud real muestreada por el
+   AnalyserNode (ver leerAmplitud() en historias-audio.js) — no es
+   decorativo. En vivo (mientras se graba) las barras se actualizan
+   cada 100ms como una ventana deslizante; en el preview quedan fijas,
+   con las barras ya reproducidas resaltadas en blanco sólido. */
+
+.historia-audio__onda {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  height: 48px;
+  width: min(260px, 80vw);
+}
+
+.historia-audio__barra {
+  flex: 1;
+  max-width: 4px;
+  min-height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.3);
+  transition: height 0.1s ease;
+}
+
+.historia-audio__barra--activa {
+  background: #ffffff;
+}
+
+.historia-audio__onda--estatica .historia-audio__barra {
+  transition: none;
+}
+
+/* ── Selector de fondo ────────────────────────────────────────── */
+
+.historia-audio__selector-fondo {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 44px;
+  padding: 0 16px;
+  overflow-x: auto;
+  transition: opacity 0.2s ease;
+}
+
+.historia-audio__selector-fondo--deshabilitado {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.historia-audio__swatch {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  cursor: pointer;
+}
+
+.historia-audio__swatch--sel {
+  border: 2.5px solid #fff;
+}
+
+/* ── Barra inferior ───────────────────────────────────────────── */
+
+.historia-audio__barra-inferior {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 12px 24px max(20px, env(safe-area-inset-bottom, 20px));
+  min-height: 44px;
+}
+
+.historia-audio__hint {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.54);
+  font-size: 13px;
+}
+
+.historia-audio__btn-regrabar {
+  border: none;
+  background: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  cursor: pointer;
+  font-family: var(--font-family);
+}
+
+.historia-audio__btn-siguiente {
+  margin-left: auto;
+  border: none;
+  border-radius: 20px;
+  background: var(--color-primary, #0a84ff);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 12px 22px;
+  cursor: pointer;
+  font-family: var(--font-family);
+}
+
+/* ── Publicando: disco girando ────────────────────────────────── */
+
+.historia-audio__publicando {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.historia-audio__publicando-texto {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Disco de vinilo: surcos concéntricos vía repeating-radial-gradient
+   + una "etiqueta" central sólida, girando en loop mientras se sube
+   el archivo — puramente CSS, sin lógica de animación en JS. */
+.historia-audio__disco-girando {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at center, #0a84ff 0 5px, transparent 5.5px),
+    repeating-radial-gradient(circle at center, #1c1c1e 0, #1c1c1e 2.5px, #333 2.5px, #333 5px);
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  animation: historia-audio-girar 1s linear infinite;
+}
+
+@keyframes historia-audio-girar {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,67 @@
+/* mencion-autocomplete.css
+   Panel de sugerencias que aparece arriba del campo de comentario
+   mientras se escribe una @mención (renderPanelMenciones en
+   mencion-autocomplete.js). */
+
+.panel-menciones {
+  max-height: 180px;
+  overflow-y: auto;
+  margin-bottom: 6px;
+  border-radius: 14px;
+  background: var(--color-surface);
+}
+
+.panel-menciones__spinner {
+  display: flex;
+  justify-content: center;
+  padding: 14px 0;
+}
+
+.panel-menciones__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.panel-menciones__item:hover {
+  background: var(--glass-bg);
+}
+
+.panel-menciones__avatar {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface);
+  color: var(--color-text-38);
+  font-size: 14px;
+}
+
+.panel-menciones__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.panel-menciones__info {
+  min-width: 0;
+}
+
+.panel-menciones__nombre {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.panel-menciones__usuario {
+  margin: 0;
+  font-size: 11px;
+  color: var(--color-text-54);
+}

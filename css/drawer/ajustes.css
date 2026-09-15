@@ -1,0 +1,286 @@
+/* ═════════════════════════════════════════════════════════════════
+   ajustes.css
+
+   Estilos de la pantalla de Ajustes, su sub-pantalla de Cambiar
+   contraseña, y los diálogos de confirmación tipo AlertDialog
+   (cerrar sesión / eliminar cuenta), usados por
+   js/features/drawer/ajustes.js.
+   ═════════════════════════════════════════════════════════════════ */
+
+.ajustes {
+  min-height: 100vh;
+  background: var(--color-bg);
+}
+
+.ajustes-header {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 52px;
+  padding: 0 8px;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.ajustes-volver {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: none;
+  color: var(--color-text);
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.ajustes-header h1 {
+  flex: 1;
+  color: var(--color-text);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.ajustes-guardar {
+  border: none;
+  background: none;
+  color: var(--color-primary-light);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0 10px;
+  cursor: pointer;
+  font-family: var(--font-family);
+}
+
+.ajustes-cuerpo {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 28px 16px 40px;
+}
+
+.ajustes-seccion {
+  margin: 0 0 8px 4px;
+  color: var(--color-text-38);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+}
+
+.ajustes-grupo {
+  margin-bottom: 28px;
+  border-radius: 16px;
+  border: 0.5px solid var(--glass-border);
+  background: var(--color-surface);
+  overflow: hidden;
+}
+
+.ajustes-tile {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-family);
+}
+
+.ajustes-tile__icono {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.ajustes-tile__titulo {
+  flex: 1;
+  color: var(--color-text);
+  font-size: 15px;
+}
+
+.ajustes-tile__textos {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ajustes-tile__textos .ajustes-tile__titulo {
+  font-weight: 500;
+}
+
+.ajustes-tile__subtitulo {
+  color: var(--color-text-38);
+  font-size: 12px;
+}
+
+.ajustes-tile__flecha {
+  flex-shrink: 0;
+  color: var(--color-text-38);
+  font-size: 18px;
+}
+
+.ajustes-divisor {
+  height: 0.5px;
+  margin-left: 56px;
+  background: var(--glass-border);
+}
+
+.ajustes-pie {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.ajustes-pie a {
+  text-decoration: none;
+}
+
+.ajustes-pie p {
+  margin: 0 0 3px;
+  color: var(--color-text-54);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.ajustes-pie__copy {
+  color: var(--color-text-30) !important;
+  font-size: 11px !important;
+  font-weight: 400 !important;
+}
+
+/* ── Sub-pantalla: cambiar contraseña ────────────────────────────── */
+
+.ajustes-campo-password {
+  display: flex;
+  align-items: center;
+  padding: 4px 16px;
+}
+
+.ajustes-campo-password input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--color-text);
+  font-size: 15px;
+  padding: 13px 0;
+  font-family: var(--font-family);
+}
+
+.ajustes-campo-password input::placeholder {
+  color: var(--color-text-38);
+}
+
+.ajustes-toggle-ver {
+  border: none;
+  background: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: var(--color-text-38);
+}
+
+.ajustes-hint {
+  margin: 12px 4px 0;
+  color: var(--color-text-38);
+  font-size: 12px;
+}
+
+/* ── Diálogos de confirmación (tipo AlertDialog) ─────────────────── */
+
+.ajustes-dialogo-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.ajustes-dialogo {
+  width: 100%;
+  max-width: 360px;
+  background: var(--color-surface);
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.ajustes-dialogo__titulo {
+  margin: 0 0 10px;
+  color: var(--color-text);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.ajustes-dialogo__cuerpo {
+  margin: 0 0 14px;
+  color: var(--color-text-70);
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
+.ajustes-dialogo__label {
+  margin: 0 0 8px;
+  color: var(--color-text);
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.ajustes-dialogo__input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  color: var(--color-text);
+  font-size: 14px;
+  font-family: var(--font-family);
+  text-transform: uppercase;
+}
+
+.ajustes-dialogo__error {
+  min-height: 16px;
+  margin: 6px 0 0;
+  color: #ff3b30;
+  font-size: 12px;
+}
+
+.ajustes-dialogo__acciones {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.ajustes-dialogo__btn {
+  border: none;
+  background: none;
+  color: var(--color-text-38);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 6px 4px;
+  font-family: var(--font-family);
+  display: flex;
+  align-items: center;
+}
+
+.ajustes-dialogo__btn--peligro {
+  color: #ff3b30;
+}
+
+.ajustes-dialogo__btn:disabled {
+  color: var(--color-text-30);
+  cursor: not-allowed;
+}

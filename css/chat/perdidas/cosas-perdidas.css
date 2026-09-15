@@ -1,0 +1,146 @@
+/* ═════════════════════════════════════════════════════════════════
+   cosas-perdidas.css
+   Ubicación: css/chat/perdidas/cosas-perdidas.css
+   ═════════════════════════════════════════════════════════════════ */
+
+.cp-screen { height: 100%; overflow-y: auto; padding: 12px 16px 100px; }
+.cp-cargando, .cp-error, .cp-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.cp-cargando { padding: 60px 0; }
+
+/* ── Lista ─────────────────────────────────────────────────────── */
+.cp-lista { display: flex; flex-direction: column; gap: 14px; }
+
+/* ── Card ──────────────────────────────────────────────────────── */
+.cp-card {
+  border-radius: 18px; overflow: hidden;
+  background: var(--color-surface); box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+}
+.cp-card__imagen { aspect-ratio: 16/10; overflow: hidden; }
+.cp-card__imagen img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.cp-card__cuerpo { padding: 12px 14px 10px; }
+
+.cp-card__meta { display: flex; align-items: center; justify-content: space-between; }
+.cp-card__tiempo { font-size: 11px; color: var(--color-text-38); }
+.cp-card__expira { font-size: 11px; color: var(--color-text-30); }
+
+.cp-card__desc { font-size: 14px; line-height: 1.45; color: var(--color-text); margin: 10px 0 0; }
+.cp-card__lugar { font-size: 12px; color: var(--color-text-45); margin: 6px 0 0; }
+
+.cp-card__footer { display: flex; align-items: center; gap: 8px; margin-top: 12px; }
+.cp-card__avatar {
+  width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,122,255,0.15); color: #007AFF; font-weight: 700; font-size: 11px;
+}
+.cp-card__avatar img { width: 100%; height: 100%; object-fit: cover; }
+.cp-card__autor { flex: 1; min-width: 0; }
+.cp-card__autor-nombre { font-size: 13px; font-weight: 600; color: var(--color-text-70); margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cp-card__autor-usuario { font-size: 11px; color: var(--color-text-38); margin: 0; }
+
+.cp-btn-eliminar, .cp-btn-contactar {
+  display: flex; align-items: center; gap: 4px; padding: 7px 12px; border-radius: 10px;
+  border: none; font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap;
+}
+.cp-btn-eliminar { background: rgba(255,69,58,0.1); color: #ff453a; }
+.cp-btn-contactar { background: #007AFF; color: #fff; }
+
+/* ── Empty / error ─────────────────────────────────────────────── */
+.cp-empty, .cp-error { padding: 60px 32px; }
+.cp-empty__icono { width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; background: rgba(0,122,255,0.1); }
+.cp-empty__titulo { font-size: 17px; font-weight: 700; color: var(--color-text); margin: 18px 0 6px; }
+.cp-empty__desc { font-size: 14px; line-height: 1.5; color: var(--color-text-38); margin: 0; }
+.cp-empty__boton {
+  margin-top: 22px; padding: 12px 22px; border-radius: 14px; border: none;
+  background: #007AFF; color: #fff; font-weight: 600; font-size: 14px; cursor: pointer;
+}
+.cp-error__icono { font-size: 32px; margin-bottom: 12px; }
+.cp-error__texto { font-size: 14px; color: var(--color-text-54); margin: 0 0 16px; }
+.cp-error__boton { padding: 10px 20px; border-radius: 12px; border: none; background: #007AFF; color: #fff; font-weight: 600; cursor: pointer; }
+
+/* ── FAB ───────────────────────────────────────────────────────── */
+.cp-fab {
+  position: fixed; bottom: 100px; right: 20px; display: flex; align-items: center; gap: 6px;
+  padding: 13px 18px; border-radius: 16px; background: #007AFF; color: #fff; border: none;
+  font-weight: 600; font-size: 14px; cursor: pointer; box-shadow: 0 4px 14px rgba(0,0,0,0.25); z-index: 30;
+}
+
+/* ── Confirmar eliminar ───────────────────────────────────────── */
+.cp-confirm-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0); z-index: 1000;
+  display: flex; align-items: center; justify-content: center; transition: background 150ms;
+}
+.cp-confirm-overlay.visible { background: rgba(0,0,0,0.45); }
+.cp-confirm {
+  width: 280px; padding: 20px; border-radius: 18px; background: var(--color-surface);
+  transform: scale(0.92); opacity: 0; transition: transform 150ms, opacity 150ms;
+}
+.cp-confirm-overlay.visible .cp-confirm { transform: scale(1); opacity: 1; }
+.cp-confirm__titulo { font-size: 16px; font-weight: 700; color: var(--color-text); margin: 0 0 8px; }
+.cp-confirm__texto { font-size: 13px; color: var(--color-text-54); margin: 0 0 18px; line-height: 1.4; }
+.cp-confirm__botones { display: flex; justify-content: flex-end; gap: 16px; }
+.cp-confirm__cancelar, .cp-confirm__eliminar { background: none; border: none; font-size: 14px; font-weight: 600; cursor: pointer; padding: 4px; }
+.cp-confirm__cancelar { color: var(--color-text-54); }
+.cp-confirm__eliminar { color: #ff453a; }
+
+/* ── Sheets (formulario / menú de imagen) ─────────────────────── */
+.cp-sheet-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0); z-index: 1000;
+  display: flex; align-items: flex-end; justify-content: center; transition: background 200ms;
+}
+.cp-sheet-overlay.visible { background: rgba(0,0,0,0.4); }
+.cp-sheet-overlay > .cp-sheet { transform: translateY(100%); transition: transform 200ms; width: 100%; max-width: 480px; margin: 0 12px 12px; }
+.cp-sheet-overlay.visible > .cp-sheet { transform: translateY(0); }
+
+.cp-sheet { background: var(--color-surface); border-radius: 20px; padding: 8px 20px 20px; max-height: 85vh; overflow-y: auto; box-sizing: border-box; }
+.cp-sheet--menu { padding: 8px 12px 20px; }
+.cp-sheet__manija { width: 36px; height: 4px; border-radius: 2px; background: var(--color-text-38); margin: 4px auto 12px; }
+.cp-sheet__titulo { font-size: 18px; font-weight: 800; color: var(--color-text); margin: 0; letter-spacing: -0.3px; }
+.cp-sheet__subtitulo { font-size: 12px; color: var(--color-text-38); margin: 4px 0 16px; }
+
+.cp-opcion-imagen {
+  display: block; width: 100%; text-align: left; padding: 14px 8px; border: none; background: none;
+  color: var(--color-text); font-size: 15px; cursor: pointer; border-radius: 10px;
+}
+.cp-opcion-imagen:active { background: var(--glass-bg); }
+
+.cp-imagen-selector {
+  height: 110px; border-radius: 14px; border: 1px solid var(--glass-border); background: var(--glass-bg);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+  cursor: pointer; margin-bottom: 14px; position: relative; overflow: hidden;
+}
+.cp-imagen-selector__icono { font-size: 26px; }
+.cp-imagen-selector__texto { font-size: 13px; color: var(--color-text-45); }
+.cp-imagen-selector__subtexto { font-size: 11px; color: var(--color-text-30); }
+.cp-imagen-selector.con-imagen { height: 200px; padding: 0; }
+.cp-imagen-preview { width: 100%; height: 100%; object-fit: cover; }
+.cp-imagen-preview__quitar {
+  position: absolute; top: 8px; right: 8px; width: 26px; height: 26px; border-radius: 50%;
+  background: rgba(0,0,0,0.55); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px;
+}
+
+.cp-textarea, .cp-input {
+  width: 100%; border: none; border-radius: 12px; background: var(--glass-bg);
+  padding: 12px; font-size: 14px; color: var(--color-text); font-family: var(--font-family);
+  outline: none; box-sizing: border-box; margin-bottom: 10px;
+}
+.cp-textarea { resize: none; }
+
+.cp-error { font-size: 12px; color: #ff453a; font-weight: 500; margin: 0 0 8px; padding: 0; text-align: left; }
+
+.cp-boton-grande {
+  width: 100%; padding: 14px; border: none; border-radius: 14px;
+  background: #007AFF; color: #fff; font-weight: 700; font-size: 15px; cursor: pointer;
+}
+.cp-boton-grande:disabled { opacity: 0.7; }
+.cp-spinner-boton {
+  display: inline-block; width: 18px; height: 18px; border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.4); border-top-color: #fff; animation: chats-girar 0.7s linear infinite;
+}
+
+/* ── Overlay de conversación (placeholder de integración futura) ── */
+.cp-conversacion-overlay { position: fixed; inset: 0; z-index: 1100; background: var(--color-fondo, #fff); }
+
+/* ── Vista de detalle ──────────────────────────────────────────── */
+.cp-detalle { padding: 16px; min-height: 200px; display: flex; }
+.cp-detalle__no-disponible { margin: 60px auto 0; text-align: center; color: var(--color-text-45); font-size: 14px; }
+.cp-detalle__no-disponible span { display: block; font-size: 40px; margin-bottom: 12px; }

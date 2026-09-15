@@ -1,0 +1,263 @@
+/* css/ubicatecnm/ubicatecnm.css */
+
+.ubica-hub {
+  padding: 12px 16px 24px;
+  background: var(--fondo-principal, #000);
+  min-height: 100%;
+}
+
+.ubica-press {
+  cursor: pointer;
+  transition: transform 0.12s ease-out;
+}
+
+.ubica-press:active {
+  transform: scale(0.97);
+}
+
+/* ── Título grande ── */
+.ubica-hub__titulo-zona {
+  margin-bottom: 20px;
+}
+
+.ubica-hub__titulo {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.6px;
+  color: var(--texto-primario, #fff);
+}
+
+.ubica-hub__titulo--acento {
+  color: #0a84ff;
+}
+
+/* ── Botón mapa interactivo ── */
+.ubica-hub__boton-mapa {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  border: none;
+  background: var(--fondo-tarjeta, #1c1c1e);
+  border-radius: 20px;
+  padding: 16px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+  text-align: left;
+}
+
+.ubica-hub__mapa-icono-zona {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ubica-hub__mapa-icono {
+  position: relative;
+  z-index: 1;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: rgba(10, 132, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.ubica-hub__pulso {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(10, 132, 255, 0.35);
+  animation: ubica-pulso 2s ease-out infinite;
+}
+
+.ubica-hub__pulso--retraso {
+  animation-delay: 1s;
+}
+
+@keyframes ubica-pulso {
+  0% {
+    transform: scale(1);
+    opacity: 0.35;
+  }
+  100% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+}
+
+.ubica-hub__mapa-texto {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.ubica-hub__mapa-titulo {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  color: var(--texto-primario, #fff);
+}
+
+.ubica-hub__mapa-subtitulo {
+  font-size: 12px;
+  color: var(--texto-secundario, rgba(255, 255, 255, 0.4));
+}
+
+.ubica-hub__mapa-flecha {
+  font-size: 22px;
+  color: var(--texto-terciario, rgba(255, 255, 255, 0.25));
+}
+
+/* ── Sección de videos ── */
+.ubica-hub__videos-zona {
+  margin-top: 28px;
+}
+
+.ubica-hub__videos-titulo {
+  margin: 0 0 4px;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  color: var(--texto-primario, #fff);
+}
+
+.ubica-hub__videos-subtitulo {
+  margin: 0 0 14px;
+  font-size: 13px;
+  color: var(--texto-secundario, rgba(255, 255, 255, 0.38));
+}
+
+.ubica-hub__videos-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ubica-video {
+  background: var(--fondo-tarjeta, #1c1c1e);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+}
+
+.ubica-video__media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #111;
+}
+
+.ubica-video__miniatura {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  animation: ubica-shimmer 1.4s linear infinite;
+  background: linear-gradient(90deg, #1c1c1e 25%, #2a2a2c 37%, #1c1c1e 63%);
+  background-size: 400% 100%;
+}
+
+@keyframes ubica-shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+.ubica-video__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.ubica-video__play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 20px;
+  padding-left: 4px; /* óptica del triángulo de play */
+}
+
+.ubica-video__iframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: none;
+}
+
+.ubica-video__titulo {
+  margin: 0;
+  padding: 12px 14px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.1px;
+  color: var(--texto-primario, #fff);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Fallback "Ver en YouTube" — cuando el embed de un video falla
+   (owner desactivó "permitir insertar", age-restricted, etc.)
+   Ocupa el mismo espacio que .ubica-video__media (16:9, position:
+   relative, aspect-ratio ya fijado ahí), así que este bloque solo
+   necesita llenarlo con position: absolute; inset: 0.
+   ═══════════════════════════════════════════════════════════════ */
+
+.ubica-video__fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px;
+  background: #111;
+  text-align: center;
+}
+
+.ubica-video__fallback-texto {
+  margin: 0;
+  max-width: 240px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--texto-secundario, rgba(255, 255, 255, 0.4));
+}
+
+/* ─── Botón de salida — mismo acento que el resto del hub ─── */
+.ubica-video__fallback-boton {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: rgba(10, 132, 255, 0.12);
+  color: #0a84ff;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.1px;
+  text-decoration: none;
+  white-space: nowrap;
+}

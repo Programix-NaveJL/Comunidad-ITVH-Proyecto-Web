@@ -1,0 +1,147 @@
+/* galeria-multimedia.css
+   Ruta real sugerida: css/social/publicaciones/tarjeta-publicaciones/galeria-multimedia.css
+
+   Los aspect-ratio de abajo son la traducción directa de las
+   proporciones fijas del Dart original (lado = ancho/2, altura de
+   3-medios = ancho*0.65, etc.), resueltas en CSS puro en vez de
+   medir el contenedor en JS. */
+
+.galeria-medios {
+  display: grid;
+  width: 100%;
+  overflow: hidden;
+}
+
+.galeria-medios__celda {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--color-fill-sutil, #2c2c2e);
+  /* FIX imágenes alargadas: los grid items tienen min-height:auto
+     por defecto, lo que en ciertos navegadores les impide llenar el
+     alto del cuadro que da aspect-ratio en el contenedor padre y
+     terminan heredando la proporción natural (vertical) de la foto
+     en vez de recortarse a cuadro. height:100% + min-height:0
+     fuerzan explícitamente el estiramiento que el grid debería dar
+     solo. */
+  height: 100%;
+  min-height: 0;
+}
+
+.galeria-medios__img,
+.galeria-medios__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.galeria-medios__img--error {
+  visibility: hidden;
+}
+
+.galeria-medios__celda::after {
+  content: '';
+}
+
+/* 1 medio — cuadro completo */
+.galeria-medios--1 {
+  aspect-ratio: 1 / 1;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+}
+
+/* 2 medios — dos columnas iguales */
+.galeria-medios--2 {
+  aspect-ratio: 2 / 1;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+}
+
+/* 3 medios — grande a la izquierda + dos apilados a la derecha */
+.galeria-medios--3 {
+  aspect-ratio: 100 / 65;
+  grid-template-columns: 2fr 1fr;
+  display: grid;
+}
+
+.galeria-medios--3 .galeria-medios__izq,
+.galeria-medios--3 .galeria-medios__der {
+  display: grid;
+  height: 100%;
+  min-height: 0;
+}
+
+.galeria-medios--3 .galeria-medios__der {
+  grid-template-rows: 1fr 1fr;
+}
+
+/* 4+ medios — grid 2x2 */
+.galeria-medios--4mas {
+  aspect-ratio: 1 / 1;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+/* ── Overlay de video ─────────────────────────────────────────── */
+
+.galeria-medios__video-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.35) 100%);
+  pointer-events: none;
+}
+
+.galeria-medios__play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.45);
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  font-size: 22px;
+}
+
+.galeria-medios__badge {
+  position: absolute;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+}
+
+.galeria-medios__badge--tipo {
+  top: 8px;
+  left: 10px;
+}
+
+.galeria-medios__badge--duracion {
+  bottom: 8px;
+  right: 10px;
+}
+
+/* ── Overlay "+N" (4+ medios) ─────────────────────────────────── */
+
+.galeria-medios__extra {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.54);
+}
+
+.galeria-medios__extra span {
+  color: #fff;
+  font-size: 28px;
+  font-weight: 700;
+}

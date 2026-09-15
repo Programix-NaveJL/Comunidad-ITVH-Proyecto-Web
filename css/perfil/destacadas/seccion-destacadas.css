@@ -1,0 +1,188 @@
+/* ═════════════════════════════════════════════════════════════════
+   seccion-destacadas.css
+   Estilos del carrusel de Historias Destacadas, equivalente a
+   _headerDestacadas() + ItemDestacada en SeccionDestacadas.dart.
+
+   No incluye la decoración de "tarjeta flotante" (decoracionSeccion()
+   en Dart) porque el contenedor que inserta este HTML ya la trae
+   (mi-perfil-screen.js usa "mp-tarjeta mp-destacadas").
+   ═════════════════════════════════════════════════════════════════ */
+
+.destacadas-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 16px 8px;
+}
+
+.destacadas-header-icono {
+  font-size: 14px;
+  color: var(--color-text-54);
+}
+
+.destacadas-header-texto {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.1px;
+  color: var(--color-text);
+}
+
+.destacadas-carrusel {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  padding: 4px 16px 12px;
+  scrollbar-width: none;
+}
+
+.destacadas-carrusel::-webkit-scrollbar {
+  display: none;
+}
+
+.destacada-item {
+  flex: 0 0 auto;
+  width: 72px;
+  margin-right: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.destacada-avatar {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  border: 2px solid var(--color-primary);
+  background: var(--color-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.destacada-avatar--nueva {
+  border: 1.5px solid var(--glass-border);
+}
+
+.destacada-icono-mas {
+  font-size: 22px;
+  color: var(--color-text);
+  line-height: 1;
+}
+
+.destacada-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.destacada-avatar-fallback {
+  font-size: 18px;
+  color: var(--color-text-54);
+  display: flex;
+}
+
+.destacada-nombre {
+  margin-top: 5px;
+  font-size: 10.5px;
+  color: var(--color-text);
+  letter-spacing: -0.1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* ── Hoja de opciones (editar / eliminar) ─────────────────────── */
+
+.destacadas-opciones {
+  padding: 4px 0 8px;
+}
+
+.destacadas-opciones-titulo {
+  padding: 6px 16px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.destacadas-opciones-divisor {
+  border: none;
+  border-top: 1px solid var(--glass-border);
+  margin: 0;
+}
+
+.destacadas-opciones-item {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 14px 16px;
+  font-size: 15px;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.destacadas-opciones-item--peligro {
+  color: var(--color-error);
+}
+
+/* ── Diálogo de confirmación ──────────────────────────────────── */
+
+.destacadas-confirmar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2300;
+  padding: 24px;
+}
+
+.destacadas-confirmar-caja {
+  width: 100%;
+  max-width: 320px;
+  background: var(--color-surface);
+  border-radius: var(--radius-card);
+  padding: 20px;
+}
+
+.destacadas-confirmar-titulo {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 8px;
+}
+
+.destacadas-confirmar-texto {
+  font-size: 13px;
+  color: var(--color-text-54);
+  margin: 0 0 18px;
+}
+
+.destacadas-confirmar-acciones {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+}
+
+.destacadas-confirmar-btn {
+  background: none;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-54);
+  cursor: pointer;
+  padding: 4px;
+}
+
+.destacadas-confirmar-btn--peligro {
+  color: var(--color-error);
+}

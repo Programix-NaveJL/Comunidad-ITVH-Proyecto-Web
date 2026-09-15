@@ -1,0 +1,65 @@
+/* ═════════════════════════════════════════════════════════════════
+   ver-destacada.css
+   Overlay mínimo de carga/error mientras VerDestacada arma los
+   grupos y navega al visor de historias real. z-index 2000, igual
+   que los demás overlays a pantalla completa.
+
+   Usa la clase compartida ".spinner" si el proyecto ya la tiene
+   (glassmorphism.css) — el bloque de abajo es solo un respaldo por
+   si no existiera; bórralo si ya hay una definición global.
+   ═════════════════════════════════════════════════════════════════ */
+
+.ver-destacada-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ver-destacada-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 24px;
+  text-align: center;
+}
+
+.ver-destacada-error-icono {
+  font-size: 40px;
+  opacity: 0.5;
+}
+
+.ver-destacada-error-texto {
+  color: rgba(255, 255, 255, 0.54);
+  font-size: 14px;
+}
+
+.ver-destacada-error-volver {
+  margin-top: 8px;
+  background: none;
+  border: none;
+  color: var(--color-primary, #0a84ff);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Respaldo — quitar si .spinner ya existe globalmente */
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid rgba(10, 132, 255, 0.25);
+  border-top-color: #0a84ff;
+  border-radius: 50%;
+  animation: ver-destacada-girar 0.8s linear infinite;
+}
+
+@keyframes ver-destacada-girar {
+  to {
+    transform: rotate(360deg);
+  }
+}

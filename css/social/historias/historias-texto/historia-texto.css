@@ -1,0 +1,299 @@
+/* historia-texto.css
+   Pantalla de historia de texto (historias-texto.js): lienzo de
+   fondo elegible + texto centrado, header con acciones (cerrar,
+   música, fuente, paleta), panel deslizable de fuentes/colores, chip
+   de música seleccionada y botón de compartir. Pantalla de creación
+   a pantalla completa — sin relación con el tema claro/oscuro de la
+   app, igual que el visor de medios. */
+
+.historia-texto {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #000;
+}
+
+.historia-texto__lienzo {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px;
+  transition: background 0.15s ease;
+}
+
+.historia-texto__texto {
+  width: 100%;
+  max-height: 60vh;
+  background: transparent;
+  border: none;
+  outline: none;
+  resize: none;
+  overflow: hidden;
+  color: #fff;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.historia-texto__texto::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ── Header ───────────────────────────────────────────────────── */
+
+.historia-texto__header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: max(16px, env(safe-area-inset-top, 16px)) 16px 12px;
+}
+
+.historia-texto__header-derecha {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.historia-texto__btn-circular {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.historia-texto__btn-musica {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  font-size: 17px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.historia-texto__btn-musica--activo {
+  background: var(--color-primary);
+}
+
+.historia-texto__btn-ok {
+  border: none;
+  background: #fff;
+  color: #000;
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: var(--font-family);
+}
+
+/* ── Panel deslizable (fuentes / colores) ────────────────────────── */
+
+.historia-texto__panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 5;
+  padding: 10px 0 max(16px, env(safe-area-inset-bottom, 16px));
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.historia-texto__panel[hidden] {
+  display: none;
+}
+
+.historia-texto__panel-scroll {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 4px 16px;
+  overflow-x: auto;
+}
+
+.historia-texto__fuente-circulo {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.historia-texto__fuente-circulo--sel {
+  border-color: #fff;
+}
+
+.historia-texto__fondo-swatch {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 16px;
+}
+
+.historia-texto__fondo-swatch--sel {
+  border-color: #fff;
+}
+
+/* ── Chip de música seleccionada ─────────────────────────────────── */
+
+.historia-texto__chip-musica {
+  position: absolute;
+  left: 16px;
+  right: 84px;
+  bottom: max(24px, env(safe-area-inset-bottom, 24px));
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.historia-texto__chip-musica[hidden] {
+  display: none;
+}
+
+.historia-texto__chip-texto {
+  flex: 1;
+  min-width: 0;
+  color: #fff;
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.historia-texto__chip-quitar {
+  flex-shrink: 0;
+  border: none;
+  background: none;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* ── Botón de compartir ───────────────────────────────────────────── */
+
+.historia-texto__compartir {
+  position: absolute;
+  right: 16px;
+  bottom: max(24px, env(safe-area-inset-bottom, 24px));
+  z-index: 4;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: none;
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.historia-texto__compartir[hidden] {
+  display: none;
+}
+
+.historia-texto__compartir:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ── Confirmar descarte ───────────────────────────────────────────── */
+
+.historia-texto__confirmar-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2500;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.historia-texto__confirmar-tarjeta {
+  width: 100%;
+  max-width: 320px;
+  background: var(--color-surface);
+  border-radius: 16px;
+  padding: 20px;
+  text-align: center;
+}
+
+.historia-texto__confirmar-titulo {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.historia-texto__confirmar-texto {
+  margin: 0 0 16px;
+  font-size: 13px;
+  color: var(--color-text-70);
+}
+
+.historia-texto__confirmar-acciones {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.historia-texto__confirmar-acciones button {
+  padding: 10px 18px;
+  border-radius: 10px;
+  border: none;
+  background: var(--glass-bg);
+  color: var(--color-text);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font-family);
+}
+
+.historia-texto__confirmar-descartar {
+  background: var(--color-error) !important;
+  color: #fff !important;
+}

@@ -1,0 +1,92 @@
+/* ver-publicacion.css
+   Pantalla de detalle de una publicación (ver-publicacion.js): la
+   tarjeta completa arriba, el hilo de comentarios inline debajo, y
+   el composer fijo abajo. El estilo de la tarjeta viene de
+   tarjeta-publicacion.css; el de cada comentario, de
+   item-comentario.css y comentarios-hilo.css (reusa las clases de
+   hoja-comentarios.css) — este archivo solo define la estructura
+   propia de la pantalla. */
+
+.ver-publicacion {
+  height: 100vh;
+  height: 100dvh; /* dvh evita el brinco por la barra de direcciones en móvil, donde esté soportado */
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg);
+  overflow: hidden;
+}
+
+.ver-publicacion__header {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 52px;
+  padding: 0 8px;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.ver-publicacion__volver {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: none;
+  color: var(--color-text);
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.ver-publicacion__header h1 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.ver-publicacion__lista {
+  flex: 1;
+  min-height: 0; /* clave para que flex:1 + overflow-y:auto realmente acote la altura en vez de crecer con el contenido */
+  overflow-y: auto;
+  padding-bottom: 16px;
+}
+
+.ver-publicacion__comentarios {
+  padding-bottom: 8px;
+}
+
+.ver-publicacion__spinner {
+  display: flex;
+  justify-content: center;
+  padding: 24px 0;
+}
+
+.ver-publicacion__composer {
+  flex-shrink: 0;
+  background: var(--color-surface);
+  border-top: 1px solid var(--glass-border);
+}
+
+.ver-publicacion__error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  min-height: 60vh;
+  color: var(--color-text-54);
+  font-size: 14px;
+}
+
+.ver-publicacion__error button {
+  padding: 10px 20px;
+  border-radius: 12px;
+  border: none;
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font-family);
+}

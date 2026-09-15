@@ -1,0 +1,153 @@
+/* ═════════════════════════════════════════════════════════════════
+   maestros.css
+   Ubicación: css/chat/maestros/maestros.css
+   ═════════════════════════════════════════════════════════════════ */
+
+.mst-screen { display: flex; flex-direction: column; height: 100%; }
+
+/* ── Chips de departamento ────────────────────────────────────── */
+.mst-chips-zona { padding: 8px 0; }
+.mst-chips-scroll { display: flex; gap: 8px; overflow-x: auto; padding: 0 16px; }
+.mst-depto-chip {
+  display: flex; align-items: center; gap: 5px; flex-shrink: 0;
+  padding: 8px 14px; border-radius: 20px; border: none;
+  background: var(--glass-bg); color: var(--color-text-54);
+  font-size: 13px; font-weight: 600; cursor: pointer;
+}
+
+/* ── Búsqueda ──────────────────────────────────────────────────── */
+.mst-busqueda-zona { padding: 10px 16px; }
+.mst-busqueda { display: flex; align-items: center; gap: 8px; height: 42px; padding: 0 12px; border-radius: 12px; background: var(--glass-bg); }
+.mst-busqueda input { flex: 1; border: none; background: none; outline: none; font-size: 14px; color: var(--color-text); }
+.mst-busqueda input::placeholder { color: var(--color-text-38); }
+.mst-limpiar { background: none; border: none; color: var(--color-text-38); cursor: pointer; font-size: 14px; }
+
+.mst-lista-zona { flex: 1; overflow-y: auto; padding-bottom: 100px; }
+.mst-cargando { display: flex; justify-content: center; padding: 40px; }
+
+/* ── Card ──────────────────────────────────────────────────────── */
+.mst-card {
+  margin: 8px 16px; padding: 16px; border-radius: 20px;
+  background: var(--color-surface); border: 0.8px solid var(--glass-border);
+}
+.mst-card__cabecera { display: flex; align-items: flex-start; gap: 12px; }
+.mst-card__avatar {
+  width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,122,255,0.12); color: #007AFF; font-weight: 700; font-size: 18px;
+}
+.mst-card__nombre-zona { flex: 1; min-width: 0; }
+.mst-card__nombre { font-size: 16px; font-weight: 700; color: var(--color-text); margin: 0; }
+.mst-card__depto { font-size: 13px; color: var(--color-text-38); margin: 2px 0 0; }
+.mst-card__meta { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+.mst-card__editar {
+  display: flex; align-items: center; gap: 4px; padding: 4px 9px; border-radius: 8px;
+  background: var(--glass-bg); border: none; color: var(--color-text-54); font-size: 12px; font-weight: 600; cursor: pointer;
+}
+
+.mst-divisor { border: none; border-top: 1px solid var(--glass-border); margin: 14px 0 12px; }
+
+.mst-etiqueta { font-size: 12px; font-weight: 700; letter-spacing: 0.3px; color: var(--color-text-38); margin: 0 0 6px; }
+.mst-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.mst-chip { padding: 4px 10px; border-radius: 8px; border: 0.8px solid; font-size: 12px; font-weight: 600; }
+
+.mst-card__fila-comentarios { display: flex; align-items: center; }
+.mst-card__evaluar {
+  margin-left: auto; display: flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 10px;
+  background: rgba(0,122,255,0.1); border: none; color: #007AFF; font-size: 12px; font-weight: 600; cursor: pointer;
+}
+.mst-sin-evals { font-size: 13px; color: var(--color-text-38); padding: 8px 0; }
+.mst-comentarios-cargando { display: flex; justify-content: center; padding: 12px; }
+.mst-comentario { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 10px; }
+.mst-comentario__texto { flex: 1; padding: 8px 12px; border-radius: 12px; background: var(--glass-bg); font-size: 13px; line-height: 1.45; color: var(--color-text-70); }
+.mst-ver-mas { display: block; margin-left: auto; background: none; border: none; color: #007AFF; font-size: 13px; font-weight: 600; cursor: pointer; padding-top: 8px; }
+
+/* ── Estrellas (relleno por porcentaje) ──────────────────────────── */
+.mst-puntuacion { display: flex; flex-direction: column; align-items: flex-end; }
+.mst-puntuacion__texto { font-size: 11px; color: var(--color-text-38); margin-top: 2px; }
+.mst-estrellas { display: inline-flex; }
+.mst-estrella { position: relative; display: inline-block; width: 1em; }
+.mst-estrella__vacia { color: var(--color-text-30); }
+.mst-estrella__llena { position: absolute; left: 0; top: 0; overflow: hidden; white-space: nowrap; color: #FFCC00; }
+
+/* ── Empty states ──────────────────────────────────────────────── */
+.mst-empty { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 60px 32px; }
+.mst-empty--chico { padding: 40px 32px; }
+.mst-empty__icono { width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; }
+.mst-empty--chico .mst-empty__icono { width: 64px; height: 64px; font-size: 26px; }
+.mst-empty__titulo { font-size: 17px; font-weight: 700; color: var(--color-text); margin: 18px 0 6px; }
+.mst-empty__desc { font-size: 14px; line-height: 1.5; color: var(--color-text-38); margin: 0; }
+.mst-empty__boton { margin-top: 22px; padding: 12px 22px; border-radius: 14px; border: none; color: #fff; font-weight: 600; font-size: 14px; cursor: pointer; }
+
+/* ── FAB ───────────────────────────────────────────────────────── */
+.mst-fab {
+  position: fixed; bottom: 100px; right: 20px; width: 52px; height: 52px; border-radius: 50%;
+  background: #007AFF; color: #fff; border: none; font-size: 24px; cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.25); z-index: 30;
+}
+
+/* ── Sheets ────────────────────────────────────────────────────── */
+.mst-sheet-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0); z-index: 1000;
+  display: flex; align-items: flex-end; justify-content: center; transition: background 200ms;
+}
+.mst-sheet-overlay.visible { background: rgba(0,0,0,0.4); }
+.mst-sheet-overlay > * { transform: translateY(100%); transition: transform 200ms; width: 100%; max-width: 480px; margin: 0 12px 12px; }
+.mst-sheet-overlay.visible > * { transform: translateY(0); }
+
+.mst-sheet { background: var(--color-surface); border-radius: 20px; padding: 20px; }
+.mst-sheet--grande { display: flex; flex-direction: column; height: 92vh; padding: 0; }
+.mst-sheet__manija { width: 36px; height: 4px; border-radius: 2px; background: var(--color-text-38); margin: 12px auto 8px; }
+.mst-sheet__scroll { flex: 1; overflow-y: auto; padding: 8px 20px 20px; }
+.mst-sheet__cabecera { display: flex; align-items: center; }
+.mst-sheet__titulo { font-size: 18px; font-weight: 700; color: var(--color-text); margin: 0; }
+.mst-sheet__badge { margin-left: auto; padding: 4px 8px; border-radius: 8px; background: rgba(0,122,255,0.1); color: #007AFF; font-size: 11px; font-weight: 600; }
+.mst-sheet__subtitulo { font-size: 13px; color: var(--color-text-38); margin: 4px 0 20px; }
+
+.mst-label { font-size: 13px; font-weight: 600; color: var(--color-text-54); margin: 14px 0 6px; }
+.mst-titulos { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 2px; }
+.mst-titulo-chip { flex-shrink: 0; padding: 7px 12px; border-radius: 10px; border: none; background: var(--glass-bg); color: var(--color-text-54); font-size: 13px; font-weight: 600; cursor: pointer; }
+.mst-titulo-chip.seleccionado { background: #007AFF; color: #fff; }
+
+.mst-input, .mst-select, .mst-textarea {
+  width: 100%; border: none; border-radius: 12px; background: var(--glass-bg);
+  padding: 12px; font-size: 14px; color: var(--color-text); font-family: var(--font-family); outline: none; box-sizing: border-box;
+}
+.mst-textarea { resize: none; }
+
+/* FIX: <option> no hereda el fondo/color de .mst-select — el
+   navegador dibuja el popup del <select> con SU PROPIO fondo por
+   defecto (blanco en la mayoría de navegadores/SO), pero el color
+   de texto sí se hereda (blanco, del tema oscuro), resultando en
+   texto blanco sobre fondo blanco. Se fija explícitamente el fondo
+   y color de cada <option> para que siempre haya contraste,
+   independientemente del tema. Soportado en Chrome/Edge/Firefox;
+   Safari en iOS ignora el estilo de <option> y usa su propio picker
+   nativo (ahí no hay bug porque no comparte el fondo del <select>). */
+.mst-select option {
+  background: var(--color-surface, #1c1c1e);
+  color: var(--color-text, #fff);
+}
+
+.mst-input-con-sufijo { position: relative; }
+.mst-input-con-sufijo .mst-input { padding-right: 36px; }
+.mst-sufijo { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); }
+.mst-check { color: #34C759; font-weight: 700; }
+.mst-error { font-size: 12px; color: #ff453a; font-weight: 500; margin: 6px 0 0; }
+
+.mst-boton-grande {
+  width: 100%; margin-top: 24px; padding: 14px; border: none; border-radius: 14px;
+  background: #007AFF; color: #fff; font-weight: 600; font-size: 15px; cursor: pointer;
+}
+.mst-boton-grande:disabled { opacity: 0.7; }
+
+.mst-estrellas-select { display: flex; justify-content: center; gap: 6px; margin: 10px 0 20px; }
+.mst-estrella-btn { background: none; border: none; font-size: 40px; color: var(--color-text-30); cursor: pointer; padding: 0 4px; }
+.mst-estrella-btn.activa { color: #FFCC00; }
+
+.mst-spinner-boton, .mst-spinner-chico {
+  display: inline-block; border-radius: 50%; border: 2px solid rgba(255,255,255,0.4); border-top-color: #fff;
+  animation: chats-girar 0.7s linear infinite;
+}
+.mst-spinner-boton { width: 18px; height: 18px; }
+.mst-spinner-chico { width: 14px; height: 14px; border-color: rgba(0,122,255,0.3); border-top-color: #007AFF; }

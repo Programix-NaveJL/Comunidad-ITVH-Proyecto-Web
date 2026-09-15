@@ -1,0 +1,286 @@
+/* ═════════════════════════════════════════════════════════════════
+   marketplace-editar-publicacion.css
+   Pantalla de edición de publicación (marketplace-editar-publicacion.js).
+   Reutiliza las clases genéricas .mkt-ep-label / .mkt-ep-input /
+   .mkt-ep-textarea / .mkt-ep-contador / .mkt-ep-divisor /
+   .mkt-ep-boton-guardar definidas en marketplace-editar-perfil.css
+   — cárgalo ANTES que este archivo. Aquí solo van los estilos
+   específicos de esta pantalla: header, radios de tipo, select de
+   categoría, precio y fotografías.
+   ═════════════════════════════════════════════════════════════════ */
+
+.mkt-editar-pub {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* ── Header (idéntico a marketplace-editar-perfil) ───────────────
+   Se repite el selector con nombre propio (en vez de reusar
+   .mkt-editar-perfil__header) para que esta hoja pueda cargarse de
+   forma independiente sin depender del otro archivo CSS. */
+.mkt-editar-pub__header {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 8px 14px 4px;
+  border-bottom: 0.8px solid var(--glass-border);
+}
+
+.mkt-editar-pub__volver {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: none;
+  font-size: 22px;
+  color: var(--color-text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mkt-editar-pub__titulo {
+  flex: 1;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.mkt-editar-pub__guardar {
+  border: none;
+  background: none;
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--mkt-accent, #3390EC);
+  cursor: pointer;
+  padding: 6px 10px;
+}
+
+.mkt-editar-pub__guardar:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.mkt-editar-pub__form {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 16px 40px;
+}
+
+/* ── Radios de tipo (Producto / Servicio) ────────────────────────
+   Mismo criterio visual que _RadioTile en el Dart: ícono + label +
+   sublabel en una fila, radio nativo a la derecha vía flujo normal
+   del <label> (el <input> se posiciona al final del contenido). */
+.mkt-ep-radio-grupo {
+  border: 1px solid var(--glass-border);
+  border-radius: 14px;
+  background: var(--glass-bg);
+  overflow: hidden;
+}
+
+.mkt-ep-radio-tile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  cursor: pointer;
+}
+
+.mkt-ep-radio-tile input[type='radio'] {
+  margin-left: auto;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--mkt-accent, #3390EC);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.mkt-ep-radio-icono {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.mkt-ep-radio-texto {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mkt-ep-radio-texto strong {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.mkt-ep-radio-texto small {
+  font-size: 12px;
+  color: var(--color-text-38);
+}
+
+.mkt-ep-radio-divisor {
+  height: 1px;
+  background: var(--glass-border);
+  margin: 0 16px;
+}
+
+/* ── Select de categoría ──────────────────────────────────────── */
+.mkt-ep-select {
+  width: 100%;
+  border: 1px solid var(--glass-border);
+  border-radius: 14px;
+  background: var(--glass-bg);
+  color: var(--color-text);
+  font-size: 15px;
+  font-family: inherit;
+  padding: 12px 14px;
+  box-sizing: border-box;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath fill='%23888' d='M1 1l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+}
+
+.mkt-ep-select:focus {
+  border-color: var(--mkt-accent, #3390EC);
+}
+
+.mkt-ep-select option {
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+/* ── Precio ───────────────────────────────────────────────────── */
+.mkt-ep-precio-zona {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--glass-border);
+  border-radius: 14px;
+  background: var(--glass-bg);
+  padding: 0 14px;
+}
+
+.mkt-ep-precio-zona:focus-within {
+  border-color: var(--mkt-accent, #3390EC);
+  background: var(--glass-bg-focus);
+}
+
+.mkt-ep-precio-signo {
+  font-size: 15px;
+  color: var(--color-text-54);
+  padding-right: 4px;
+}
+
+.mkt-ep-input--precio {
+  border: none;
+  background: none;
+  padding: 12px 0;
+}
+
+.mkt-ep-input--precio:focus {
+  border: none;
+  background: none;
+}
+
+/* ── Fotografías ──────────────────────────────────────────────── */
+.mkt-ep-fotos-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.mkt-ep-fotos-contador {
+  font-size: 13px;
+  color: var(--color-text-38);
+}
+
+.mkt-ep-fotos-fila {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.mkt-ep-foto-preview {
+  position: relative;
+  flex-shrink: 0;
+  width: 100px;
+  height: 100px;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.mkt-ep-foto-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.mkt-ep-foto-borrar,
+.mkt-ep-foto-quitar {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 22px;
+  height: 22px;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.mkt-ep-foto-borrar {
+  background: var(--color-error, #ff3b30);
+  color: #fff;
+}
+
+.mkt-ep-foto-quitar {
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+}
+
+.mkt-ep-foto-badge {
+  position: absolute;
+  bottom: 4px;
+  left: 4px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 9px;
+  font-weight: 700;
+  color: #fff;
+  background: rgba(52, 199, 89, 0.85);
+}
+
+.mkt-ep-foto-agregar {
+  flex-shrink: 0;
+  width: 100px;
+  height: 100px;
+  border-radius: 14px;
+  border: 1.5px dashed var(--glass-border);
+  background: var(--glass-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+  color: var(--color-text-38);
+}
+
+.mkt-ep-foto-agregar__icono {
+  font-size: 22px;
+}
+
+.mkt-ep-foto-agregar__texto {
+  font-size: 11px;
+}

@@ -1,0 +1,55 @@
+/* ═════════════════════════════════════════════════════════════════
+   base.css
+
+   Reset mínimo y estilos base aplicados a toda la app. Sin este
+   archivo, el navegador usa sus valores por defecto (fuente serif,
+   márgenes en h1/p, box-sizing content-box), que es justo lo que
+   causaba que los títulos se vieran con una tipografía distinta a
+   la definida en variables.css.
+
+   Debe cargarse ANTES que glassmorphism.css y cualquier CSS de
+   pantalla, para que estas reglas actúen como base y no como
+   sobrescritura.
+   ═════════════════════════════════════════════════════════════════ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-family);
+  background: var(--color-bg);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+  font-family: inherit;
+}
+
+button,
+input,
+select {
+  font-family: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+#app {
+  min-height: 100vh;
+}

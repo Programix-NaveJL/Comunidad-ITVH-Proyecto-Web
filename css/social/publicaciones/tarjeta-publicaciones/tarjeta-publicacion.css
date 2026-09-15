@@ -1,0 +1,252 @@
+/* tarjeta-publicacion.css
+
+   La tarjeta usa la clase global .glass-card (glassmorphism.css)
+   para fondo/sombra/radio — aquí solo se agregan las diferencias de
+   layout interno de esta pantalla, igual que el resto del proyecto.
+
+   El acento de este archivo (menciones, "y N más", ver más) es
+   --color-primary (0xFF0A84FF en Dart), NO --color-accent
+   (0xFF00C6FF, cian — ese es el acento fijo de las pantallas de
+   Auth y no se usa aquí). */
+
+.tarjeta-publicacion {
+  margin: 6px 12px;
+  padding: 0;
+  overflow: hidden;
+}
+
+.tarjeta-publicacion__header {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 8px 8px 14px;
+}
+
+.tarjeta-publicacion__avatar {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface);
+  color: var(--color-text-38);
+  cursor: pointer;
+}
+
+.tarjeta-publicacion__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tarjeta-publicacion__autor-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.tarjeta-publicacion__nombre {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.tarjeta-publicacion__meta {
+  margin: 0;
+  font-size: 11px;
+  color: var(--color-text-54);
+  cursor: pointer;
+}
+
+.tarjeta-publicacion__etiquetados {
+  margin-top: 2px;
+  font-size: 12px;
+}
+
+.tarjeta-publicacion__con {
+  color: var(--color-text-54);
+}
+
+.tarjeta-publicacion__coma {
+  color: var(--color-text-54);
+}
+
+.tarjeta-publicacion__etiquetado-nombre,
+.tarjeta-publicacion__mas {
+  color: var(--color-primary);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.tarjeta-publicacion__opciones {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: var(--color-text-54);
+  cursor: pointer;
+  padding: 6px;
+}
+
+.tarjeta-publicacion__texto-zona {
+  padding: 0 14px 10px;
+}
+
+.tarjeta-publicacion__texto {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--color-text);
+  overflow-wrap: break-word;
+}
+
+.tarjeta-publicacion__texto--clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.tarjeta-publicacion__texto--expandido {
+  -webkit-line-clamp: unset;
+  line-clamp: unset;
+}
+
+.tarjeta-publicacion__ver-mas {
+  margin-top: 2px;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-primary);
+  cursor: pointer;
+}
+
+.tarjeta-publicacion__footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px 12px;
+}
+
+.tarjeta-publicacion__spacer {
+  flex: 1;
+}
+
+.tarjeta-publicacion__resumen {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  border-radius: 20px;
+  background: var(--glass-bg);
+  cursor: pointer;
+}
+
+.tarjeta-publicacion__resumen-total {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-54);
+}
+
+/* ── Emojis apilados del resumen ─────────────────────────────── */
+
+.tp-emojis-apilados {
+  position: relative;
+  display: inline-block;
+  height: 22px;
+}
+
+.tp-emojis-apilados--1 {
+  width: 22px;
+}
+
+.tp-emojis-apilados--2 {
+  width: 38px;
+}
+
+.tp-emoji-circulo {
+  position: absolute;
+  top: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-surface);
+}
+
+.tp-emoji-circulo--frente {
+  left: 0;
+  z-index: 2;
+}
+
+.tp-emoji-circulo--atras {
+  left: 16px;
+  z-index: 1;
+}
+
+/* ── Menú de opciones (⋯) — overlay simple, sin arrastre ────────
+   (equivalente ligero al .feed-hoja-overlay/.feed-hoja de
+   pantalla-principal.css, pero definido aquí propio para no
+   depender de las clases de otra pantalla) */
+
+.tp-opciones-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1250;
+  display: flex;
+  align-items: flex-end;
+  background: rgba(0, 0, 0, 0);
+  transition: background-color 0.18s ease;
+}
+
+.tp-opciones-overlay.visible {
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.tp-opciones-menu {
+  width: 100%;
+  padding: 0 0 max(16px, env(safe-area-inset-bottom, 16px));
+  background: var(--color-surface);
+  border-radius: 20px 20px 0 0;
+  transform: translateY(100%);
+  transition: transform 0.18s ease;
+}
+
+.tp-opciones-overlay.visible .tp-opciones-menu {
+  transform: translateY(0);
+}
+
+.tp-opciones-menu__manija {
+  width: 36px;
+  height: 4px;
+  margin: 10px auto 6px;
+  border-radius: 2px;
+  background: var(--color-text-38);
+}
+
+.tp-opciones-menu__item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 14px 20px;
+  background: none;
+  border: none;
+  font-size: 15px;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.tp-opciones-menu__item--peligro {
+  color: var(--color-danger);
+}

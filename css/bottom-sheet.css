@@ -1,0 +1,78 @@
+/* bottom-sheet.css
+   Ruta real sugerida: css/bottom-sheet.css (junto a glassmorphism.css
+   y shell.css — reutilizable globalmente, igual que esas dos).
+
+   Shell compartido de hoja inferior arrastrable (backdrop + panel +
+   manija). Cada hoja que lo usa (hoja-comentarios.css,
+   hoja-etiquetados.css, hoja-reacciones.css) solo agrega estilos de
+   SU contenido interno dentro de .hoja-inferior__cuerpo — no
+   redefine nada de este archivo.
+
+   El panel sigue el tema activo directamente vía var(--color-surface),
+   así que no necesita un modificador de "oscuro forzado" aparte. */
+
+.hoja-inferior-abierta {
+  overflow: hidden;
+}
+
+.hoja-inferior-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2200;
+  background: rgba(0, 0, 0, 0);
+  transition: background-color 0.22s ease;
+}
+
+.hoja-inferior-overlay.visible {
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.hoja-inferior {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-surface);
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.25);
+  transform: translateY(100%);
+  transition: transform 0.22s ease, height 0.15s ease;
+  overflow: hidden;
+}
+
+.hoja-inferior.visible {
+  transform: translateY(0);
+}
+
+.hoja-inferior--arrastrando {
+  transition: none;
+}
+
+.hoja-inferior__manija-zona {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  padding: 10px 0 12px;
+  cursor: grab;
+  touch-action: none;
+}
+
+.hoja-inferior__manija-zona:active {
+  cursor: grabbing;
+}
+
+.hoja-inferior__manija {
+  width: 36px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(120, 120, 128, 0.3);
+}
+
+.hoja-inferior__cuerpo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}

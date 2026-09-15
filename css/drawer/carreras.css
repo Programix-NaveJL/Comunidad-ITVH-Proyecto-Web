@@ -1,0 +1,565 @@
+/* ═════════════════════════════════════════════════════════════════
+   carreras.css
+
+   Estilos compartidos por todas las pantallas de carrera (ISC,
+   ICDA, IINF y el resto). Réplica de los widgets privados repetidos
+   en cada Screen.dart: SliverAppBar con ícono decorativo, InfoCard,
+   SectionTitle, ObjetivoItem, PerfilSection, ReticulaItem,
+   SemestreExpansion, EspecialidadExpansion y MateriaItem.
+
+   Cada instancia recibe su color de acento vía la variable CSS
+   --color-carrera, fijada inline por los helpers de comun.js
+   (equivalente al parámetro `color` que reciben los widgets de
+   Flutter). Los tintes translúcidos de esa variable se calculan con
+   color-mix() en vez de duplicar el color en rgba(), ya que
+   --color-carrera puede ser un var() anidado (--color-primary) o
+   un hex fijo (--color-secondary) según la carrera.
+   ═════════════════════════════════════════════════════════════════ */
+
+.carrera {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* ── Encabezado (equivalente al SliverAppBar expandible) ────────── */
+
+.carrera-hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
+  background: color-mix(in srgb, var(--color-carrera) 12%, var(--color-surface));
+}
+
+.carrera-hero__volver {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: var(--glass-bg);
+  color: var(--color-text);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.carrera-hero__icono-fondo {
+  position: absolute;
+  right: -20px;
+  top: -10px;
+  font-size: 180px;
+  line-height: 1;
+  opacity: 0.07;
+  pointer-events: none;
+}
+
+.carrera-hero__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.carrera-hero__chip--solido {
+  background: color-mix(in srgb, var(--color-carrera) 90%, transparent);
+  color: var(--color-surface);
+  font-weight: 700;
+}
+
+.carrera-hero__chip {
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--color-carrera) 15%, transparent);
+  color: var(--color-carrera);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.carrera-hero__titulo {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+/* ── Cuerpo y ritmo vertical entre secciones ─────────────────────── */
+
+.carrera-cuerpo {
+  padding: 24px 20px 40px;
+}
+
+.carrera-titulo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 12px;
+}
+
+.carrera-titulo__barra {
+  width: 4px;
+  height: 18px;
+  border-radius: 2px;
+  background: var(--color-carrera);
+  flex-shrink: 0;
+}
+
+.carrera-titulo h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.carrera-cards,
+.carrera-objetivo,
+.carrera-objetivos,
+.carrera-perfil,
+.carrera-reticulas,
+.carrera-semestres,
+.carrera-especialidades {
+  margin-bottom: 28px;
+}
+
+.carrera-cuerpo > *:last-child {
+  margin-bottom: 0;
+}
+
+/* ── InfoCard (Misión/Visión, resúmenes) ─────────────────────────── */
+
+.carrera-cards {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.carrera-info-card {
+  flex: 1;
+  min-width: 0;
+  padding: 14px;
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--color-carrera) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-carrera) 20%, transparent);
+}
+
+.carrera-info-card__icono {
+  display: block;
+  font-size: 22px;
+  margin-bottom: 8px;
+}
+
+.carrera-info-card__titulo {
+  margin: 0 0 6px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-carrera);
+}
+
+.carrera-info-card__texto {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--color-text-70);
+}
+
+/* ── Objetivo General ─────────────────────────────────────────────── */
+
+.carrera-objetivo {
+  padding: 16px;
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--color-carrera) 7%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-carrera) 15%, transparent);
+}
+
+.carrera-objetivo p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--color-text-70);
+}
+
+/* ── Objetivos Específicos (filas numeradas) ─────────────────────── */
+
+.carrera-objetivo-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.carrera-objetivo-item:last-child {
+  margin-bottom: 0;
+}
+
+.carrera-objetivo-item__numero {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--color-carrera) 12%, transparent);
+  color: var(--color-carrera);
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carrera-objetivo-item__titulo {
+  margin: 0 0 3px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.carrera-objetivo-item__descripcion {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--color-text-60);
+}
+
+/* ── Perfil de Ingreso / Egreso / Campo Laboral (bullets) ────────── */
+
+.carrera-perfil__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.carrera-perfil__item:last-child {
+  margin-bottom: 0;
+}
+
+.carrera-perfil__punto {
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  margin-top: 5px;
+  border-radius: 50%;
+  background: var(--color-carrera);
+}
+
+.carrera-perfil__item p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--color-text-70);
+}
+
+/* ── Retícula (card tappable) ────────────────────────────────────── */
+
+.carrera-reticula {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  border-radius: 16px;
+  border: 1px solid var(--glass-border);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.carrera-reticula:last-child {
+  margin-bottom: 0;
+}
+
+.carrera-reticula:hover {
+  background: var(--glass-bg);
+}
+
+.carrera-reticula__icono {
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--color-carrera) 12%, transparent);
+  color: var(--color-carrera);
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carrera-reticula__texto {
+  flex: 1;
+  min-width: 0;
+}
+
+.carrera-reticula__nombre {
+  margin: 0 0 3px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.carrera-reticula__clave {
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: 0.2px;
+  color: var(--color-text-38);
+}
+
+.carrera-reticula__pdf {
+  flex-shrink: 0;
+  font-size: 20px;
+  opacity: 0.5;
+}
+
+/* ── Semestres y Especialidades (acordeón) ───────────────────────── */
+
+.carrera-expansion {
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 8px;
+  border: 1px solid var(--glass-border);
+  background: color-mix(in srgb, var(--color-carrera) 5%, transparent);
+}
+
+.carrera-expansion:last-child {
+  margin-bottom: 0;
+}
+
+.carrera-expansion__cabecera {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+}
+
+.carrera-expansion__numero {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--color-carrera) 12%, transparent);
+  color: var(--color-carrera);
+  font-size: 15px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carrera-expansion__icono {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--color-carrera) 12%, transparent);
+  color: var(--color-carrera);
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carrera-expansion__info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.carrera-expansion__titulo {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.carrera-expansion__subtitulo {
+  font-size: 11px;
+  color: var(--color-text-38);
+}
+
+.carrera-expansion__flecha {
+  flex-shrink: 0;
+  font-size: 18px;
+  color: var(--color-text-38);
+  transition: transform 0.2s ease;
+}
+
+.carrera-expansion--abierta .carrera-expansion__flecha {
+  transform: rotate(180deg);
+}
+
+.carrera-expansion__cuerpo {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.25s ease;
+}
+
+.carrera-expansion__cuerpo-inner {
+  overflow: hidden;
+  min-height: 0;
+  padding: 0 12px;
+}
+
+.carrera-expansion--abierta .carrera-expansion__cuerpo {
+  grid-template-rows: 1fr;
+}
+
+.carrera-expansion--abierta .carrera-expansion__cuerpo-inner {
+  padding-bottom: 12px;
+}
+
+/* ── Materia (fila dentro de un acordeón) ────────────────────────── */
+
+.carrera-materia {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 8px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.carrera-materia:hover {
+  background: var(--glass-bg);
+}
+
+.carrera-materia--info {
+  cursor: default;
+}
+
+.carrera-materia--info:hover {
+  background: none;
+}
+
+.carrera-materia__icono {
+  flex-shrink: 0;
+  font-size: 15px;
+  opacity: 0.5;
+}
+
+.carrera-materia__nombre {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-size: 13px;
+  color: var(--color-text-70);
+}
+
+.carrera-materia--info .carrera-materia__nombre {
+  color: var(--color-text-60);
+}
+
+.carrera-materia__flecha {
+  flex-shrink: 0;
+  font-size: 16px;
+  color: var(--color-text-38);
+}
+
+/* ── Estado sin datos (fallback del dispatcher) ──────────────────── */
+
+.carrera-no-encontrada {
+  padding: 60px 20px;
+  text-align: center;
+  color: var(--color-text-60);
+  font-size: 14px;
+}
+
+/* ── Subtítulo itálico bajo un título de sección (IAMB) ──────────── */
+
+.carrera-subtitulo {
+  margin: -6px 0 12px;
+  font-size: 12px;
+  font-style: italic;
+  color: var(--color-text-38);
+}
+
+/* ── Aviso ámbar (cruce de datos conocido en el portal — IAMB) ───── */
+
+.carrera-aviso {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  margin-bottom: 28px;
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--color-aviso) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-aviso) 25%, transparent);
+}
+
+.carrera-aviso__icono {
+  flex-shrink: 0;
+  font-size: 20px;
+  color: var(--color-aviso);
+}
+
+.carrera-aviso__titulo {
+  margin: 0 0 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.carrera-aviso__cuerpo {
+  margin: 0 0 6px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--color-text-70);
+}
+
+.carrera-aviso__nota {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.5;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--color-text) 85%, transparent);
+}
+
+/* ── Campo Laboral (párrafo + chips) ─────────────────────────────── */
+
+.carrera-campo-laboral__texto {
+  margin: 0 0 14px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--color-text-70);
+}
+
+.carrera-campo-laboral__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.carrera-campo-laboral__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 24px;
+  background: color-mix(in srgb, var(--color-carrera) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-carrera) 20%, transparent);
+  color: var(--color-carrera);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.carrera-campo-laboral__chip-icono {
+  font-size: 16px;
+}

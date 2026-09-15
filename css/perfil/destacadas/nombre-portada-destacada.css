@@ -1,0 +1,186 @@
+/* ═════════════════════════════════════════════════════════════════
+   nombre-portada-destacada.css
+   Equivalente visual a NombrePortadaDestacada.dart. z-index 2000,
+   igual que el resto de overlays a pantalla completa. Se apila sobre
+   seleccionar-historias-destacada.css (mismo z-index, después en el
+   DOM), reproduciendo el push de Flutter.
+   ═════════════════════════════════════════════════════════════════ */
+
+.nombre-portada-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: var(--color-bg-app, #f2f2f7);
+  display: flex;
+  flex-direction: column;
+}
+
+[data-theme="dark"] .nombre-portada-overlay,
+:root:not([data-theme="light"]) .nombre-portada-overlay {
+  background: #000;
+}
+
+.nombre-portada-appbar {
+  flex: 0 0 auto;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px;
+  background: var(--color-bg-card);
+  border-bottom: 0.5px solid var(--color-border);
+}
+
+.nombre-portada-atras {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: var(--color-text-primary);
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.nombre-portada-appbar-spacer {
+  width: 40px;
+}
+
+.nombre-portada-titulo {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.nombre-portada-cuerpo {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 36px 20px 24px;
+}
+
+.nombre-portada-portada-wrap {
+  position: relative;
+  width: 110px;
+  height: 110px;
+}
+
+.nombre-portada-portada {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  border: 2.5px solid var(--color-primary);
+  background: var(--color-bg-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: pointer;
+  padding: 0;
+}
+
+.nombre-portada-portada-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.nombre-portada-portada-icono {
+  font-size: 36px;
+  color: var(--color-text-secondary);
+}
+
+.nombre-portada-portada-editar {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  border: 2px solid var(--color-bg-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  pointer-events: none;
+}
+
+.nombre-portada-hint {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.nombre-portada-campo-wrap {
+  width: 100%;
+  max-width: 400px;
+  margin-top: 32px;
+  background: var(--color-bg-card);
+  border-radius: 12px;
+}
+
+.nombre-portada-campo {
+  width: 100%;
+  box-sizing: border-box;
+  background: none;
+  border: none;
+  padding: 14px 16px;
+  font-size: 15px;
+  color: var(--color-text-primary);
+}
+
+.nombre-portada-campo:focus {
+  outline: none;
+}
+
+.nombre-portada-contador {
+  width: 100%;
+  max-width: 400px;
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+.nombre-portada-boton-listo {
+  width: 100%;
+  max-width: 400px;
+  margin-top: 36px;
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.nombre-portada-boton-listo:disabled {
+  background: color-mix(in srgb, var(--color-primary) 50%, transparent);
+  cursor: default;
+}
+
+.nombre-portada-boton-listo--cargando {
+  position: relative;
+}
+
+.nombre-portada-boton-listo--cargando::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2.5px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: nombre-portada-girar 0.7s linear infinite;
+}
+
+@keyframes nombre-portada-girar {
+  to {
+    transform: rotate(360deg);
+  }
+}

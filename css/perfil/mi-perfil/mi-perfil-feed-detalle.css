@@ -1,0 +1,61 @@
+/* mi-perfil-feed-detalle.css
+   Ruta real: css/perfil/mi-perfil/mi-perfil-feed-detalle.css
+   Requiere mi-perfil.css cargado antes (usa .mp-tarjeta,
+   .mp-topbar-detalle, .mp-error-estado y las variables --color-*). */
+
+.mpfd-screen {
+  min-height: 100%;
+  padding: 0 14px 24px;
+  background: var(--color-bg);
+}
+
+/* ── Barra superior: flecha de regreso + @usuario ────────────────
+   Mismo patrón que historial-reacciones__header/historial-
+   comentarios__header — antes faltaba por completo, por eso el
+   botón "‹" se veía con el estilo por defecto del navegador en vez
+   del botón circular sin borde del resto de la app. */
+
+.mpfd-topbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 4px;
+}
+
+.mpfd-volver {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: none;
+  color: var(--color-text);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mpfd-titulo {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.mpfd-header-tarjeta {
+  padding: 22px 18px 16px;
+}
+
+.mpfd-publicaciones-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 4px;
+  margin-top: 4px;
+  border-top: 1px solid var(--glass-border);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-54);
+}

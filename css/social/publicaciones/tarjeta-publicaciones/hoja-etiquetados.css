@@ -1,0 +1,76 @@
+/* hoja-etiquetados.css
+   Ruta real sugerida: css/social/publicaciones/tarjeta-publicaciones/hoja-etiquetados.css */
+
+.hoja-etiquetados__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px 12px;
+}
+
+.hoja-etiquetados__icono {
+  font-size: 18px;
+  color: var(--color-accent);
+}
+
+.hoja-etiquetados__titulo {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.hoja-etiquetados__divisor {
+  height: 0.5px;
+  background: var(--glass-border);
+}
+
+.hoja-etiquetados__lista {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 16px;
+}
+
+.hoja-etiquetados__fila {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  cursor: pointer;
+}
+
+.hoja-etiquetados__avatar {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--glass-bg-focus);
+  color: var(--color-text-60);
+}
+
+.hoja-etiquetados__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hoja-etiquetados__info {
+  min-width: 0;
+}
+
+.hoja-etiquetados__nombre {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.hoja-etiquetados__usuario {
+  margin: 0;
+  font-size: 12px;
+  color: var(--color-text-60);
+}

@@ -1,0 +1,212 @@
+/* ═════════════════════════════════════════════════════════════════
+   jaguar-chat.css
+   Estilos del contenedor principal de JaguarChat (header + pill de
+   navegación inferior). Réplica visual de JaguarChatPrincipal.dart:
+   mismo azul de acento, mismo pill flotante translúcido con blur,
+   mismo indicador sólido deslizante detrás del ítem activo.
+
+   CORRECCIÓN: la versión anterior usaba nombres de variables que no
+   existen en variables.css (--color-fondo, --color-texto-fuerte,
+   --color-acento-chat, --color-chip-fondo, --color-texto-suave,
+   --color-pill-fondo), así que siempre caía en el valor de fallback
+   y el panel se veía claro sin importar el tema activo. También
+   usaba el selector `:root[data-tema='dark']` (en español), pero
+   theme.js alterna el atributo `data-theme` (en inglés, ver
+   variables.css) — ese bloque nunca se aplicaba.
+
+   Ahora se usan las variables reales de variables.css. Importante:
+   en ese archivo el :root BASE ya representa el tema OSCURO (los
+   valores de tema claro están en el bloque
+   :root[data-theme="light"]), así que aquí también se invierte la
+   lógica: los valores por defecto son los de oscuro, y el bloque
+   [data-theme="light"] los sobreescribe — igual que hace
+   variables.css.
+
+   El color del indicador del pill (--color-azul-telegram) y las
+   opacidades exactas del propio pill flotante (blur, alpha) no
+   tienen una variable equivalente en variables.css — son un acento
+   fijo/propio de este widget, igual que --color-secondary o
+   --color-tertiary son fijos por carrera. Se dejan como valores
+   literales aquí a propósito, documentados en su lugar; si se
+   prefiere centralizarlos en variables.css más adelante, avisar.
+   ═════════════════════════════════════════════════════════════════ */
+
+.jchat-root {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* El panel padre (.shell-panel) puede no traer una altura real
+     heredada — sin esto, el root colapsa al alto de su contenido
+     (solo el header) y el pill, al ser absolute, queda pegado justo
+     debajo del header en vez de ir al fondo de la pantalla. */
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  background: var(--color-bg);
+  overflow: hidden;
+}
+
+/* ── Encabezado ─────────────────────────────────────────────────── */
+
+.jchat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px 12px;
+  flex-shrink: 0;
+}
+
+.jchat-header__titulo {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  color: var(--color-text);
+}
+
+.jchat-header__accento {
+  color: var(--color-primary);
+}
+
+.jchat-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border-radius: 14px;
+  background: var(--glass-bg);
+  color: var(--color-primary);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.1px;
+  animation: jchat-chip-in 220ms ease;
+}
+
+@keyframes jchat-chip-in {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.jchat-chip__icono {
+  font-size: 15px;
+}
+
+/* ── Contenido (secciones) ──────────────────────────────────────── */
+
+.jchat-contenido {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+}
+
+.jchat-panel {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  display: none;
+  /* Deja aire suficiente para no quedar tapado por el pill flotante,
+     equivalente al MediaQuery.padding.bottom inyectado en la versión
+     Flutter. */
+  padding-bottom: calc(64px + 20px + 8px);
+}
+
+.jchat-panel.visible {
+  display: block;
+}
+
+/* ── Zona para FABs propios de una sección (p. ej. "Agregar
+   docente" en Maestros), posicionados arriba del pill igual que
+   _FabSobrePill en la versión Flutter. Cada módulo hijo puede
+   inyectar aquí su propio botón absoluto. ── */
+
+.jchat-fab-zona {
+  position: fixed;
+  right: 20px;
+  bottom: calc(64px + 20px + 12px);
+  z-index: 5;
+}
+
+/* ── Pill de navegación inferior ────────────────────────────────── */
+
+.jchat-pill {
+  position: fixed;
+  left: 40px;
+  right: 40px;
+  bottom: 20px;
+  height: 64px;
+  display: flex;
+  border-radius: 26px;
+  overflow: hidden;
+  /* Valores por defecto = tema OSCURO (ver nota de cabecera). */
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.22);
+  z-index: 10;
+}
+
+:root[data-theme='light'] .jchat-pill {
+  background: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.08);
+}
+
+.jchat-pill__indicador {
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  left: 0;
+  border-radius: 20px;
+  background: var(--color-azul-telegram, #3390ec);
+  box-shadow: 0 3px 14px -3px rgba(51, 144, 236, 0.35);
+  transition: transform 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  margin: 0 4px;
+  /* El ancho real (100% / n) y el transform se fijan por JS ya que
+     dependen del número de tabs. */
+}
+
+.jchat-pill__btn {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  z-index: 1;
+  font-family: inherit;
+}
+
+.jchat-pill__icono {
+  font-size: 20px;
+  line-height: 1;
+  filter: grayscale(1);
+  opacity: 0.55;
+  transition: opacity 220ms ease, filter 220ms ease, transform 220ms ease;
+}
+
+.jchat-pill__label {
+  font-size: 9.5px;
+  font-weight: 400;
+  /* Por defecto = tema OSCURO. */
+  color: rgba(255, 255, 255, 0.38);
+  transition: color 220ms ease, font-weight 220ms ease;
+}
+
+:root[data-theme='light'] .jchat-pill__label {
+  color: rgba(0, 0, 0, 0.38);
+}
+
+.jchat-pill__btn.activo .jchat-pill__icono {
+  filter: grayscale(0);
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.jchat-pill__btn.activo .jchat-pill__label {
+  color: #fff;
+  font-weight: 700;
+}

@@ -1,0 +1,323 @@
+/* ═════════════════════════════════════════════════════════════════
+   historia.css
+
+   Estilos de "Un poco de historia" (js/features/drawer/historia.js).
+   Réplica de historia_plantel_screen.dart: barra superior con
+   título que aparece al hacer scroll, hero fotográfico con badge de
+   fundación, y línea de tiempo vertical con paleta de color propia
+   por hito (ámbar/dorado 1974, verde azulado 1979, coral 1992).
+
+   Cada _EventoTheme de Flutter define valores distintos para claro
+   y oscuro; aquí se replican como variables CSS fijadas por evento
+   vía [data-evento="<año>"], con su bloque [data-theme="light"]
+   correspondiente — el resto del layout no depende del tema.
+   ═════════════════════════════════════════════════════════════════ */
+
+.historia {
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-family: var(--font-family);
+}
+
+/* ── Barra superior fija ─────────────────────────────────────── */
+
+.historia-barra {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 56px;
+  padding: 0 12px;
+  background: var(--color-surface);
+}
+
+.historia-barra__volver {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: var(--glass-bg);
+  color: var(--color-text);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.historia-barra__titulo {
+  font-size: 15px;
+  font-weight: 700;
+  opacity: 0;
+  transition: opacity 0.05s linear;
+}
+
+/* ── Hero fotográfico ─────────────────────────────────────────── */
+
+.historia-hero {
+  position: relative;
+  height: 204px; /* 260px de alturaExpandida, menos los 56px de la barra */
+  margin-top: -56px;
+  overflow: hidden;
+}
+
+.historia-hero__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.historia-hero__fallback {
+  display: none;
+  width: 100%;
+  height: 100%;
+  background: color-mix(in srgb, var(--color-surface) 85%, var(--color-text) 15%);
+}
+
+.historia-hero__gradiente {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 35%,
+    color-mix(in srgb, var(--color-surface) 95%, transparent) 100%
+  );
+}
+
+.historia-hero__badge {
+  position: absolute;
+  bottom: 16px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.55);
+  border: 0.5px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ── Introducción ─────────────────────────────────────────────── */
+
+.historia-contenido {
+  padding: 28px 20px 40px;
+}
+
+.historia-titulo-principal {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.historia-subtitulo {
+  color: color-mix(in srgb, var(--color-text) 55%, transparent);
+  font-size: 15px;
+  line-height: 1.5;
+  margin: 10px 0 0;
+}
+
+.historia-divisor {
+  height: 1px;
+  background: color-mix(in srgb, var(--color-text) 12%, transparent);
+  margin: 32px 0;
+}
+
+/* ── Línea de tiempo ──────────────────────────────────────────── */
+
+.historia-timeline__item {
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+}
+
+.historia-timeline__columna-izq {
+  flex-shrink: 0;
+  width: 44px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.historia-timeline__nodo {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  background: var(--evento-nodo);
+  color: var(--evento-nodo-texto);
+}
+
+.historia-timeline__linea {
+  flex: 1;
+  width: 2px;
+  margin-top: 4px;
+  background: color-mix(in srgb, var(--color-text) 12%, transparent);
+}
+
+.historia-timeline__contenido {
+  flex: 1;
+  min-width: 0;
+  padding-bottom: 36px;
+}
+
+.historia-timeline__contenido.sin-margen {
+  padding-bottom: 0;
+}
+
+.historia-timeline__anio {
+  color: var(--evento-anio);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  margin: 0;
+}
+
+.historia-timeline__titulo {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 4px 0 8px;
+}
+
+.historia-timeline__cuerpo {
+  color: color-mix(in srgb, var(--color-text) 65%, transparent);
+  font-size: 14px;
+  line-height: 1.65;
+  margin: 0 0 16px;
+}
+
+.historia-timeline__imagen {
+  position: relative;
+  height: 180px;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.historia-timeline__imagen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.historia-timeline__imagen-fallback {
+  display: none;
+  position: absolute;
+  inset: 0;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  background: color-mix(in srgb, var(--color-surface) 85%, var(--color-text) 15%);
+  color: var(--color-text-38);
+}
+
+.historia-timeline__imagen-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--evento-overlay);
+}
+
+.historia-timeline__pie {
+  color: var(--color-text-38);
+  font-size: 12px;
+  font-style: italic;
+  text-align: center;
+  margin: 6px 0 0;
+}
+
+/* Paletas por evento — dorado (1974), verde azulado (1979) y coral
+   (1992). Los valores de tema oscuro se definen aquí como base;
+   [data-theme="light"] los sobreescribe con la variante clara. */
+
+.historia-timeline__item[data-evento="1974"] {
+  --evento-nodo: #7c5a1e;
+  --evento-nodo-texto: #ffd97d;
+  --evento-anio: #ffd97d;
+  --evento-overlay: rgba(184, 134, 11, 0.15);
+}
+
+[data-theme="light"] .historia-timeline__item[data-evento="1974"] {
+  --evento-nodo: #fff0cc;
+  --evento-nodo-texto: #7c5a1e;
+  --evento-anio: #9a6f2b;
+}
+
+.historia-timeline__item[data-evento="1979"] {
+  --evento-nodo: #0d4a3a;
+  --evento-nodo-texto: #5de0b0;
+  --evento-anio: #5de0b0;
+  --evento-overlay: rgba(29, 158, 117, 0.15);
+}
+
+[data-theme="light"] .historia-timeline__item[data-evento="1979"] {
+  --evento-nodo: #ccf0e6;
+  --evento-nodo-texto: #0d6b52;
+  --evento-anio: #0d6b52;
+}
+
+.historia-timeline__item[data-evento="1992"] {
+  --evento-nodo: #6b2510;
+  --evento-nodo-texto: #f0997b;
+  --evento-anio: #f0997b;
+  --evento-overlay: rgba(216, 90, 48, 0.12);
+}
+
+[data-theme="light"] .historia-timeline__item[data-evento="1992"] {
+  --evento-nodo: #ffe8df;
+  --evento-nodo-texto: #8c3820;
+  --evento-anio: #8c3820;
+}
+
+/* ── Banner de cierre ─────────────────────────────────────────── */
+
+.historia-banner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 8px;
+  padding: 28px;
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--color-surface) 85%, var(--color-text) 15%);
+  border: 0.5px solid color-mix(in srgb, var(--color-text) 12%, transparent);
+}
+
+.historia-banner__icono {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  background: color-mix(in srgb, var(--color-text) 8%, transparent);
+}
+
+.historia-banner__texto {
+  min-width: 0;
+}
+
+.historia-banner__titulo {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.historia-banner__subtitulo {
+  color: color-mix(in srgb, var(--color-text) 55%, transparent);
+  font-size: 13px;
+  line-height: 1.4;
+  margin: 2px 0 0;
+}

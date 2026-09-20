@@ -4,7 +4,18 @@
    Pantalla "Mi Perfil" (mi-perfil-screen.js). .mp-tarjeta es el
    equivalente de decoracionTarjeta() del Dart — esquinas de 20 +
    sombra difusa, reutilizada tal cual por mi-perfil-header.js y por
-   este archivo (headers de sección, destacadas). */
+   este archivo (headers de sección, destacadas).
+
+   RESPONSIVE: .mp-screen no tenía max-width, así que en escritorio
+   ocupaba el ancho completo del navegador — eso no rompe nada por sí
+   solo, pero infla .mp-grid: sus 3 columnas son 1fr (proporcionales
+   al contenedor), así que sin límite de ancho cada celda se vuelve
+   gigante. NO es el mismo bug de "grid blowout" que ya se corrigió
+   en historia-diseno.css (ahí el número de celdas era variable, por
+   eso se pasó a columnas de tamaño fijo); acá 3 columnas
+   proporcionales SÍ es el diseño correcto, tipo grilla de Instagram
+   — lo único que faltaba era acotar el contenedor. Ver el bloque
+   @media al final. */
 
 .mp-screen {
   min-height: 100%;
@@ -536,4 +547,18 @@
   padding: 10px 22px;
   font-weight: 600;
   cursor: pointer;
+}
+
+/* ── Escritorio: acota el ancho de la pantalla y la centra ───────
+   .mp-screen no tenía límite de ancho, así que en monitores grandes
+   ocupaba todo el viewport y, con eso, las 3 columnas proporcionales
+   de .mp-grid (arriba) se volvían celdas gigantes. Acotar aquí es
+   suficiente — no hace falta tocar grid-template-columns, la grilla
+   de 3 columnas ya es el diseño correcto una vez que el contenedor
+   tiene un ancho razonable. */
+@media (min-width: 768px) {
+  .mp-screen {
+    max-width: 620px;
+    margin: 0 auto;
+  }
 }

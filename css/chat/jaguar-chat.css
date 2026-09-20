@@ -1,18 +1,49 @@
 /* ═════════════════════════════════════════════════════════════════
    jaguar-chat.css
+   Ubicación: css/chat/jaguar-chat.css
+   (ruta inferida; ajustar si tu archivo vive en otra carpeta)
+
+   PROPÓSITO
    Estilos del contenedor principal de JaguarChat (header + pill de
    navegación inferior). Réplica visual de JaguarChatPrincipal.dart:
    mismo azul de acento, mismo pill flotante translúcido con blur,
    mismo indicador sólido deslizante detrás del ítem activo.
 
-   CORRECCIÓN: la versión anterior usaba nombres de variables que no
-   existen en variables.css (--color-fondo, --color-texto-fuerte,
-   --color-acento-chat, --color-chip-fondo, --color-texto-suave,
-   --color-pill-fondo), así que siempre caía en el valor de fallback
-   y el panel se veía claro sin importar el tema activo. También
-   usaba el selector `:root[data-tema='dark']` (en español), pero
-   theme.js alterna el atributo `data-theme` (en inglés, ver
-   variables.css) — ese bloque nunca se aplicaba.
+   RESPONSABILIDADES
+   - Layout del contenedor (.jchat-root), encabezado y chip.
+   - Carril horizontal de secciones (.jchat-pager / .jchat-panel).
+   - Zona de FABs (.jchat-fab-zona) y pill de navegación inferior.
+
+   CAMBIOS
+   - DESLIZAR ENTRE PESTAÑAS: las secciones (.jchat-panel) ya no son
+     paneles absolutos que se muestran/ocultan con display. Ahora
+     son hijos de un carril horizontal (.jchat-pager) con
+     scroll-snap-type: x mandatory, cada uno ocupando 100% del ancho.
+     El carril va en position:absolute + inset:0 dentro de
+     .jchat-contenido, igual que antes lo iban los paneles, así que
+     el layout del root no cambia (no aporta altura propia) y cada
+     panel sigue siendo su propio contenedor de scroll vertical.
+       · scroll-snap-stop: always → un gesto rápido nunca se salta
+         una sección.
+       · overscroll-behavior-x: contain → el gesto en los bordes no
+         dispara el "atrás/adelante" del navegador.
+       · Barra de scroll horizontal oculta.
+   - .jchat-panel.visible ya no controla display (todos los paneles
+     están siempre en el carril); la clase se sigue poniendo desde JS
+     en el panel activo por compatibilidad, sin estilos asociados.
+   - .jchat-pill__indicador: se eliminó la `transition` del
+     transform, porque ahora JS lo posiciona con la posición
+     fraccionaria del scroll y una transición lo haría ir "atrasado"
+     respecto al dedo. Se agrega will-change: transform.
+
+   CORRECCIÓN (histórico): la versión anterior usaba nombres de
+   variables que no existen en variables.css (--color-fondo,
+   --color-texto-fuerte, --color-acento-chat, --color-chip-fondo,
+   --color-texto-suave, --color-pill-fondo), así que siempre caía en
+   el valor de fallback y el panel se veía claro sin importar el
+   tema activo. También usaba el selector `:root[data-tema='dark']`
+   (en español), pero theme.js alterna el atributo `data-theme` (en
+   inglés, ver variables.css) — ese bloque nunca se aplicaba.
 
    Ahora se usan las variables reales de variables.css. Importante:
    en ese archivo el :root BASE ya representa el tema OSCURO (los
@@ -100,25 +131,44 @@
   overflow: hidden;
 }
 
-.jchat-panel {
+/* Carril horizontal: las 4 secciones lado a lado, con snap. Va
+   absoluto para no aportar altura propia al root (igual que los
+   paneles absolutos de la versión anterior). */
+.jchat-pager {
   position: absolute;
   inset: 0;
-  overflow-y: auto;
-  display: none;
-  /* Deja aire suficiente para no quedar tapado por el pill flotante,
-     equivalente al MediaQuery.padding.bottom inyectado en la versión
-     Flutter. */
-  padding-bottom: calc(64px + 20px + 8px);
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
 
-.jchat-panel.visible {
-  display: block;
+.jchat-pager::-webkit-scrollbar {
+  display: none;
+}
+
+.jchat-panel {
+  position: relative;
+  flex: 0 0 100%;
+  min-width: 0;
+  overflow-y: auto;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  /* Deja aire suficiente para no quedar tapado por el pill flotante,
+     equivalente al MediaQuery.padding.bottom inyectado en la versión
+     Flutter. (Se reajusta más abajo, ver "La barra ahora ocupa su
+     propio espacio en el flujo".) */
+  padding-bottom: calc(64px + 20px + 8px);
 }
 
 /* ── Zona para FABs propios de una sección (p. ej. "Agregar
    docente" en Maestros), posicionados arriba del pill igual que
    _FabSobrePill en la versión Flutter. Cada módulo hijo puede
-   inyectar aquí su propio botón absoluto. ── */
+   inyectar aquí su propio botón absoluto. Es fija y está fuera del
+   carril, así que no se desliza con las secciones. ── */
 
 .jchat-fab-zona {
   position: fixed;
@@ -129,16 +179,19 @@
 
 /* ── Pill de navegación inferior ────────────────────────────────── */
 
+.jchat-root {
+  padding-bottom: 20px; /* espacio bajo la barra cuando está en su posición natural */
+}
+
 .jchat-pill {
-  position: fixed;
-  left: 40px;
-  right: 40px;
+  position: sticky;
   bottom: 20px;
+  flex-shrink: 0;
+  margin: 0 40px;
   height: 64px;
   display: flex;
   border-radius: 26px;
   overflow: hidden;
-  /* Valores por defecto = tema OSCURO (ver nota de cabecera). */
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(30px);
   -webkit-backdrop-filter: blur(30px);
@@ -159,10 +212,12 @@
   border-radius: 20px;
   background: var(--color-azul-telegram, #3390ec);
   box-shadow: 0 3px 14px -3px rgba(51, 144, 236, 0.35);
-  transition: transform 280ms cubic-bezier(0.4, 0, 0.2, 1);
   margin: 0 4px;
-  /* El ancho real (100% / n) y el transform se fijan por JS ya que
-     dependen del número de tabs. */
+  /* Sin `transition`: el transform lo fija JS en cada evento de
+     scroll con la posición fraccionaria del carril, así sigue al
+     dedo en tiempo real. El ancho real (100% / n) también se fija
+     por JS ya que depende del número de tabs. */
+  will-change: transform;
 }
 
 .jchat-pill__btn {
@@ -209,4 +264,15 @@
 .jchat-pill__btn.activo .jchat-pill__label {
   color: #fff;
   font-weight: 700;
+}
+
+/* La raíz ya no es contenedor de scroll, así que la barra sí se pega a la ventana */
+.jchat-root {
+  overflow: visible;
+  overflow: clip;
+}
+
+/* La barra ahora ocupa su propio espacio en el flujo, ya no hace falta el hueco extra */
+.jchat-panel {
+  padding-bottom: 16px;
 }

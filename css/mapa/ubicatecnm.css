@@ -1,8 +1,14 @@
-/* css/ubicatecnm/ubicatecnm.css */
+/* css/ubicatecnm/ubicatecnm.css
+
+   Usa directamente las variables de tema de variables.css
+   (--color-bg, --color-surface, --color-text, --color-text-54,
+   --color-text-30), que cambian solas entre modo oscuro y claro.
+   Antes usaba nombres que no existen (--fondo-*, --texto-*), y por
+   eso caía siempre en los colores oscuros de respaldo. */
 
 .ubica-hub {
   padding: 12px 16px 24px;
-  background: var(--fondo-principal, #000);
+  background: var(--color-bg);
   min-height: 100%;
 }
 
@@ -26,11 +32,11 @@
   font-weight: 800;
   line-height: 1.1;
   letter-spacing: -0.6px;
-  color: var(--texto-primario, #fff);
+  color: var(--color-text);
 }
 
 .ubica-hub__titulo--acento {
-  color: #0a84ff;
+  color: var(--color-primary);
 }
 
 /* ── Botón mapa interactivo ── */
@@ -40,7 +46,7 @@
   gap: 14px;
   width: 100%;
   border: none;
-  background: var(--fondo-tarjeta, #1c1c1e);
+  background: var(--color-surface);
   border-radius: 20px;
   padding: 16px;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
@@ -106,17 +112,17 @@
   font-size: 15px;
   font-weight: 700;
   letter-spacing: -0.2px;
-  color: var(--texto-primario, #fff);
+  color: var(--color-text);
 }
 
 .ubica-hub__mapa-subtitulo {
   font-size: 12px;
-  color: var(--texto-secundario, rgba(255, 255, 255, 0.4));
+  color: var(--color-text-54);
 }
 
 .ubica-hub__mapa-flecha {
   font-size: 22px;
-  color: var(--texto-terciario, rgba(255, 255, 255, 0.25));
+  color: var(--color-text-30);
 }
 
 /* ── Sección de videos ── */
@@ -129,13 +135,13 @@
   font-size: 18px;
   font-weight: 700;
   letter-spacing: -0.3px;
-  color: var(--texto-primario, #fff);
+  color: var(--color-text);
 }
 
 .ubica-hub__videos-subtitulo {
   margin: 0 0 14px;
   font-size: 13px;
-  color: var(--texto-secundario, rgba(255, 255, 255, 0.38));
+  color: var(--color-text-54);
 }
 
 .ubica-hub__videos-lista {
@@ -145,7 +151,7 @@
 }
 
 .ubica-video {
-  background: var(--fondo-tarjeta, #1c1c1e);
+  background: var(--color-surface);
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
@@ -214,7 +220,7 @@
   font-size: 14px;
   font-weight: 600;
   letter-spacing: -0.1px;
-  color: var(--texto-primario, #fff);
+  color: var(--color-text);
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -243,7 +249,7 @@
   max-width: 240px;
   font-size: 13px;
   line-height: 1.4;
-  color: var(--texto-secundario, rgba(255, 255, 255, 0.4));
+  color: var(--color-text-54);
 }
 
 /* ─── Botón de salida — mismo acento que el resto del hub ─── */
@@ -254,10 +260,27 @@
   padding: 8px 16px;
   border-radius: 999px;
   background: rgba(10, 132, 255, 0.12);
-  color: #0a84ff;
+  color: var(--color-primary);
   font-size: 13px;
   font-weight: 700;
   letter-spacing: -0.1px;
   text-decoration: none;
   white-space: nowrap;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Ajustes solo para modo claro
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Sombras más suaves: la sombra oscura pesada se ve sucia sobre
+   un fondo claro. */
+:root[data-theme="light"] .ubica-hub__boton-mapa,
+:root[data-theme="light"] .ubica-video {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* El recuadro "Ver en YouTube" pasa de negro a gris claro (el texto
+   ya usa --color-text-54, que es oscuro en este tema). */
+:root[data-theme="light"] .ubica-video__fallback {
+  background: var(--glass-bg);
 }

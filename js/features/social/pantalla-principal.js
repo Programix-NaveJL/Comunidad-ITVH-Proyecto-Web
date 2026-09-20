@@ -24,6 +24,23 @@
 // (galería, reacciones por emoji, comentarios, etiquetados, menú de
 // opciones) — ya no con un stand-in.
 //
+// CICLO DE VIDA (FIX — conservación del shell):
+// render(panel) ahora se llama UNA sola vez por sesión. shell.js
+// guarda su nodo raíz en memoria y, cuando el usuario vuelve a /home
+// desde otra pantalla (perfil de otro usuario, buscador,
+// notificaciones...), reinserta ese mismo nodo en lugar de
+// reconstruirlo. Por eso el feed, sus tarjetas, sus listeners y su
+// paginación siguen intactos al volver. Lo único que se refresca al
+// regresar es el badge de notificaciones, mediante alVolver().
+// El estado del módulo solo se reinicia cuando shell.js construye un
+// shell nuevo (primer login, o después de cerrar sesión).
+//
+// Consecuencia importante: este módulo sigue "vivo" mientras el
+// usuario está en otra pantalla o en otra pestaña. Por eso onScroll()
+// verifica que el panel del feed esté realmente visible antes de
+// cargar más posts; si no, scrollear en Notificaciones (o en otra
+// pestaña) dispararía cargarMasPosts() sin que el feed se vea.
+//
 // FIX DE RENDIMIENTO APLICADO: renderPosts() ya NO reconstruye el
 // HTML completo de la lista en cada llamada. Antes, cada vez que se
 // cargaba una página nueva por scroll infinito, se volvían a montar
@@ -39,13 +56,9 @@
 // limpia ese registro y vuelve a montar todo desde cero, como antes.
 //
 // ASUNCIONES marcadas explícitamente (avisar si alguna no aplica):
-//   - Scroll infinito: se asume que el panel recibido (la propia
-//     <section class="shell-panel">) es el contenedor que scrollea
-//     (overflow-y:auto), y se le engancha el listener de scroll
-//     directamente a él. Si en shell.css el que scrollea es
-//     .shell-contenido o la ventana completa, hay que mover el
-//     listener de panel.addEventListener('scroll', ...) al elemento
-//     correcto.
+//   - Scroll infinito: el que scrollea es `window` (no el panel), y
+//     el listener se engancha a window. Se comprueba que el panel del
+//     feed sea visible (ver CICLO DE VIDA arriba).
 //   - Navegación a pantallas que aún no existen (crear historia, ver
 //     historia): se deja un mostrarToast() de "en construcción" en
 //     vez de romper con una ruta 404, con un TODO señalando dónde
@@ -74,8 +87,8 @@ const CACHE_KEY_PREFIX = 'feed_posts_';
 const LONG_PRESS_MS = 500;
 const HISTORIAS_VENTANA_MS = 24 * 60 * 60 * 1000;
 
-// Estado del módulo. Se reinicia cada vez que render() se llama
-// (primera vez que se muestra la pestaña "Comunidad").
+// Estado del módulo. Se reinicia cada vez que render() se llama, lo
+// cual ahora ocurre solo cuando shell.js construye un shell nuevo.
 let uidActual = null;
 let posts = [];
 let stories = [];
@@ -119,7 +132,7 @@ export async function render(panel) {
   autoresSilenciados = new Set();
   seguidosCache = null;
   idsRenderizados = new Set();
-  postsChannel?.unsubscribe();
+  if (postsChannel) supabaseClient.removeChannel(postsChannel);
   postsChannel = null;
 
   panel.innerHTML = plantillaBase();
@@ -133,6 +146,22 @@ export async function render(panel) {
 
   await cargarTodo({ refresh: true });
   suscribirRealtime();
+}
+
+/**
+ * Gancho ligero que shell.js llama cuando el usuario regresa a /home
+ * (desde perfil de otro usuario, buscador, notificaciones...) y la
+ * pestaña Comunidad es la activa. NO toca los posts, las historias
+ * ni el scroll: solo refresca el badge de notificaciones, que es lo
+ * único que puede haber cambiado mientras el usuario estuvo fuera.
+ *
+ * Si además se quisieran traer publicaciones nuevas de otros, se
+ * podría llamar aquí a traerPostsNuevos(), pero antepone tarjetas y
+ * desplaza el scroll; quizá convenga un aviso tipo "Hay publicaciones
+ * nuevas" en su lugar.
+ */
+export function alVolver() {
+  cargarNotificaciones();
 }
 
 function plantillaBase() {
@@ -547,10 +576,16 @@ function suscribirRealtime() {
 }
 
 // ═══════════════════════════════════════════════════════════════
-// SCROLL INFINITO — ver ASUNCIÓN sobre el contenedor al inicio
+// SCROLL INFINITO — el que scrollea es `window`
 // ═══════════════════════════════════════════════════════════════
 
 function onScroll() {
+  // El módulo sigue vivo aunque el usuario esté en otra pantalla
+  // (shell.js conserva el feed en memoria) o en otra pestaña. Si el
+  // panel del feed no está conectado al DOM o está oculto
+  // (display:none → offsetParent === null), no se carga nada.
+  if (!panelActual?.isConnected || panelActual.offsetParent === null) return;
+
   const scrollTop = window.scrollY || document.documentElement.scrollTop;
   const clientHeight = window.innerHeight;
   const scrollHeight = document.documentElement.scrollHeight;
@@ -713,8 +748,8 @@ function activarInteracciones(panel) {
   panel.querySelector('#feed-buscar').addEventListener('click', () => navegarA('/buscador-usuarios'));
   panel.querySelector('#feed-notif').addEventListener('click', () => {
     navegarA('/notificaciones');
-    // Al volver de notificaciones se asume que el usuario las vio;
-    // se refresca el contador (mismo comportamiento que en Dart).
+    // Al volver de notificaciones, shell.js llama a alVolver() y se
+    // refresca el contador (mismo comportamiento que en Dart).
   });
 
   panel.querySelector('#feed-composer-input').addEventListener('click', abrirCrearPublicacion);

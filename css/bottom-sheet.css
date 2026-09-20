@@ -9,7 +9,16 @@
    redefine nada de este archivo.
 
    El panel sigue el tema activo directamente vía var(--color-surface),
-   así que no necesita un modificador de "oscuro forzado" aparte. */
+   así que no necesita un modificador de "oscuro forzado" aparte.
+
+   RESPONSIVE: las reglas base están pensadas para móvil (franja
+   pegada a los tres bordes, como una hoja nativa). El bloque
+   @media al final del archivo es lo único que cambia en escritorio:
+   convierte el mismo panel en un modal centrado con ancho máximo,
+   en vez de extenderlo de borde a borde. El JS de bottom-sheet.js
+   no necesita ningún cambio — solo anima `height` (inline) y las
+   clases `.visible`/`--arrastrando`, nunca `left`/`right`/`bottom`,
+   así que este breakpoint puede resolverse enteramente aquí. */
 
 .hoja-inferior-abierta {
   overflow: hidden;
@@ -75,4 +84,36 @@
   display: flex;
   flex-direction: column;
   min-height: 0;
+}
+
+/* ── Escritorio: modal centrado en vez de franja de ancho completo ──
+   El overlay pasa a centrar su contenido; el panel deja de pegarse
+   a left/right/bottom y se limita a un ancho máximo cómodo de leer,
+   con las cuatro esquinas redondeadas (ya no tiene sentido que las
+   de abajo sean rectas si no toca el borde de la pantalla). La
+   manija de arrastre se conserva: en un modal centrado, arrastrarla
+   simplemente cambia su altura sin descentrarlo. */
+@media (min-width: 768px) {
+  .hoja-inferior-overlay {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .hoja-inferior {
+    position: relative;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    width: 100%;
+    max-width: 480px;
+    max-height: calc(100vh - 64px);
+    margin-bottom: 32px;
+    border-radius: 20px;
+    transform: translateY(24px);
+  }
+
+  .hoja-inferior.visible {
+    transform: translateY(0);
+  }
 }

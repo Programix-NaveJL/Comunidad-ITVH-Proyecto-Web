@@ -1,10 +1,22 @@
 // galeria-multimedia.js
-// Ruta real sugerida: js/features/social/publicaciones/tarjeta-publicaciones/galeria-multimedia.js
+// Ubicación: js/features/social/publicaciones/tarjeta-publicaciones/galeria-multimedia.js
 //
+// ═══════════════════════════════════════════════════════════════
+// PROPÓSITO
+// ═══════════════════════════════════════════════════════════════
 // Puerto de galeria_multimedia.dart. Cuadrícula de medios de una
 // publicación, estilo Facebook: 1 medio = cuadro completo; 2 =
 // columnas iguales; 3 = uno grande + dos apilados; 4+ = grid 2x2
 // con overlay "+N" en la última celda si sobran más de 4.
+//
+// ═══════════════════════════════════════════════════════════════
+// RESPONSABILIDADES
+// ═══════════════════════════════════════════════════════════════
+//   - renderGaleriaMultimedia(medios): arma el HTML de la galería.
+//   - activarGaleriaMultimedia(contenedor, onMedioTap): engancha los
+//     clicks de cada celda (abre visor-media.js), formatea la
+//     duración de los videos y registra cada video para autoplay
+//     por visibilidad (ver video-autoplay.js).
 //
 // A diferencia del Dart, las proporciones (lado = ancho/2, altura
 // total de 3 = ancho*0.65, etc.) se resuelven con `aspect-ratio` en
@@ -21,8 +33,21 @@
 // solo. Mismo criterio ya usado en notificaciones.js para miniaturas
 // de video (<video>+<canvas>), aquí no hace falta <canvas> porque no
 // se necesita una imagen estática, solo el frame visible del <video>.
+//
+// ═══════════════════════════════════════════════════════════════
+// CAMBIOS
+// ═══════════════════════════════════════════════════════════════
+//   - AUTOPLAY ESTILO FACEBOOK: los videos se reproducen solos (en
+//     mute) al quedar a la vista y se pausan al salir. La lógica
+//     vive en video-autoplay.js; aquí solo se registra cada celda
+//     de video en activarGaleriaMultimedia().
+//   - Cada celda de video incluye ahora un botón de sonido
+//     (.galeria-medios__silencio, 🔇/🔊). Su click NO abre el visor.
+//   - Al tocar una celda (abrir el visor) se pausa el video que esté
+//     sonando en el feed, para que no suene debajo del visor.
 
 import { resolverUrlMedio } from '../../../../core/perfil-utils.js';
+import { registrarVideoAutoplay, pausarVideoActivo } from './video-autoplay.js';
 
 /**
  * Arma el HTML de la galería. Debe insertarse en el DOM y luego
@@ -96,7 +121,8 @@ function celda(medios, index, { gapDerecha = false, gapAbajo = false, extraLabel
                <span class="galeria-medios__play">▶️</span>
                <span class="galeria-medios__badge galeria-medios__badge--tipo">🎥 VIDEO</span>
                <span class="galeria-medios__badge galeria-medios__badge--duracion" hidden></span>
-             </div>`
+             </div>
+             <button type="button" class="galeria-medios__silencio" data-silencio aria-label="Activar sonido">🔇</button>`
           : `<img class="galeria-medios__img" src="${url}" alt="" loading="lazy" onerror="this.classList.add('galeria-medios__img--error')" />`
       }
       ${
@@ -110,8 +136,9 @@ function celda(medios, index, { gapDerecha = false, gapAbajo = false, extraLabel
 
 /**
  * Engancha los clicks de cada celda (abre visor-media.js en el
- * índice correspondiente) y, para videos, formatea la duración una
- * vez que el navegador la conoce (evento 'loadedmetadata').
+ * índice correspondiente), formatea la duración de los videos una
+ * vez que el navegador la conoce (evento 'loadedmetadata') y
+ * registra cada video para autoplay por visibilidad.
  *
  * @param {HTMLElement} contenedor - el elemento donde se insertó el HTML de renderGaleriaMultimedia().
  * @param {(indice: number) => void} onMedioTap
@@ -119,17 +146,22 @@ function celda(medios, index, { gapDerecha = false, gapAbajo = false, extraLabel
 export function activarGaleriaMultimedia(contenedor, onMedioTap) {
   contenedor.querySelectorAll('.galeria-medios__celda').forEach((celdaEl) => {
     celdaEl.addEventListener('click', () => {
+      // Antes de abrir el visor, se calla el video que esté sonando en el feed.
+      pausarVideoActivo();
       onMedioTap(Number(celdaEl.dataset.clickIdx));
     });
 
     const video = celdaEl.querySelector('.galeria-medios__video');
     if (!video) return;
+
     const badgeDuracion = celdaEl.querySelector('.galeria-medios__badge--duracion');
     video.addEventListener('loadedmetadata', () => {
       if (!badgeDuracion || Number.isNaN(video.duration)) return;
       badgeDuracion.textContent = formatearDuracion(video.duration);
       badgeDuracion.hidden = false;
     });
+
+    registrarVideoAutoplay(celdaEl);
   });
 }
 

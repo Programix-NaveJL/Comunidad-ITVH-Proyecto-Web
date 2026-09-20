@@ -1,15 +1,45 @@
-/* Pantalla de búsqueda de usuarios (buscador-usuarios.js).
+/* buscador-usuarios.css
+   Ubicación: css/social/buscador-usuarios.css
+   (ruta inferida del patrón css/social/... de la galería; ajustar si
+   tu archivo vive en otra carpeta)
+
+   PROPÓSITO
+   Estilos de la pantalla de búsqueda de usuarios (buscador-usuarios.js).
    Colores tomados directamente de buscador_usuarios.dart: fondo
    negro/blanco-humo, tarjetas #1C1C1E/blanco, acento #0A84FF/#007AFF.
    Sigue el patrón del proyecto: valores oscuros como base, overrides
-   bajo [data-theme="light"]. */
+   bajo [data-theme="light"].
+
+   RESPONSABILIDADES
+   - Fondo de pantalla completa (.buscador).
+   - Header con campo de búsqueda, sugerencias, resultados y tarjetas
+     de usuario con botón Seguir/Siguiendo.
+
+   CAMBIOS
+   - COLUMNA CENTRADA EN ESCRITORIO: esta pantalla es una ruta que el
+     router pinta directo en el contenedor principal (no vive dentro
+     del layout de tres columnas del shell), así que en una
+     computadora se estiraba a todo el ancho. Ahora el header y el
+     cuerpo se limitan a --buscador-ancho-max y se centran; el fondo
+     (.buscador) sigue ocupando todo el ancho. En celular no cambia
+     nada porque el máximo es mayor que la pantalla. */
 
 .buscador {
+  --buscador-ancho-max: 720px;
   min-height: 100%;
   background: #000000;
 }
 [data-theme="light"] .buscador {
   background: #f2f2f7;
+}
+
+.buscador-header,
+.buscador-cuerpo {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--buscador-ancho-max);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .buscador-header {

@@ -1,13 +1,45 @@
-/* Pantalla de notificaciones (notificaciones.js). Colores tomados
-   directamente de notificaciones.dart. Acento fijo #007AFF (así
-   está en el Dart original, sin variante 0A84FF para oscuro). */
+/* notificaciones.css
+   Ubicación: css/social/notificaciones.css
+   (ruta inferida del patrón css/social/... de la galería; ajustar si
+   tu archivo vive en otra carpeta)
+
+   PROPÓSITO
+   Estilos de la pantalla de notificaciones (notificaciones.js).
+   Colores tomados directamente de notificaciones.dart. Acento fijo
+   #007AFF (así está en el Dart original, sin variante 0A84FF para
+   oscuro).
+
+   RESPONSABILIDADES
+   - Fondo de pantalla completa (.notif).
+   - Header, barra de filtros, lista agrupada por día, ítems con
+     avatar/badge/miniatura y estados vacíos.
+
+   CAMBIOS
+   - COLUMNA CENTRADA EN ESCRITORIO: esta pantalla es una ruta que el
+     router pinta directo en el contenedor principal (no vive dentro
+     del layout de tres columnas del shell), así que en una
+     computadora se estiraba a todo el ancho. Ahora el header, los
+     filtros y la lista se limitan a --notif-ancho-max y se centran;
+     el fondo (.notif) sigue ocupando todo el ancho. En celular no
+     cambia nada porque el máximo es mayor que la pantalla. */
 
 .notif {
+  --notif-ancho-max: 720px;
   min-height: 100%;
   background: #000000;
 }
 [data-theme="light"] .notif {
   background: #f2f2f7;
+}
+
+.notif-header,
+.notif-filtros,
+.notif-lista {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--notif-ancho-max);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .notif-header {

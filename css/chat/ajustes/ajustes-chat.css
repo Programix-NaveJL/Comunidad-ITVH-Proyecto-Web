@@ -1,0 +1,513 @@
+/* ═════════════════════════════════════════════════════════════════
+   ajustes-chat.css
+   Ubicación: css/chat/ajustes-chat.css
+   (ruta inferida; ajustar si tu carpeta de CSS es otra)
+
+   PROPÓSITO
+   Estilos de la pestaña "Ajustes" de JaguarChat
+   (js/features/chat/ajustes/ajustes-chat-screen.js). Réplica visual
+   de configuracion_screen.dart: encabezados de sección en
+   mayúsculas, tarjetas con borde sutil, filas con ícono, botón de
+   cerrar sesión en rojo.
+
+   RESPONSABILIDADES
+   - Layout de la pantalla (.jca-root), secciones y tarjetas.
+   - Filas de acción, cuenta de Google vinculada y bloque del último
+     backup.
+   - Vista interna de chats archivados.
+   - Modal de confirmación (.jca-dialogo-*), que se agrega al <body>.
+
+   NOTAS
+   - Usa SOLO las variables reales de variables.css (--color-bg,
+     --color-surface, --color-text, --color-text-54, --color-text-38,
+     --glass-border, --glass-bg, --color-primary), así que respeta el
+     tema claro y oscuro sin bloques [data-theme] propios.
+   - Los colores semánticos (peligro y éxito) se definen abajo como
+     variables --jca-* con fallback, por si el proyecto los nombra
+     distinto (--color-error vs --color-danger).
+   - Se limita el ancho a 620px y se centra, igual que el resto de
+     pantallas para escritorio.
+   ═════════════════════════════════════════════════════════════════ */
+
+:root {
+  --jca-peligro: var(--color-error, var(--color-danger, #e53935));
+  --jca-exito: var(--color-success, #34c759);
+}
+
+.jca-root {
+  box-sizing: border-box;
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 12px 16px 28px;
+  color: var(--color-text);
+}
+
+/* ── Secciones ──────────────────────────────────────────────────── */
+
+.jca-bloque + .jca-bloque {
+  margin-top: 28px;
+}
+
+.jca-seccion {
+  margin: 0 0 8px;
+  padding-left: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.1px;
+  color: var(--color-text-54);
+}
+
+.jca-seccion__sub {
+  display: block;
+  margin-top: 2px;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--color-text-38);
+}
+
+.jca-tarjeta {
+  overflow: hidden;
+  background: var(--color-surface);
+  border: 0.5px solid var(--glass-border);
+  border-radius: 16px;
+}
+
+.jca-nota {
+  margin: 8px 4px 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--color-text-38);
+}
+
+/* ── Fila de acción ─────────────────────────────────────────────── */
+
+.jca-fila {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  box-sizing: border-box;
+  border: none;
+  background: none;
+  color: var(--color-text);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+}
+
+.jca-fila:hover:not(:disabled) {
+  background: var(--glass-bg);
+}
+
+.jca-fila:disabled {
+  cursor: default;
+  color: var(--color-text-38);
+}
+
+.jca-fila__icono {
+  flex-shrink: 0;
+  width: 22px;
+  font-size: 18px;
+  line-height: 1;
+  text-align: center;
+}
+
+.jca-fila:disabled .jca-fila__icono {
+  opacity: 0.5;
+}
+
+.jca-fila__label {
+  flex: 1;
+  min-width: 0;
+}
+
+.jca-fila__flecha {
+  flex-shrink: 0;
+  font-size: 22px;
+  line-height: 1;
+  color: var(--color-text-38);
+}
+
+.jca-badge {
+  flex-shrink: 0;
+  padding: 3px 8px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--color-primary) 15%, transparent);
+  color: var(--color-primary);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.jca-divisor {
+  height: 0.5px;
+  margin-left: 48px;
+  background: var(--glass-border);
+}
+
+/* ── Spinner ────────────────────────────────────────────────────── */
+
+.jca-spinner {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid color-mix(in srgb, var(--color-primary) 25%, transparent);
+  border-top-color: var(--color-primary);
+  animation: jca-giro 0.75s linear infinite;
+}
+
+@keyframes jca-giro {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Cuenta de Google vinculada ─────────────────────────────────── */
+
+.jca-cuenta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+}
+
+.jca-cuenta__avatar {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--color-primary) 15%, transparent);
+  font-size: 20px;
+}
+
+.jca-cuenta__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.jca-cuenta__info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.jca-cuenta__titulo {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.jca-cuenta__email {
+  font-size: 12px;
+  color: var(--color-text-54);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.jca-desvincular {
+  flex-shrink: 0;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 8px;
+  background: none;
+  color: var(--jca-peligro);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.jca-desvincular:hover {
+  background: color-mix(in srgb, var(--jca-peligro) 10%, transparent);
+}
+
+/* ── Info del último backup ─────────────────────────────────────── */
+
+.jca-respaldo-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px 10px;
+}
+
+.jca-respaldo-info__icono {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--color-primary) 12%, transparent);
+  font-size: 18px;
+}
+
+.jca-respaldo-info__texto {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.jca-respaldo-info__titulo {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.jca-respaldo-info__tamanio {
+  font-size: 12px;
+  color: var(--color-text-38);
+}
+
+/* ── Botón de peligro (cerrar sesión) ───────────────────────────── */
+
+.jca-peligro {
+  width: 100%;
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  box-sizing: border-box;
+  border: 0.5px solid color-mix(in srgb, var(--jca-peligro) 25%, transparent);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--jca-peligro) 8%, transparent);
+  color: var(--jca-peligro);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+
+.jca-peligro:hover {
+  background: color-mix(in srgb, var(--jca-peligro) 13%, transparent);
+}
+
+.jca-peligro__icono {
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* ── Vista interna: chats archivados ────────────────────────────── */
+
+.jca-subheader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.jca-volver {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: none;
+  color: var(--color-text);
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.jca-volver:hover {
+  background: var(--glass-bg);
+}
+
+.jca-subheader__titulo {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.jca-vacio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 48px 24px;
+  text-align: center;
+  color: var(--color-text-54);
+  font-size: 14px;
+}
+
+.jca-vacio p {
+  margin: 0;
+}
+
+.jca-vacio__icono {
+  font-size: 44px;
+  opacity: 0.4;
+}
+
+.jca-chat {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border-bottom: 0.5px solid var(--glass-border);
+}
+
+.jca-chat:last-child {
+  border-bottom: none;
+}
+
+.jca-chat__avatar {
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--color-primary) 15%, transparent);
+  color: var(--color-primary);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.jca-chat__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.jca-chat__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.jca-chat__nombre,
+.jca-chat__preview {
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.jca-chat__nombre {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.jca-chat__preview {
+  margin-top: 3px;
+  font-size: 12.5px;
+  color: var(--color-text-54);
+}
+
+.jca-chat__desarchivar {
+  flex-shrink: 0;
+  padding: 7px 12px;
+  border: none;
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--color-primary) 12%, transparent);
+  color: var(--color-primary);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ── Modal de confirmación (se agrega al <body>) ────────────────── */
+
+.jca-dialogo-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0);
+  transition: background-color 0.15s ease;
+}
+
+.jca-dialogo-overlay.visible {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.jca-dialogo {
+  width: 100%;
+  max-width: 360px;
+  padding: 20px 20px 12px;
+  box-sizing: border-box;
+  border-radius: 16px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+  transform: scale(0.96);
+  opacity: 0;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.jca-dialogo-overlay.visible .jca-dialogo {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.jca-dialogo__titulo {
+  margin: 0 0 10px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.jca-dialogo__cuerpo {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-text-54);
+}
+
+.jca-dialogo__acciones {
+  display: flex;
+  justify-content: flex-end;
+  gap: 4px;
+  margin-top: 14px;
+}
+
+.jca-dialogo__btn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  background: none;
+  color: var(--color-text-54);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.jca-dialogo__btn:hover {
+  background: var(--glass-bg);
+}
+
+.jca-dialogo__btn--primario {
+  color: var(--color-primary);
+}
+
+.jca-dialogo__btn--peligro {
+  color: var(--jca-peligro);
+}

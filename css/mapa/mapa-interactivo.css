@@ -1,10 +1,16 @@
-/* css/ubicatecnm/mapa-interactivo.css */
+/* css/ubicatecnm/mapa-interactivo.css
+
+   Usa directamente las variables de tema de variables.css
+   (--color-bg, --color-surface, --color-text, --glass-border), que
+   cambian solas entre modo oscuro y claro. Antes usaba nombres que
+   no existen (--fondo-*, --texto-*, --borde-sutil), y por eso el
+   encabezado quedaba siempre oscuro. */
 
 .ubica-mapa {
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: var(--fondo-principal, #0b0b0f);
+  background: var(--color-bg);
 }
 
 .ubica-mapa__header {
@@ -12,14 +18,14 @@
   align-items: center;
   gap: 8px;
   padding: 14px 12px;
-  background: var(--fondo-superficie, #1c1c1e);
-  border-bottom: 1px solid var(--borde-sutil, rgba(255, 255, 255, 0.08));
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--glass-border);
 }
 
 .ubica-mapa__volver {
   background: none;
   border: none;
-  color: var(--texto-primario, #fff);
+  color: var(--color-text);
   font-size: 28px;
   line-height: 1;
   cursor: pointer;
@@ -30,7 +36,7 @@
   margin: 0;
   font-size: 16px;
   font-weight: 700;
-  color: var(--texto-primario, #fff);
+  color: var(--color-text);
 }
 
 .ubica-mapa__lienzo-zona {

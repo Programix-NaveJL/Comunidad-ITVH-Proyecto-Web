@@ -1,11 +1,32 @@
 /* ver-publicacion.css
+   Ubicación: css/social/publicaciones/ver-publicacion.css
+   (ruta inferida del patrón css/social/... de la galería; ajustar si
+   tu archivo vive en otra carpeta)
+
+   PROPÓSITO
    Pantalla de detalle de una publicación (ver-publicacion.js): la
    tarjeta completa arriba, el hilo de comentarios inline debajo, y
    el composer fijo abajo. El estilo de la tarjeta viene de
    tarjeta-publicacion.css; el de cada comentario, de
    item-comentario.css y comentarios-hilo.css (reusa las clases de
    hoja-comentarios.css) — este archivo solo define la estructura
-   propia de la pantalla. */
+   propia de la pantalla.
+
+   RESPONSABILIDADES
+   - Contenedor de pantalla completa con header, lista con scroll
+     interno y composer fijo (.ver-publicacion).
+   - Estados de carga y de error.
+
+   CAMBIOS
+   - ESCRITORIO: .ver-publicacion no tenía límite de ancho, así que
+     en monitores grandes la tarjeta (con su galería cuadrada), el
+     header y el composer se estiraban a todo el viewport. Se agrega
+     al final el mismo bloque @media (min-width: 768px) que usan
+     mi-perfil.css y mi-perfil-feed-detalle.css, con el mismo ancho
+     máximo (620px). Se acota el contenedor completo (y no solo sus
+     hijos) para que la rueda del mouse siga scrolleando la lista
+     mientras el cursor esté sobre la columna. En celular no cambia
+     nada. */
 
 .ver-publicacion {
   height: 100vh;
@@ -89,4 +110,14 @@
   font-weight: 600;
   cursor: pointer;
   font-family: var(--font-family);
+}
+
+/* ── Escritorio: acota el ancho de la pantalla y la centra ───────
+   Mismo criterio y mismo ancho que mi-perfil.css y
+   mi-perfil-feed-detalle.css. */
+@media (min-width: 768px) {
+  .ver-publicacion {
+    max-width: 620px;
+    margin: 0 auto;
+  }
 }

@@ -518,3 +518,164 @@
 }
 
 
+/* ═════════════════════════════════════════════════════════════════
+   Menú: tile hero + fila de dos tiles chicos (estilo captura web)
+   ═════════════════════════════════════════════════════════════════ */
+.drawer-tile__label { font-size: 15px; font-weight: 600; }
+
+.drawer-tile:not(.drawer-tile--hero) .drawer-tile__icono {
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  background: rgba(0, 198, 255, 0.15);
+}
+
+.drawer-tile--hero {
+  height: 190px;
+  padding: 14px;
+  border-radius: 18px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 6px;
+}
+.drawer-tile--hero::before {
+  background: linear-gradient(to top, rgba(0,0,0,.78) 0%, rgba(0,0,0,.15) 65%, rgba(0,0,0,.05) 100%);
+}
+[data-theme="light"] .drawer-tile--hero .drawer-tile__icono {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.drawer-fila { display: flex; gap: 10px; margin-bottom: 10px; }
+.drawer-tile--mini {
+  flex: 1;
+  width: auto;
+  min-width: 0;
+  height: 125px;
+  margin-bottom: 0;
+  padding: 10px 12px;
+  border-radius: 14px;
+}
+.drawer-tile--hero.drawer-tile--mini .drawer-tile__icono {
+  width: auto;
+  height: auto;
+  background: none;
+  font-size: 17px;
+}
+.drawer-tile--mini .drawer-tile__label { font-size: 12.5px; line-height: 1.3; }
+
+/* ═════════════════════════════════════════════════════════════════
+   Escritorio (≥1100px): menú fijo a la izquierda + contenido angosto
+   Para cambiar los anchos, edita solo estas dos variables.
+   ═════════════════════════════════════════════════════════════════ */
+:root {
+  --shell-ancho-menu: 350px;
+  --shell-ancho-contenido: 810px;
+}
+
+@media (min-width: 1100px) {
+  .shell {
+    display: grid;
+    grid-template-columns:
+      minmax(16px, 1fr)
+      var(--shell-ancho-menu)
+      minmax(0, var(--shell-ancho-contenido))
+      minmax(16px, 1fr);
+    grid-template-rows: auto auto 1fr;
+    column-gap: 24px;
+  }
+
+  .shell-header  { grid-column: 1 / -1; grid-row: 1; }
+  .shell-tabbar  { grid-column: 2 / 4;  grid-row: 2; margin: 10px 0; }
+  .shell-contenido { grid-column: 3; grid-row: 3; min-width: 0; }
+
+  /* El ☰ ya no hace falta, pero conserva su espacio para que el logo siga centrado */
+  .shell-header__menu { visibility: hidden; pointer-events: none; }
+  .shell-drawer-overlay { display: none !important; }
+
+  .shell-drawer {
+    grid-column: 2;
+    grid-row: 3;
+    position: sticky;
+    top: 16px;
+    left: auto;
+    bottom: auto;
+    width: auto;
+    max-width: none;
+    align-self: start;
+    margin-top: 16px;
+    max-height: calc(100vh - 32px);
+    transform: none;
+    transition: none;
+    z-index: auto;
+    background: var(--color-surface);
+    border: 1px solid var(--glass-border);
+    border-radius: 18px;
+  }
+  [data-theme="light"] .shell-drawer {
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: none;
+  }
+}
+
+/* ═════════════════════════════════════════════════════════════════
+   Escritorio: el shell mide exactamente la ventana (sin scroll de página)
+   ═════════════════════════════════════════════════════════════════ */
+@media (min-width: 1100px) {
+  .shell {
+    height: 100dvh;
+    min-height: 0;
+    overflow: hidden;
+    grid-template-rows: auto auto minmax(0, 1fr);
+  }
+
+  .shell-contenido {
+    overflow-y: auto;
+    min-height: 0;
+  }
+
+  /* Menú: ocupa el alto de su fila y scrollea por dentro si no cabe */
+  .shell-drawer {
+    position: static;
+    align-self: stretch;
+    max-height: none;
+    margin: 6px 0 16px;
+    overflow-y: auto;
+  }
+
+  /* Jaguares: mismo esquema que Market, la barra queda al fondo del panel */
+  .shell-panel[data-panel="jaguares"] { padding: 0; }
+  .shell-panel[data-panel="jaguares"].visible {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+  }
+  .shell-panel[data-panel="jaguares"] .jchat-root {
+    min-height: 0;
+    flex: 1;
+  }
+}
+
+/* ═════════════════════════════════════════════════════════════════
+   Cabecera pegajosa (header + pestañas) en móvil y tablet
+   ═════════════════════════════════════════════════════════════════ */
+.shell-cabecera {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--color-bg);
+}
+
+/* En escritorio el shell ya mide la ventana y el contenido scrollea por dentro:
+   el contenedor desaparece del layout y el grid sigue colocando sus hijos igual. */
+@media (min-width: 1100px) {
+  .shell-cabecera {
+    display: contents;
+    position: static;
+  }
+}
+
+/* Transición suave al cambiar de pestaña deslizando */
+@keyframes shell-panel-entra { from { opacity: 0; } to { opacity: 1; } }
+.shell-panel--entra { animation: shell-panel-entra 0.2s ease-out; }

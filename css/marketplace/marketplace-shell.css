@@ -1,5 +1,9 @@
 /* ═════════════════════════════════════════════════════════════════
    marketplace-shell.css
+   Ubicación: css/marketplace/marketplace-shell.css
+   (ruta inferida; ajustar si tu archivo vive en otra carpeta)
+
+   PROPÓSITO
    Contenedor raíz del módulo Market (marketplace-screen.js) + su
    barra de navegación inferior flotante. Usa las variables globales
    de variables.css — nada de color hardcodeado aquí.
@@ -7,6 +11,37 @@
    La pantalla de Inicio (buscador, chips, feed, tarjetas) vive en
    marketplace-inicio.css, aparte, porque cambia con más frecuencia
    y no tiene relación con el layout del shell/tabbar.
+
+   RESPONSABILIDADES
+   - Layout del contenedor (.market-shell), encabezado y contenido.
+   - Carril horizontal de subpantallas (.market-pager / .market-panel).
+   - Barra inferior flotante (.market-tabbar) y su pill deslizante.
+   - Ajuste del panel host (.shell-contenido / .shell-panel[market]).
+
+   CAMBIOS
+   - DESLIZAR ENTRE PESTAÑAS: las subpantallas (.market-panel) ya no
+     se muestran/ocultan con display. Ahora son hijas de un carril
+     horizontal (.market-pager) con scroll-snap-type: x mandatory,
+     cada una ocupando 100% del ancho.
+       · El carril usa height:100% dentro de .market-contenido, la
+         misma dependencia de altura que ya usaba .market-panel
+         antes, así que el layout del shell no cambia: cada panel
+         sigue siendo su propio contenedor de scroll vertical.
+       · scroll-snap-stop: always → un gesto rápido nunca se salta
+         una subpantalla.
+       · overscroll-behavior-x: contain → el gesto en los bordes no
+         dispara el "atrás/adelante" del navegador.
+       · Barra de scroll horizontal oculta.
+   - .market-panel.visible ya no controla display (todos los
+     paneles están siempre en el carril); la clase se sigue poniendo
+     desde JS en el panel activo por compatibilidad, sin estilos
+     asociados.
+   - .market-tabbar__pill: ya no se mueve con `left` + transición.
+     JS lo posiciona con transform: translateX() según la posición
+     fraccionaria del scroll (su ancho es 100%/3, así que
+     translateX(100%) equivale exactamente al antiguo left de una
+     tercera parte). Se elimina la `transition` porque haría al pill
+     ir "atrasado" respecto al dedo; se agrega will-change.
    ═════════════════════════════════════════════════════════════════ */
 
 :root {
@@ -51,15 +86,29 @@
   position: relative;
 }
 
-.market-panel {
-  display: none;
+/* Carril horizontal: las 3 subpantallas lado a lado, con snap. */
+.market-pager {
+  display: flex;
   height: 100%;
-  overflow-y: auto;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
   -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
 
-.market-panel.visible {
-  display: block;
+.market-pager::-webkit-scrollbar {
+  display: none;
+}
+
+.market-panel {
+  flex: 0 0 100%;
+  min-width: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 .market-placeholder {
@@ -103,7 +152,10 @@
   border-radius: 16px;
   background: var(--mkt-accent);
   box-shadow: 0 3px 14px rgba(var(--mkt-accent-rgb), 0.35);
-  transition: left 0.28s cubic-bezier(0.33, 1, 0.68, 1);
+  /* Sin `transition`: el transform lo fija JS en cada evento de
+     scroll con la posición fraccionaria del carril, así sigue al
+     dedo en tiempo real. */
+  will-change: transform;
 }
 
 .market-tabbar__btn {

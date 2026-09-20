@@ -9,7 +9,16 @@
    (topbar, fila superior, textos de header, header de publicaciones,
    vacío, hoja de avatar, error) — el JS no reutiliza los mp-*
    equivalentes de mi-perfil.css para estos elementos, así que aquí
-   se definen desde cero en vez de depender de esa herencia. */
+   se definen desde cero en vez de depender de esa herencia.
+
+   RESPONSIVE: mismo ajuste aplicado en mi-perfil.css a .mp-screen —
+   .pp-screen tampoco tenía max-width, así que en escritorio se
+   estiraba a todo el ancho del navegador. Como esta pantalla
+   reutiliza .mp-grid/.mp-celda de mi-perfil.css (3 columnas
+   proporcionales al contenedor), sin ese límite las celdas del
+   grid de publicaciones se inflaban igual que en Mi Perfil. Ver el
+   bloque @media al final — no se toca .mp-grid aquí, vive en
+   mi-perfil.css y ya se corrigió ahí. */
 
 .pp-screen {
   min-height: 100%;
@@ -251,4 +260,16 @@
 .pp-hoja-avatar__item--accent {
   color: var(--color-primary);
   font-weight: 600;
+}
+
+/* ── Escritorio: acota el ancho de la pantalla y la centra ───────
+   Mismo criterio y mismo valor que .mp-screen en mi-perfil.css, para
+   que Mi Perfil y Perfil Público midan igual en escritorio y el
+   grid de publicaciones (compartido, definido allá) se vea
+   consistente entre ambas pantallas. */
+@media (min-width: 768px) {
+  .pp-screen {
+    max-width: 620px;
+    margin: 0 auto;
+  }
 }

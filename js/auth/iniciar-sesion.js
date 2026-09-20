@@ -4,9 +4,13 @@
 // Pantalla de inicio de sesión de Comunidad ITVH (web).
 // Réplica funcional de Logins/iniciar_sesion.dart.
 //
-// Qué hace este archivo:
-//   • Pinta el formulario de login (correo/usuario + contraseña)
-//     dentro del contenedor que le entrega el router.
+// Responsabilidades de este archivo:
+//   • Antes de pintar nada, comprueba si ya existe una sesión activa
+//     (persistida por Supabase en localStorage). Si la hay, salta
+//     directo a '/home' sin mostrar el formulario — es el guard de
+//     sesión que router.js delega explícitamente en cada pantalla.
+//   • Si no hay sesión, pinta el formulario de login (correo/usuario
+//     + contraseña) dentro del contenedor que entrega el router.
 //   • Permite autenticarse con correo O nombre de usuario: si el
 //     identificador no contiene '@', primero resuelve el correo
 //     asociado consultando la tabla `perfiles` antes de llamar a
@@ -29,11 +33,33 @@ import { navegarA, registrarRuta } from '../core/router.js';
 import { mostrarToast } from '../core/toast.js';
 
 /**
- * Pinta la pantalla de login dentro de `contenedor` y engancha sus
- * eventos. Es la función que el router invoca al entrar a '/login'.
+ * Punto de entrada que invoca el router al resolver la ruta '/login'.
+ *
+ * No pinta el formulario de inmediato: primero pregunta a Supabase
+ * si ya hay una sesión activa (la llamada es asíncrona porque el SDK
+ * la restaura desde localStorage). Si existe, el usuario nunca
+ * debería ver el login de nuevo — se le redirige directo al Feed.
+ * Solo si no hay sesión se procede a pintar y enganchar el formulario.
+ *
  * @param {HTMLElement} contenedor
  */
 export function renderLogin(contenedor) {
+  supabaseClient.auth.getSession().then(({ data: { session } }) => {
+    if (session) {
+      navegarA('/home');
+      return;
+    }
+    _pintarFormulario(contenedor);
+  });
+}
+
+/**
+ * Construye el markup del formulario de login dentro de `contenedor`
+ * y engancha sus eventos. Separado de `renderLogin` para poder
+ * omitirse por completo cuando ya existe una sesión activa.
+ * @param {HTMLElement} contenedor
+ */
+function _pintarFormulario(contenedor) {
   contenedor.innerHTML = `
     <div class="pantalla-fondo" style="background-image: url('assets/img/tec_villahermosa.png')"></div>
     <div class="pantalla-overlay"></div>
@@ -86,7 +112,12 @@ export function renderLogin(contenedor) {
   _inicializarEventos(contenedor);
 }
 
-/** Engancha el submit del formulario y el toggle de visibilidad de contraseña. */
+/**
+ * Engancha el submit del formulario y el toggle de visibilidad de
+ * la contraseña. Se llama una sola vez, justo después de insertar
+ * el markup en `_pintarFormulario`.
+ * @param {HTMLElement} contenedor
+ */
 function _inicializarEventos(contenedor) {
   const form = contenedor.querySelector('#form-login');
   const passwordInput = contenedor.querySelector('#login-password');
@@ -105,9 +136,9 @@ function _inicializarEventos(contenedor) {
 }
 
 /**
- * Flujo completo de login: resuelve usuario→correo si aplica,
- * autentica con Supabase, valida `estado_cuenta` y navega o
- * bloquea según el resultado. Espejo de `_login()` en
+ * Flujo completo de autenticación: resuelve usuario→correo si
+ * aplica, autentica contra Supabase Auth, valida `estado_cuenta` y
+ * navega o bloquea según el resultado. Espejo de `_login()` en
  * iniciar_sesion.dart.
  * @param {HTMLElement} contenedor
  */
@@ -151,8 +182,9 @@ async function _iniciarSesion(contenedor) {
 
     if (authError) throw authError;
 
-    // Si ya se conocía el estado (login por usuario), se reutiliza;
-    // si se autenticó por correo, se consulta aparte.
+    // Si el estado de la cuenta ya se conocía (login por nombre de
+    // usuario), se reutiliza; si se autenticó por correo directo,
+    // se consulta aparte usando el id recién autenticado.
     let estado = estadoPrecargado;
     if (!estado) {
       const uid = sesionData.user?.id;
@@ -179,7 +211,12 @@ async function _iniciarSesion(contenedor) {
   }
 }
 
-/** Traduce los mensajes de error de Supabase Auth al español. */
+/**
+ * Traduce los mensajes de error crudos de Supabase Auth a texto en
+ * español legible para el usuario final.
+ * @param {string} msg
+ * @returns {string}
+ */
 function _traducirError(msg) {
   const lower = msg.toLowerCase();
 
@@ -198,7 +235,12 @@ function _traducirError(msg) {
   return 'Error al iniciar sesión. Intenta de nuevo.';
 }
 
-/** Alterna el botón de login entre su estado normal y "cargando" (spinner). */
+/**
+ * Alterna el botón de login entre su estado normal y "cargando"
+ * (spinner), deshabilitándolo mientras dura la petición.
+ * @param {HTMLButtonElement} boton
+ * @param {boolean} cargando
+ */
 function _setCargando(boton, cargando) {
   boton.disabled = cargando;
   boton.innerHTML = cargando
@@ -207,9 +249,9 @@ function _setCargando(boton, cargando) {
 }
 
 /**
- * Hoja de bloqueo mostrada cuando la cuenta está suspendida o
- * expulsada. Equivalente al `showModalBottomSheet` no descartable
- * de Flutter: no se cierra con click afuera, solo con "Entendido".
+ * Muestra la hoja de bloqueo para cuentas suspendidas o expulsadas.
+ * Equivalente al `showModalBottomSheet` no descartable de Flutter:
+ * no se cierra con click afuera, solo con el botón "Entendido".
  * @param {'suspendido'|'expulsado'} estado
  */
 function _mostrarPantallaBloqueo(estado) {

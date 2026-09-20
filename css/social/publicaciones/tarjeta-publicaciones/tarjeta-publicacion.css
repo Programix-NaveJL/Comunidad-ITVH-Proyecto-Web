@@ -1,4 +1,11 @@
 /* tarjeta-publicacion.css
+   Ubicación: css/social/publicaciones/tarjeta-publicaciones/tarjeta-publicacion.css
+   (ruta inferida del patrón css/social/... de la galería; ajustar si
+   tu archivo vive en otra carpeta)
+
+   PROPÓSITO
+   Estilos de la tarjeta de publicación (tarjeta-publicacion.js) y de
+   su menú de opciones (⋯).
 
    La tarjeta usa la clase global .glass-card (glassmorphism.css)
    para fondo/sombra/radio — aquí solo se agregan las diferencias de
@@ -7,7 +14,23 @@
    El acento de este archivo (menciones, "y N más", ver más) es
    --color-primary (0xFF0A84FF en Dart), NO --color-accent
    (0xFF00C6FF, cian — ese es el acento fijo de las pantallas de
-   Auth y no se usa aquí). */
+   Auth y no se usa aquí).
+
+   RESPONSABILIDADES
+   - Layout interno de la tarjeta: header, texto expandible, footer,
+     resumen de reacciones y etiquetados.
+   - Menú de opciones (.tp-opciones-overlay / .tp-opciones-menu) con
+     "Reportar" o "Eliminar publicación" y "Cancelar".
+
+   CAMBIOS
+   - ESCRITORIO: .tp-opciones-menu tenía width:100%, así que en
+     monitores grandes la hoja de opciones se estiraba a todo el
+     ancho de la ventana. Se agrega al final un bloque
+     @media (min-width: 768px) que la limita a 620px y la centra
+     (mismo ancho que usan las pantallas de perfil y detalle de
+     publicación). El overlay sigue cubriendo toda la pantalla y, al
+     ser flex, el margin:auto centra la hoja. En celular no cambia
+     nada. */
 
 .tarjeta-publicacion {
   margin: 6px 12px;
@@ -249,4 +272,14 @@
 
 .tp-opciones-menu__item--peligro {
   color: var(--color-danger);
+}
+
+/* ── Escritorio: acota el ancho de la hoja de opciones y la centra ──
+   El overlay es flex (align-items:flex-end), así que el margin:auto
+   horizontal centra la hoja sin tocar su animación (translateY). */
+@media (min-width: 768px) {
+  .tp-opciones-menu {
+    max-width: 620px;
+    margin: 0 auto;
+  }
 }

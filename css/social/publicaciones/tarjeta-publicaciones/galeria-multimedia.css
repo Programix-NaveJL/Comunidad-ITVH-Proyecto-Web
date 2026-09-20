@@ -1,10 +1,21 @@
 /* galeria-multimedia.css
-   Ruta real sugerida: css/social/publicaciones/tarjeta-publicaciones/galeria-multimedia.css
+   Ubicación: css/social/publicaciones/tarjeta-publicaciones/galeria-multimedia.css
+
+   PROPÓSITO
+   Estilos de la cuadrícula de medios de una publicación (1, 2, 3 y
+   4+ medios) y de los overlays de video / "+N".
 
    Los aspect-ratio de abajo son la traducción directa de las
    proporciones fijas del Dart original (lado = ancho/2, altura de
    3-medios = ancho*0.65, etc.), resueltas en CSS puro en vez de
-   medir el contenedor en JS. */
+   medir el contenedor en JS.
+
+   CAMBIOS
+   - Autoplay estilo Facebook (ver video-autoplay.js): mientras un
+     video se reproduce, su celda recibe la clase
+     .galeria-medios__celda--reproduciendo, que oculta el ▶️ central
+     y muestra el botón de sonido (.galeria-medios__silencio) en la
+     esquina inferior izquierda. */
 
 .galeria-medios {
   display: grid;
@@ -106,6 +117,12 @@
   background: rgba(0, 0, 0, 0.45);
   border: 2px solid rgba(255, 255, 255, 0.7);
   font-size: 22px;
+  transition: opacity 0.2s ease;
+}
+
+/* Mientras el video se reproduce (autoplay) el ▶️ central se oculta. */
+.galeria-medios__celda--reproduciendo .galeria-medios__play {
+  opacity: 0;
 }
 
 .galeria-medios__badge {
@@ -127,6 +144,32 @@
 .galeria-medios__badge--duracion {
   bottom: 8px;
   right: 10px;
+}
+
+/* ── Botón de sonido (solo visible mientras el video se reproduce) ── */
+
+.galeria-medios__silencio {
+  position: absolute;
+  bottom: 8px;
+  left: 10px;
+  z-index: 2;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.galeria-medios__celda--reproduciendo .galeria-medios__silencio {
+  display: flex;
 }
 
 /* ── Overlay "+N" (4+ medios) ─────────────────────────────────── */

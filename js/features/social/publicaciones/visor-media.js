@@ -14,6 +14,14 @@
 // original: medios, índice inicial, post, reacción/likes/comentarios
 // iniciales y el callback de reaccionar.
 //
+// IMPORTANTE — el overlay vive fuera del router: se inserta con
+// document.body.appendChild(overlay), no dentro del contenedor que
+// controla router.js. Eso significa que cambiar el hash (navegarA)
+// NO lo hace desaparecer por sí solo — cualquier navegación
+// disparada desde aquí (ir al perfil del autor, por ejemplo) debe
+// llamar a cerrar() explícitamente antes, o el overlay se queda
+// tapando la pantalla que el router acaba de renderizar debajo.
+//
 // DIFERENCIA DE PLATAFORMA — PageView → scroll-snap: el Dart original
 // usa un PageView.builder para el swipe entre medios. En web se logra
 // con un contenedor flex de ancho 100%×n con overflow-x:auto y
@@ -37,16 +45,6 @@
 // (ver iniciarArrastre/moverArrastre más abajo), pero si en pruebas
 // reales un swipe diagonal dispara ambos gestos a la vez, es el
 // punto a revisar primero.
-//
-// DIFERENCIA DE PLATAFORMA — pausar video al ir al perfil: este
-// visor es un overlay independiente del router (mismo patrón que
-// tp-opciones-overlay/feed-hoja-overlay en tarjeta-publicacion.css),
-// no una ruta empujada encima de otra como en Flutter. Se pausa el
-// video antes de navegar al perfil del autor por si el usuario cierra
-// el visor después, pero no existe un "onAlRegresar" real — el
-// router de hash no tiene concepto de "volver" a una pantalla
-// anterior. AVISAR si esto no es el comportamiento esperado una vez
-// exista el módulo Mi Perfil real.
 //
 // Usa:
 //   - js/core/router.js para navegar al perfil del autor.
@@ -131,6 +129,11 @@ export function abrirVisorMedia({
   reproducirVideoDe(indiceActual);
 
   // ── Cerrar ──────────────────────────────────────────────────
+  // Único punto de salida del visor: lo usan tanto el botón "✕"
+  // como cualquier navegación disparada desde la barra inferior
+  // (ver nota IMPORTANTE al inicio del archivo). Pausa los videos,
+  // suelta los listeners globales y remueve el overlay del DOM tras
+  // el fade-out.
 
   function cerrar() {
     overlay.classList.remove('visible');
@@ -356,7 +359,13 @@ export function abrirVisorMedia({
     elAutor?.addEventListener('click', () => {
       const autorId = post.autor_id ?? '';
       const esPropio = autorId === uid;
-      overlay.querySelectorAll('video').forEach((v) => v.pause()); // ver nota de DIFERENCIA DE PLATAFORMA arriba
+      // Se cierra el visor ANTES de navegar: al vivir fuera de #app
+      // (ver nota IMPORTANTE al inicio del archivo), el overlay no
+      // desaparece solo con el cambio de hash — si no se cierra
+      // aquí, se queda tapando la pantalla de perfil que el router
+      // renderiza por debajo. cerrar() ya se encarga de pausar los
+      // videos, así que no hace falta hacerlo aparte.
+      cerrar();
       if (esPropio) {
         if (onMiPerfilTap) onMiPerfilTap();
         else navegarA('/perfil/editar'); // TODO: pendiente módulo Mi Perfil

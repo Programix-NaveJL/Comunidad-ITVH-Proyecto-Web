@@ -1,7 +1,25 @@
 /* mi-perfil-feed-detalle.css
-   Ruta real: css/perfil/mi-perfil/mi-perfil-feed-detalle.css
+   Ubicación: css/perfil/mi-perfil/mi-perfil-feed-detalle.css
    Requiere mi-perfil.css cargado antes (usa .mp-tarjeta,
-   .mp-topbar-detalle, .mp-error-estado y las variables --color-*). */
+   .mp-topbar-detalle, .mp-error-estado y las variables --color-*).
+
+   PROPÓSITO
+   Estilos de la pantalla de detalle del feed de "Mi Perfil"
+   (mi-perfil-feed-detalle.js): barra superior con flecha de regreso
+   y @usuario, tarjeta de header y encabezado de publicaciones.
+
+   RESPONSABILIDADES
+   - Contenedor de pantalla (.mpfd-screen).
+   - Topbar (.mpfd-topbar, .mpfd-volver, .mpfd-titulo).
+   - Tarjeta de header y encabezado de la lista de publicaciones.
+
+   CAMBIOS
+   - ESCRITORIO: .mpfd-screen no tenía límite de ancho, así que en
+     monitores grandes se estiraba a todo el viewport (mismo caso que
+     .mp-screen en mi-perfil.css). Se agrega al final el mismo bloque
+     @media (min-width: 768px) que ya usa mi-perfil.css, con el mismo
+     ancho máximo (620px) para que ambas pantallas queden alineadas.
+     En celular no cambia nada. */
 
 .mpfd-screen {
   min-height: 100%;
@@ -58,4 +76,14 @@
   font-size: 13px;
   font-weight: 600;
   color: var(--color-text-54);
+}
+
+/* ── Escritorio: acota el ancho de la pantalla y la centra ───────
+   Mismo criterio y mismo ancho que el bloque final de mi-perfil.css
+   (.mp-screen). */
+@media (min-width: 768px) {
+  .mpfd-screen {
+    max-width: 620px;
+    margin: 0 auto;
+  }
 }

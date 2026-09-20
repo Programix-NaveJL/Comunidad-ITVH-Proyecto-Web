@@ -63,6 +63,23 @@ import { abrirPublicacion } from '../social/publicaciones/ver-publicacion.js';
 import { renderSeccionDestacadas, activarSeccionDestacadas } from './destacadas/seccion-destacadas.js';
 import { abrirVerDestacada } from './destacadas/ver-destacada.js';
 
+const SELECT_PERFIL_PUBLICO = [
+  'id',
+  'nombre',
+  'nombre_usuario',
+  'cdn_foto_perfil',
+  'carrera',
+  'semestre',
+  'presentacion',
+  'facebook_url',
+  'instagram_url',
+  'tiktok_url',
+  'total_seguidores',
+  'total_seguidos',
+  'estado_cuenta',
+  'creado_en',
+].join(', ');
+
 export function abrirPerfilPublico(usuarioId) {
   navegarA(`/perfil-publico/${usuarioId}`);
 }
@@ -121,7 +138,7 @@ async function render(contenedor, usuarioId) {
 
   async function cargarPerfil() {
     try {
-      const { data, error } = await supabaseClient.from('perfiles').select().eq('id', usuarioId).single();
+      const { data, error } = await supabaseClient.from('perfiles').select(SELECT_PERFIL_PUBLICO).eq('id', usuarioId).single();
       if (error) throw error;
       estado.perfil = data;
     } catch (error) {

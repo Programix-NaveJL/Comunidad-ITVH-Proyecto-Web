@@ -456,3 +456,12 @@
   padding: 24px 20px;
   margin: 0;
 }
+
+@media (min-width: 768px) {
+  .plantel {
+    max-width: 480px;
+    margin: 0 auto;
+    border-left: 1px solid var(--glass-border);
+    border-right: 1px solid var(--glass-border);
+  }
+}

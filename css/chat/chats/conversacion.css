@@ -40,6 +40,16 @@
   background: var(--color-bg);
 }
 
+/* Escritorio: columna centrada tipo Telegram Web */
+@media (min-width: 768px) {
+  .conv-screen {
+    max-width: 480px;
+    margin: 0 auto;
+    border-left: 1px solid var(--glass-border);
+    border-right: 1px solid var(--glass-border);
+  }
+}
+
 /* ── AppBar ─────────────────────────────────────────────────── */
 .conv-appbar {
   display: flex;

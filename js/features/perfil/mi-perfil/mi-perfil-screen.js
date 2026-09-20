@@ -42,6 +42,22 @@ import { renderSeccionDestacadas, activarSeccionDestacadas } from '../destacadas
 import { abrirSeleccionarHistoriasDestacada } from '../destacadas/seleccionar-historias-destacada.js';
 import { abrirVerDestacada } from '../destacadas/ver-destacada.js';
 
+const SELECT_MI_PERFIL = [
+  'id',
+  'nombre',
+  'nombre_usuario',
+  'cdn_foto_perfil',
+  'carrera',
+  'semestre',
+  'presentacion',
+  'facebook_url',
+  'instagram_url',
+  'tiktok_url',
+  'total_seguidores',
+  'total_seguidos',
+  'estado_cuenta',
+  'creado_en',
+].join(', ');
 
 export async function render(contenedor) {
   const estado = {
@@ -81,7 +97,7 @@ export async function render(contenedor) {
 
   async function cargarPerfil() {
     try {
-      const { data: perfil, error } = await supabaseClient.from('perfiles').select().eq('id', uid).single();
+      const { data: perfil, error } = await supabaseClient.from('perfiles').select(SELECT_MI_PERFIL).eq('id', uid).single();
       if (error) throw error;
       const { data: seguidoresRaw } = await supabaseClient.from('seguidores').select('id').eq('seguido_id', uid);
       const { data: seguidosRaw } = await supabaseClient.from('seguidores').select('id').eq('seguidor_id', uid);

@@ -8,8 +8,8 @@
 // ═════════════════════════════════════════════════════════════════
 // Pestaña "Ajustes" de JaguarChat. Puerto web de
 // configuracion_screen.dart (ConfiguracionScreen): archivados,
-// cuenta de Google, copias de seguridad en Google Drive y cierre de
-// sesión.
+// notificaciones push, cuenta de Google, copias de seguridad en
+// Google Drive y cierre de sesión.
 //
 // Se monta desde jaguar-chat-principal.js cuando la sección
 // "ajustes" asoma por primera vez:
@@ -22,13 +22,16 @@
 //   1. CHATS: acceso a "Chats archivados" con badge de conteo. La
 //      lista de archivados se muestra como una vista interna del
 //      propio panel (con su flecha de regreso) y permite desarchivar.
-//   2. CUENTA DE GOOGLE: vincular / desvincular. Es requisito para
+//   2. NOTIFICACIONES: activar / desactivar las notificaciones push
+//      de este navegador (Firebase Cloud Messaging vía push-web.js).
+//   3. CUENTA DE GOOGLE: vincular / desvincular. Es requisito para
 //      las copias de seguridad.
-//   3. COPIAS DE SEGURIDAD: fecha y tamaño del último backup,
+//   4. COPIAS DE SEGURIDAD: fecha y tamaño del último backup,
 //      "Respaldar ahora" y "Restaurar conversaciones" (Google Drive,
 //      formato v2 compatible con la app móvil).
-//   4. CERRAR SESIÓN: desconecta Google, cierra sesión en Supabase y
-//      lleva a /login. El historial local se conserva.
+//   5. CERRAR SESIÓN: quita el token push de este navegador,
+//      desconecta Google, cierra sesión en Supabase y lleva a
+//      /login. El historial local se conserva.
 //
 // ═════════════════════════════════════════════════════════════════
 // DEPENDENCIAS — contrato que este archivo espera de cada una
@@ -49,6 +52,13 @@
 //     • restaurarDesdeGoogleDrive() → Promise<void>
 //     • mensajeErrorGoogle(err) → string legible para el usuario
 //
+//   push-web.js (js/core/push-web.js)
+//     • activarNotificacionesWeb(uid)   → Promise<string | null>
+//         (pide permiso, obtiene el token FCM y lo guarda en
+//          push_tokens; null si no se pudo, ya avisó con un toast)
+//     • reactivarSiHayPermiso(uid)      → Promise<string | null>
+//     • desactivarNotificacionesWeb()   → Promise<void>
+//
 // ═════════════════════════════════════════════════════════════════
 // DIFERENCIAS INTENCIONALES RESPECTO A FLUTTER
 // ═════════════════════════════════════════════════════════════════
@@ -63,8 +73,29 @@
 //   • Como el panel se mantiene vivo entre visitas a la pestaña, los
 //     metadatos (p. ej. el conteo de archivados) se refrescan cada
 //     vez que la pestaña vuelve a mostrarse.
-//   • Se omite la fila de notificaciones del navegador: en Flutter no
-//     existe y aún nada en la web las utiliza.
+//
+// ═════════════════════════════════════════════════════════════════
+// NOTIFICACIONES PUSH — cómo se decide el estado
+// ═════════════════════════════════════════════════════════════════
+//   El navegador expone Notification.permission ('default' |
+//   'granted' | 'denied'). Eso solo dice si el sitio TIENE permiso,
+//   no si ESTA cuenta quiere recibir avisos, así que además se guarda
+//   un indicador por usuario en localStorage (CLAVE_PUSH):
+//
+//     no soportado                 → fila deshabilitada.
+//     denied                       → fila deshabilitada + instrucciones
+//                                    (solo el usuario puede
+//                                    desbloquearlo desde el candado).
+//     default, o granted sin marca → "Activar notificaciones".
+//     granted + marca              → "Activadas" + botón Desactivar.
+//
+//   Desactivar borra el token de push_tokens y de FCM, pero el
+//   navegador NO permite revocar el permiso por código: sigue en
+//   'granted' y por eso hace falta la marca.
+//
+//   Con la marca puesta y el permiso concedido, al montar la pantalla
+//   se vuelve a registrar el token en segundo plano (puede rotar, y
+//   además reengancha el aviso en primer plano tras recargar).
 //
 // ═════════════════════════════════════════════════════════════════
 // CAMBIOS
@@ -73,10 +104,18 @@
 //   - Corregido import: chat-repository.js exporta funciones sueltas
 //     (contarArchivados, obtenerArchivados, toggleArchivado), no un
 //     objeto ChatRepository — causaba SyntaxError al cargar el módulo.
+//   - Sección NOTIFICACIONES: activar / desactivar push web. Al
+//     cerrar sesión se quita el token de este navegador para que el
+//     siguiente usuario no reciba los avisos de esta cuenta.
 
 import { supabaseClient } from '../../../core/supabase-client.js';
 import { navegarA } from '../../../core/router.js';
 import { mostrarToast } from '../../../core/toast.js';
+import {
+  activarNotificacionesWeb,
+  reactivarSiHayPermiso,
+  desactivarNotificacionesWeb,
+} from '../../../core/push-web.js';
 import {
   contarArchivados,
   obtenerArchivados,
@@ -93,6 +132,7 @@ import {
 
 const CLAVE_FECHA = 'jaguarchat_backup_ultima_fecha';
 const CLAVE_TAMANIO = 'jaguarchat_backup_tamanio_bytes';
+const CLAVE_PUSH = 'jaguarchat_push_activo';
 
 // ─────────────────────────────────────────────────────────────────
 // ESTADO DEL MÓDULO (se reinicia en cada render())
@@ -107,6 +147,10 @@ let ultimoBackup = null;   // Date | null
 let tamanioBackup = 0;     // bytes
 let cuentaGoogle = null;   // { email, foto } | null
 
+let permisoNotif = 'default'; // 'default' | 'granted' | 'denied' | 'no-soportado'
+let notifActiva = false;      // permiso concedido + esta cuenta la activó
+let activandoNotif = false;
+
 let vinculando = false;
 let haciendoBackup = false;
 let restaurando = false;
@@ -120,6 +164,9 @@ function reiniciarEstado() {
   ultimoBackup = null;
   tamanioBackup = 0;
   cuentaGoogle = null;
+  permisoNotif = 'default';
+  notifActiva = false;
+  activandoNotif = false;
   vinculando = false;
   haciendoBackup = false;
   restaurando = false;
@@ -145,6 +192,12 @@ export async function render(panel) {
 
   await cargarMetadatos();
   pintar();
+
+  // Si esta cuenta ya había activado las notificaciones, se vuelve a
+  // registrar el token en segundo plano (sin preguntar de nuevo).
+  if (notifActiva && uid) {
+    reactivarSiHayPermiso(uid).catch(() => { /* ya avisó push-web.js */ });
+  }
 }
 
 // El panel sigue vivo mientras el usuario está en otra sección de
@@ -158,7 +211,7 @@ function observarVisibilidad(panel) {
 }
 
 async function refrescarAlMostrar() {
-  if (vista !== 'principal' || vinculando || haciendoBackup || restaurando) return;
+  if (vista !== 'principal' || vinculando || haciendoBackup || restaurando || activandoNotif) return;
   await cargarMetadatos();
   if (vista === 'principal') pintar();
 }
@@ -179,12 +232,27 @@ function escribirLocal(clave, valor) {
   try { localStorage.setItem(clave, valor); } catch { /* almacenamiento no disponible */ }
 }
 
+// Permiso actual del navegador para notificaciones. 'no-soportado'
+// cubre navegadores sin Notification o sin service workers (las
+// push web necesitan ambos), y contextos no seguros (http fuera de
+// localhost).
+function leerPermisoNotif() {
+  if (!('Notification' in window) || !('serviceWorker' in navigator)) return 'no-soportado';
+  return Notification.permission;
+}
+
+function refrescarEstadoNotif() {
+  permisoNotif = leerPermisoNotif();
+  notifActiva = permisoNotif === 'granted' && leerLocal(claveUsuario(CLAVE_PUSH)) === '1';
+}
+
 async function cargarMetadatos() {
   const fechaRaw = leerLocal(claveUsuario(CLAVE_FECHA));
   const fecha = fechaRaw ? new Date(fechaRaw) : null;
   ultimoBackup = fecha && !Number.isNaN(fecha.getTime()) ? fecha : null;
   tamanioBackup = Number(leerLocal(claveUsuario(CLAVE_TAMANIO)) || 0);
   cuentaGoogle = cuentaGoogleGuardada();
+  refrescarEstadoNotif();
 
   try {
     totalArchivados = await contarArchivados();
@@ -225,8 +293,66 @@ function fila({ accion, icono, etiqueta, cargando = false, deshabilitada = false
   `;
 }
 
+// Contenido de la tarjeta de NOTIFICACIONES y la nota que la sigue,
+// según el estado (ver "NOTIFICACIONES PUSH" en la cabecera).
+function bloqueNotificaciones() {
+  if (permisoNotif === 'no-soportado') {
+    return {
+      tarjeta: fila({
+        accion: 'notif-no-disponible',
+        icono: '🔕',
+        etiqueta: 'No disponibles en este navegador',
+        deshabilitada: true,
+        extra: '<span></span>',
+      }),
+      nota: 'Este navegador no admite notificaciones push. Prueba con Chrome, Edge o Firefox, y recuerda que necesitan una conexión segura (HTTPS).',
+    };
+  }
+
+  if (permisoNotif === 'denied') {
+    return {
+      tarjeta: fila({
+        accion: 'notif-bloqueadas',
+        icono: '🔕',
+        etiqueta: 'Bloqueadas en el navegador',
+        deshabilitada: true,
+        extra: '<span></span>',
+      }),
+      nota: 'Bloqueaste las notificaciones de este sitio. Para activarlas, pulsa el candado junto a la dirección, cambia "Notificaciones" a "Permitir" y recarga la página.',
+    };
+  }
+
+  if (notifActiva) {
+    return {
+      tarjeta: `
+        <div class="jca-cuenta">
+          <span class="jca-cuenta__avatar">🔔</span>
+          <span class="jca-cuenta__info">
+            <span class="jca-cuenta__titulo">Notificaciones activadas</span>
+            <span class="jca-cuenta__email">En este navegador</span>
+          </span>
+          <button type="button" class="jca-desvincular" data-accion="desactivar-notif">Desactivar</button>
+        </div>
+      `,
+      nota: 'Recibirás avisos de mensajes, reacciones, comentarios y seguidores aunque tengas la pestaña en segundo plano.',
+    };
+  }
+
+  return {
+    tarjeta: fila({
+      accion: 'activar-notif',
+      icono: '🔔',
+      etiqueta: 'Activar notificaciones',
+      cargando: activandoNotif,
+      deshabilitada: activandoNotif,
+    }),
+    nota: 'Te avisaremos de mensajes, reacciones, comentarios y seguidores aunque tengas la pestaña en segundo plano.',
+  };
+}
+
 function plantillaPrincipal() {
   const ocupado = haciendoBackup || restaurando;
+  const notif = bloqueNotificaciones();
 
   const bloqueCuenta = cuentaGoogle
     ? `
@@ -260,6 +386,15 @@ function plantillaPrincipal() {
           extra: totalArchivados > 0 ? `<span class="jca-badge">${totalArchivados}</span>` : '',
         })}
       </div>
+    </section>
+
+    <section class="jca-bloque">
+      <p class="jca-seccion">
+        NOTIFICACIONES
+        <span class="jca-seccion__sub">Avisos push en este navegador</span>
+      </p>
+      <div class="jca-tarjeta">${notif.tarjeta}</div>
+      <p class="jca-nota">${notif.nota}</p>
     </section>
 
     <section class="jca-bloque">
@@ -357,6 +492,8 @@ function alClick(evento) {
     case 'abrir-archivados': abrirArchivados(); break;
     case 'volver-archivados': cerrarArchivados(); break;
     case 'desarchivar': desarchivar(el.dataset.id); break;
+    case 'activar-notif': activarNotificaciones(); break;
+    case 'desactivar-notif': desactivarNotificaciones(); break;
     case 'vincular': vincularCuenta(); break;
     case 'desvincular': desvincularCuenta(); break;
     case 'respaldar': respaldarAhora(); break;
@@ -404,6 +541,57 @@ async function desarchivar(id) {
     console.error('ajustes-chat – desarchivar:', error);
     mostrarToast('No se pudo desarchivar el chat', 'error');
   }
+}
+
+// ── Notificaciones push ─────────────────────────────────────────
+
+// Debe dispararse desde un clic del usuario: el navegador solo deja
+// mostrar el aviso de permiso tras una interacción. push-web.js se
+// encarga del permiso, el service worker, el token y guardarlo en
+// push_tokens; devuelve null (y avisa con su propio toast) si algo
+// falla.
+async function activarNotificaciones() {
+  if (activandoNotif || !uid) return;
+  activandoNotif = true;
+  pintar();
+
+  try {
+    const token = await activarNotificacionesWeb(uid);
+    if (token) {
+      escribirLocal(claveUsuario(CLAVE_PUSH), '1');
+      mostrarToast('Notificaciones activadas ✓', 'success');
+    }
+  } catch (error) {
+    console.error('ajustes-chat – activar notificaciones:', error);
+    mostrarToast('No se pudieron activar las notificaciones', 'error');
+  } finally {
+    activandoNotif = false;
+    refrescarEstadoNotif();
+    if (vista === 'principal') pintar();
+  }
+}
+
+async function desactivarNotificaciones() {
+  const ok = await confirmar({
+    titulo: 'Desactivar notificaciones',
+    cuerpo: 'Dejarás de recibir avisos en este navegador. El permiso del navegador se conserva, así que podrás volver a activarlas cuando quieras.',
+    accion: 'Desactivar',
+    peligro: true,
+  });
+  if (!ok) return;
+
+  try {
+    // Borra el token de push_tokens y de FCM. No revoca el permiso
+    // del navegador (eso solo lo puede hacer el usuario).
+    await desactivarNotificacionesWeb();
+    try { localStorage.removeItem(claveUsuario(CLAVE_PUSH)); } catch { /* sin almacenamiento */ }
+    mostrarToast('Notificaciones desactivadas', 'success');
+  } catch (error) {
+    console.error('ajustes-chat – desactivar notificaciones:', error);
+    mostrarToast('No se pudieron desactivar las notificaciones', 'error');
+  }
+  refrescarEstadoNotif();
+  if (vista === 'principal') pintar();
 }
 
 // ── Cuenta de Google ────────────────────────────────────────────
@@ -517,6 +705,14 @@ async function cerrarSesionUsuario() {
   if (!ok) return;
 
   try {
+    // El token push se quita ANTES de cerrar sesión: borrarlo de
+    // push_tokens requiere una sesión activa. Sin esto, el siguiente
+    // usuario de este navegador seguiría recibiendo los avisos de
+    // esta cuenta. La marca CLAVE_PUSH se conserva a propósito: si
+    // la misma cuenta vuelve a entrar, se reactiva sola (ver render).
+    // desactivarNotificacionesWeb() captura sus propios errores.
+    if (notifActiva) await desactivarNotificacionesWeb();
+
     // Se suelta también la cuenta de Google: en un navegador compartido
     // no debe quedar vinculada a la sesión del siguiente usuario.
     await desvincularGoogle();

@@ -72,6 +72,19 @@ const CARRERAS = [
 
 const SEMESTRES = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
+const SELECT_EDITAR_PERFIL = [
+  'id',
+  'nombre',
+  'nombre_usuario',
+  'cdn_foto_perfil',
+  'carrera',
+  'semestre',
+  'presentacion',
+  'facebook_url',
+  'instagram_url',
+  'tiktok_url',
+].join(', ');
+
 // Misma regla que en crear-cuenta.js (registro) y en el Dart
 // original: letras sin acentos/ñ, números, guion bajo y punto, sin
 // espacios; el punto no va al inicio, al final ni repetido; 3–20
@@ -122,7 +135,7 @@ export async function render(contenedor) {
 
   async function cargarPerfil() {
     try {
-      const { data: perfil, error } = await supabaseClient.from('perfiles').select().eq('id', uid).single();
+      const { data: perfil, error } = await supabaseClient.from('perfiles').select(SELECT_EDITAR_PERFIL).eq('id', uid).single();
       if (error) throw error;
 
       estado.perfil = perfil;

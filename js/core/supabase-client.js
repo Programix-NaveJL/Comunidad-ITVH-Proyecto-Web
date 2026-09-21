@@ -30,12 +30,17 @@ const SUPABASE_ANON_KEY =
   '.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRscmhieGhybnpucmhudnJ5emNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3MzU0NTMsImV4cCI6MjA5NzMxMTQ1M30' +
   '.3PI8GpF0JCs78RC5ehnnb59Pr5YDNPFYEoAastslv-8';
 
-// `detectSessionInUrl: true` es lo que permite que, cuando el
-// usuario abre el enlace de recuperación de contraseña que Supabase
-// envía por correo, el propio SDK detecte el token en la URL y
-// dispare el evento 'PASSWORD_RECOVERY' automáticamente — sin esto,
-// recuperar-contrasena.js tendría que parsear el hash de la URL a
-// mano (ver ese archivo para el listener correspondiente).
+// Opciones de autenticación:
+//   • flowType: 'pkce' — los enlaces de correo (recuperar contraseña,
+//     confirmar cuenta) regresan a la web con `?code=...` ANTES del
+//     `#`, en vez de meter el token en el fragmento. Esto evita que
+//     el token choque con las rutas por hash del router
+//     (#/nueva-contrasena). El SDK canjea el código automáticamente.
+//     Requisito: el enlace debe abrirse en el MISMO navegador desde
+//     el que se pidió el correo (el SDK guarda ahí un verificador).
+//   • detectSessionInUrl — hace que el SDK detecte ese código al
+//     cargar la página y deje una sesión temporal válida; recuperar-
+//     contrasena.js la usa para llamar a updateUser().
 export const supabaseClient = supabase.createClient(
   SUPABASE_URL,
   SUPABASE_ANON_KEY,
@@ -43,6 +48,7 @@ export const supabaseClient = supabase.createClient(
     auth: {
       persistSession: true,
       detectSessionInUrl: true,
+      flowType: 'pkce',
     },
   }
 );

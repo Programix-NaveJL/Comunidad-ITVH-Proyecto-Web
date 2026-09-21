@@ -13,34 +13,68 @@
 //      con opción de reenviar.
 //
 //  Pantalla 2 — ruta '/nueva-contrasena' (renderNuevaContrasena)
-//    • El usuario llega aquí desde el enlace del correo. El SDK de
-//      Supabase (configurado con `detectSessionInUrl: true` en
-//      core/supabase-client.js) detecta el token en la URL y deja
-//      al usuario con una sesión temporal válida solo para cambiar
-//      su contraseña.
+//    • El usuario llega aquí desde el enlace del correo. La URL
+//      queda así: index.html?code=...#/nueva-contrasena
+//    • El SDK de Supabase (configurado con flowType: 'pkce' y
+//      detectSessionInUrl: true en core/supabase-client.js) canjea
+//      ese `code` por una sesión temporal, válida solo para cambiar
+//      la contraseña, y emite el evento 'PASSWORD_RECOVERY'.
+//    • Si no hay sesión (enlace vencido, ya usado, o abierto en otro
+//      navegador), se muestra una vista de "enlace no válido".
 //    • El usuario escribe y confirma su nueva contraseña.
 //    • `updateUser()` aplica el cambio y se cierra esa sesión
 //      temporal para forzar un login limpio con las credenciales
 //      nuevas — igual que en Flutter.
 //
+// Por qué PKCE: el router de la app usa rutas por hash (#/...). En el
+// flujo implícito el token también viaja en el hash y choca con la
+// ruta. Con PKCE el código llega en la query (?code=), antes del #.
+// Requisito de PKCE: el enlace debe abrirse en el MISMO navegador
+// desde el que se pidió el correo.
+//
 // Configuración requerida en el proyecto de Supabase:
-//   • Auth → URL Configuration → Redirect URLs debe incluir la URL
-//     pública del sitio (ej. https://tu-dominio.com/*), ya que aquí
-//     no se usa un esquema de deep link como en la app móvil, sino
-//     la propia URL de la página web.
+//   • Auth → URL Configuration → Redirect URLs debe incluir la URL de
+//     la web (con comodín), por ejemplo:
+//       http://127.0.0.1:5500/**
+//       https://programix-navejl.github.io/Comunidad-ITVH-Proyecto-Web/**
+//     Además de comunidaditvh://login-callback, que usa la app móvil.
+//     Si la URL no está en la lista, Supabase ignora `redirectTo` y
+//     usa el Site URL.
 //
 // Dependencias: core/supabase-client.js, core/router.js,
 // core/toast.js.
+//
+// ORDEN DEL ARCHIVO
+//   1. Constantes y aviso de recuperación
+//   2. Pantalla 1 — solicitar enlace
+//   3. Pantalla 2 — nueva contraseña
+//   4. Utilidades compartidas
+//   5. Registro de rutas
 // ═════════════════════════════════════════════════════════════════
 
 import { supabaseClient } from '../core/supabase-client.js';
 import { navegarA, registrarRuta } from '../core/router.js';
 import { mostrarToast } from '../core/toast.js';
 
+// ─────────────────────────────────────────────────────────────────
+// 1. CONSTANTES Y AVISO DE RECUPERACIÓN
+// ─────────────────────────────────────────────────────────────────
+
 const REGEX_CORREO = /^[\w\-.]+@[\w\-.]+\.\w+$/;
 
+// Cuando el SDK termina de canjear el código del correo emite
+// 'PASSWORD_RECOVERY'. Aquí se lleva al usuario al formulario de
+// nueva contraseña, por si otro módulo (p. ej. el que decide a dónde
+// ir al detectar una sesión) lo estuviera mandando a '/home'.
+// Solo navega si todavía no está en esa ruta, para no repintarla.
+supabaseClient.auth.onAuthStateChange((evento) => {
+  if (evento === 'PASSWORD_RECOVERY' && !window.location.hash.startsWith('#/nueva-contrasena')) {
+    navegarA('/nueva-contrasena');
+  }
+});
+
 // ─────────────────────────────────────────────────────────────────
-// PANTALLA 1 — SOLICITAR ENLACE
+// 2. PANTALLA 1 — SOLICITAR ENLACE
 // ─────────────────────────────────────────────────────────────────
 
 /**
@@ -111,7 +145,8 @@ async function _enviarEnlace(contenedor) {
 
   try {
     // `redirectTo` apunta de vuelta a esta misma app, en la ruta que
-    // muestra el formulario de nueva contraseña.
+    // muestra el formulario de nueva contraseña. Debe coincidir con
+    // una de las Redirect URLs permitidas en Supabase.
     const redirectTo = `${window.location.origin}${window.location.pathname}#/nueva-contrasena`;
 
     const { error } = await supabaseClient.auth.resetPasswordForEmail(correo, { redirectTo });
@@ -134,8 +169,9 @@ function _vistaConfirmacion(correo) {
       </div>
       <h1 class="auth-titulo" style="margin-top: 8px;">¡Correo enviado!</h1>
       <p class="auth-subtitulo" style="line-height:1.6;">
-        Revisa tu bandeja de entrada en<br /><strong>${correo}</strong><br /><br />
-        Toca el enlace del correo para establecer tu nueva contraseña.
+        Revisa tu bandeja de entrada en<br /><strong>${_escaparHtml(correo)}</strong><br /><br />
+        Toca el enlace del correo para establecer tu nueva contraseña.<br />
+        <small>Ábrelo en este mismo navegador.</small>
       </p>
       <button class="btn-primary" id="recuperar-volver" style="margin-top: 12px;">
         Volver al inicio de sesión
@@ -171,14 +207,14 @@ function _traducirErrorEnvio(msg) {
 }
 
 // ─────────────────────────────────────────────────────────────────
-// PANTALLA 2 — NUEVA CONTRASEÑA
+// 3. PANTALLA 2 — NUEVA CONTRASEÑA
 // ─────────────────────────────────────────────────────────────────
 
 /**
  * Pinta el formulario de nueva contraseña. El usuario llega aquí
  * únicamente desde el enlace del correo, ya con una sesión temporal
- * de recuperación activa (ver nota de `detectSessionInUrl` en
- * core/supabase-client.js).
+ * de recuperación (ver nota de PKCE en core/supabase-client.js).
+ * Si esa sesión no existe, cambia a la vista de "enlace no válido".
  * @param {HTMLElement} contenedor
  */
 export function renderNuevaContrasena(contenedor) {
@@ -195,6 +231,40 @@ export function renderNuevaContrasena(contenedor) {
   `;
 
   _inicializarFormularioNuevaContrasena(contenedor);
+  _verificarSesionRecuperacion(contenedor);
+}
+
+/**
+ * Comprueba que exista la sesión temporal del enlace. `getSession()`
+ * espera a que el SDK termine de canjear el código de la URL, así
+ * que aquí ya se sabe si el enlace fue válido. Si no lo fue, se
+ * reemplaza el formulario por la vista de enlace no válido.
+ */
+async function _verificarSesionRecuperacion(contenedor) {
+  const { data: { session } } = await supabaseClient.auth.getSession();
+  if (session) return;
+
+  contenedor.querySelector('#nueva-contrasena-tarjeta').innerHTML = _vistaEnlaceInvalido();
+  contenedor.querySelector('#nueva-solicitar-otro').addEventListener('click', () => navegarA('/recuperar'));
+}
+
+/** Marcado de la vista mostrada cuando el enlace no dejó sesión. */
+function _vistaEnlaceInvalido() {
+  return `
+    <div style="display:flex; flex-direction:column; align-items:center; text-align:center;">
+      <div class="bloqueo-icono" style="background: rgba(255,149,0,0.15); border-color: rgba(255,149,0,0.4);">
+        <span style="font-size: 32px;">⏳</span>
+      </div>
+      <h1 class="auth-titulo" style="margin-top: 8px;">Enlace no válido</h1>
+      <p class="auth-subtitulo" style="line-height:1.6;">
+        El enlace expiró, ya se usó o se abrió en otro navegador.<br />
+        Solicita uno nuevo y ábrelo en el mismo navegador.
+      </p>
+      <button class="btn-primary" id="nueva-solicitar-otro" style="margin-top: 16px;">
+        Solicitar un enlace nuevo
+      </button>
+    </div>
+  `;
 }
 
 /** Marcado del formulario de nueva contraseña. */
@@ -262,6 +332,11 @@ async function _guardarNuevaContrasena(contenedor) {
   if (nueva.length < 8) return mostrarToast('Mínimo 8 caracteres');
   if (confirmar !== nueva) return mostrarToast('Las contraseñas no coinciden');
 
+  // Espera a que el SDK termine de canjear el código del enlace; sin
+  // sesión, updateUser() fallaría con un error poco claro.
+  const { data: { session } } = await supabaseClient.auth.getSession();
+  if (!session) return mostrarToast('El enlace expiró o ya se usó. Solicita uno nuevo.');
+
   _setCargando(boton, true, 'Guardar contraseña');
 
   try {
@@ -315,7 +390,7 @@ function _traducirErrorActualizacion(msg) {
 }
 
 // ─────────────────────────────────────────────────────────────────
-// UTILIDAD COMPARTIDA POR AMBAS PANTALLAS
+// 4. UTILIDADES COMPARTIDAS POR AMBAS PANTALLAS
 // ─────────────────────────────────────────────────────────────────
 
 /** Alterna un botón entre su estado normal y "cargando" (spinner). */
@@ -323,6 +398,17 @@ function _setCargando(boton, cargando, textoNormal) {
   boton.disabled = cargando;
   boton.innerHTML = cargando ? '<span class="btn-spinner"></span>' : textoNormal;
 }
+
+/** Escapa texto para insertarlo de forma segura dentro de HTML. */
+function _escaparHtml(texto) {
+  const div = document.createElement('div');
+  div.textContent = texto ?? '';
+  return div.innerHTML;
+}
+
+// ─────────────────────────────────────────────────────────────────
+// 5. REGISTRO DE RUTAS
+// ─────────────────────────────────────────────────────────────────
 
 // Se registran ambas rutas apenas se importa el módulo.
 registrarRuta('/recuperar', renderRecuperar);

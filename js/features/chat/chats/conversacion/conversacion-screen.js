@@ -14,10 +14,11 @@
 //   import('./conversacion/conversacion-screen.js')
 //     .then(({ render }) => render(contenedor, { otroUsuarioId, ... }));
 //
-// AJUSTAR: la navegación real a "Ver perfil" depende de la función
-// de routing de perfil-utils.js, que no se confirmó en este archivo
-// — se usa un hash de ruta razonable (#/perfil/<id>) como valor por
-// defecto; cambia SOLO la línea marcada con "AJUSTAR RUTA" si difiere.
+// CORREGIDO: "Ver perfil" ya no arma el hash de ruta a mano
+// (`#/perfil/<id>`, que no coincidía con la ruta real registrada en
+// perfil-publico.js). Ahora se usa directamente abrirPerfilPublico(),
+// la misma función que ya usa tarjeta-publicacion.js, para mantener
+// una sola fuente de verdad sobre la convención de rutas.
 // ═════════════════════════════════════════════════════════════════
 
 import { supabaseClient } from '../../../../core/supabase-client.js';
@@ -29,6 +30,7 @@ import { plantillaBurbuja, activarBurbuja } from './burbuja-mensaje.js';
 import { montarComposerBar } from './composer-bar.js';
 import { mostrarMenuMensaje, mostrarEditarMensaje, mostrarConfirmacion, plantillaFechaSeparador, plantillaEmptyConversacion, escaparHtml } from './conversacion-sheets.js';
 import { mostrarPerfilPreview } from '../perfil-preview-sheet.js';
+import { abrirPerfilPublico } from '../../../perfil/perfil-publico.js';
 
 export async function render(contenedor, { otroUsuarioId, otroNombre, otroNombreUsuario = null, otroAvatarUrl = null, contextoObjeto = null }) {
   const {
@@ -78,8 +80,7 @@ export async function render(contenedor, { otroUsuarioId, otroNombre, otroNombre
       nombreUsuario: otroNombreUsuario,
       avatarUrl: otroAvatarUrl,
       onVerPerfil: () => {
-        // AJUSTAR RUTA si perfil-utils.js expone otra convención.
-        window.location.hash = `#/perfil/${otroUsuarioId}`;
+        abrirPerfilPublico(otroUsuarioId);
       },
     });
   });

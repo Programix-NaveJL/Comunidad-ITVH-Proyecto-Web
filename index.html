@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<!--
+  ═════════════════════════════════════════════════════════════════
+  index.html
+
+  Página de arranque de la versión web de Comunidad TecNM Villahermosa.
+  Es el punto de entrada que sirve Flutter: muestra el splash de
+  bienvenida, carga los SDK de terceros que necesitan algunos plugins
+  y, por último, arranca la aplicación.
+
+  Contenido:
+    • Base de rutas        — ruta desde la que se sirve la app
+    • Metadatos            — descripción, compatibilidad y viewport
+    • iOS                  — etiquetas e ícono para "Añadir a pantalla de inicio"
+    • Identidad            — favicon, título y manifiesto de la app web
+    • Splash de bienvenida — estilos y script generados por flutter_native_splash
+    • SDK de terceros      — Passkeys (bundle.js local) y Google Maps JavaScript API
+    • Cuerpo               — imágenes del splash y arranque de Flutter
+
+  Ubicación: web/
+  ═════════════════════════════════════════════════════════════════
+-->
+<html>
+<head>
+
+  <!-- ─────────────────────────────────────────────────────────────
+       BASE DE RUTAS
+       Flutter sustituye el marcador del atributo href de la etiqueta
+       siguiente por el valor de `--base-href` al compilar
+       (`flutter build web`). No editar ese marcador: al publicar en un
+       subdirectorio, la ruta debe empezar y terminar con "/".
+       ───────────────────────────────────────────────────────────── -->
+  <base href="/Comunidad-ITVH-Proyecto-Web/">
+
+  <!-- ─────────────────────────────────────────────────────────────
+       METADATOS
+       Codificación, compatibilidad con navegadores y descripción de
+       la app para buscadores.
+       ───────────────────────────────────────────────────────────── -->
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="Comunidad estudiantil del Tec de Villahermosa">
+
+  <!-- ─────────────────────────────────────────────────────────────
+       iOS
+       Etiquetas e ícono que usa Safari al añadir la app a la pantalla
+       de inicio: modo de aplicación, barra de estado, nombre y ícono.
+       ───────────────────────────────────────────────────────────── -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="comunidad_tecnm">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- ─────────────────────────────────────────────────────────────
+       IDENTIDAD
+       Favicon, título de la pestaña y manifiesto con el nombre, los
+       íconos y los colores de la app web.
+       ───────────────────────────────────────────────────────────── -->
+  <link rel="icon" type="image/png" href="favicon.png">
+  <title>comunidad_tecnm</title>
+  <link rel="manifest" href="manifest.json">
+
+  <!-- ─────────────────────────────────────────────────────────────
+       VIEWPORT
+       Flutter aplica su propia configuración de viewport y reemplaza
+       esta etiqueta al arrancar (por eso la consola muestra un aviso
+       informativo).
+       ───────────────────────────────────────────────────────────── -->
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+
+  <!-- ─────────────────────────────────────────────────────────────
+       SPLASH DE BIENVENIDA · ESTILOS
+       Bloque generado por flutter_native_splash a partir de la
+       sección `flutter_native_splash` del pubspec.yaml; se regenera
+       con `dart run flutter_native_splash:create`. Define el fondo
+       (claro u oscuro según el sistema) y la posición del logo y de
+       la marca.
+       ───────────────────────────────────────────────────────────── -->
+  <style id="splash-screen-style">
+    html {
+      height: 100%
+    }
+
+    body {
+      margin: 0;
+      min-height: 100%;
+      background-color: #F2F2F7;
+          background-size: 100% 100%;
+    }
+
+    .center {
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+
+    .contain {
+      display:block;
+      width:100%; height:100%;
+      object-fit: contain;
+    }
+
+    .stretch {
+      display:block;
+      width:100%; height:100%;
+    }
+
+    .cover {
+      display:block;
+      width:100%; height:100%;
+      object-fit: cover;
+    }
+
+    .bottom {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      -ms-transform: translate(-50%, 0);
+      transform: translate(-50%, 0);
+    }
+
+    .bottomLeft {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+
+    .bottomRight {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #050D2E;
+          }
+    }
+  </style>
+
+  <!-- ─────────────────────────────────────────────────────────────
+       SPLASH DE BIENVENIDA · SCRIPT
+       Retira el splash y la marca cuando Flutter termina de pintar el
+       primer frame (la invoca FlutterNativeSplash.remove()).
+       ───────────────────────────────────────────────────────────── -->
+  <script id="splash-screen-script">
+    function removeSplashFromWeb() {
+      document.getElementById("splash")?.remove();
+      document.getElementById("splash-branding")?.remove();
+      document.body.style.background = "transparent";
+    }
+  </script>
+
+  <!-- ─────────────────────────────────────────────────────────────
+       SDK DE TERCEROS · PASSKEYS
+       Lo exige el plugin passkeys_web (dependencia de otro paquete);
+       sin este script la app se detiene al arrancar. El archivo
+       bundle.js está en esta misma carpeta (web/).
+       ───────────────────────────────────────────────────────────── -->
+  <script src="bundle.js" type="application/javascript"></script>
+
+  <!-- ─────────────────────────────────────────────────────────────
+       SDK DE TERCEROS · GOOGLE MAPS
+       Lo requiere google_maps_flutter en web (mapa interactivo del
+       campus). La clave es pública por diseño: su protección está en
+       Google Cloud Console, donde está restringida a la API Maps
+       JavaScript y a los sitios web autorizados (referentes HTTP).
+       Todo dominio desde el que se sirva la app debe estar en esa lista.
+       ───────────────────────────────────────────────────────────── -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBaX-sGijO0L1nmfV_w1le5iUDcCpi9qqo"></script>
+</head>
+<body>
+
+<!-- ─────────────────────────────────────────────────────────────
+     SPLASH DE BIENVENIDA · MARCA
+     Imagen de la marca (Programix NaveJL) al pie de la pantalla, en
+     versión clara u oscura según el tema del sistema.
+     ───────────────────────────────────────────────────────────── -->
+<picture id="splash-branding">
+  <source srcset="splash/img/branding-1x.png 1x, splash/img/branding-2x.png 2x, splash/img/branding-3x.png 3x, splash/img/branding-4x.png 4x" media="(prefers-color-scheme: light)">
+  <source srcset="splash/img/branding-dark-1x.png 1x, splash/img/branding-dark-2x.png 2x, splash/img/branding-dark-3x.png 3x, splash/img/branding-dark-4x.png 4x" media="(prefers-color-scheme: dark)">
+  <img class="bottom" aria-hidden="true" src="splash/img/branding-1x.png" alt="">
+</picture>
+
+<!-- ─────────────────────────────────────────────────────────────
+     SPLASH DE BIENVENIDA · LOGO
+     Logo centrado de la app, en versión clara u oscura según el
+     tema del sistema.
+     ───────────────────────────────────────────────────────────── -->
+<picture id="splash">
+  <source srcset="splash/img/light-1x.png 1x, splash/img/light-2x.png 2x, splash/img/light-3x.png 3x, splash/img/light-4x.png 4x" media="(prefers-color-scheme: light)">
+  <source srcset="splash/img/dark-1x.png 1x, splash/img/dark-2x.png 2x, splash/img/dark-3x.png 3x, splash/img/dark-4x.png 4x" media="(prefers-color-scheme: dark)">
+  <img class="center" aria-hidden="true" src="splash/img/light-1x.png" alt="">
+</picture>
+
+<!-- ─────────────────────────────────────────────────────────────
+     ARRANQUE DE FLUTTER
+     Carga el motor y monta la aplicación. `flutter_bootstrap.js` lo
+     genera Flutter al compilar; se carga en modo asíncrono, después
+     de los SDK de terceros del <head>.
+     Documentación: https://docs.flutter.dev/platform-integration/web/initialization
+     ───────────────────────────────────────────────────────────── -->
+<script src="flutter_bootstrap.js" async=""></script>
+
+</body>
+</html>

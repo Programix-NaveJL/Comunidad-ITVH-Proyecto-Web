@@ -1,0 +1,1435 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-92.90265, 18.023656, 0],
+            [-92.902701, 18.023294, 0],
+            [-92.902357, 18.023248, 0],
+            [-92.902313, 18.02361, 0],
+            [-92.90265, 18.023656, 0]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Centro de Información",
+        "description": {
+          "@type": "html",
+          "value": "<ul><li>Centro de Información y Recepción<br></li><li>Depto. Centro de Información<br></li><li>Coordinación de Lenguas Extranjeras<br></li><li>Áreas de Lectura, Consulta y Hemeroteca<br></li><li>Salas Especiales (Yokot'an y Carlos Pellicer Cámara)<br></li><li>Sala Multimedia y Auditorio<br></li><li>Aulas CI-1 a CI-3 y Espacio CI<br></li><li>Baños de Hombres y Mujeres (Planta Baja y Planta Alta)<br></li></ul><div><br></div>"
+        },
+        "styleUrl": "#__managed_style_14223C0A7442578DD8AF",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=1976d2&id=2000&scale=4"
+      },
+      "id": "0C932482273FE4DEBA74"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-92.903071, 18.023724, 0],
+            [-92.902805, 18.02368, 0],
+            [-92.90277, 18.023924, 0],
+            [-92.903023, 18.023968, 0],
+            [-92.903071, 18.023724, 0]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Centro de Cómputo",
+        "description": {
+          "@type": "html",
+          "value": "<ul><li>Depto. Sistemas y Computación<br></li><li>Depto. y Jefatura del Centro de Cómputo<br></li><li>Salas de Cómputo S1 a S4<br></li><li>Laboratorios de Redes, Robótica y Electrónica<br></li><li>Cubículos Docentes CC<br></li><li>Baños de Hombres y Mujeres</li></ul><br><div><br></div>"
+        },
+        "styleUrl": "#__managed_style_07188D693E42578DD8AC",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=1976d2&id=2000&scale=4"
+      },
+      "id": "050DDE8FE13FE4E52937"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-92.903552, 18.024108, 0],
+            [-92.903258, 18.024061, 0],
+            [-92.903252, 18.024179, 0],
+            [-92.903531, 18.024225, 0],
+            [-92.903552, 18.024108, 0]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Edificio C",
+        "description": {
+          "@type": "html",
+          "value": "<div>Edificio de Informática</div>"
+        },
+        "styleUrl": "#__managed_style_07188D693E42578DD8AC",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=1976d2&id=2000&scale=4"
+      },
+      "id": "09C75059853FE4E6EE41"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-92.903693, 18.023795, 0],
+            [-92.903521, 18.023767, 0],
+            [-92.903517, 18.023876, 0],
+            [-92.903682, 18.023909, 0],
+            [-92.903693, 18.023795, 0]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Sala de Arte y Cultura",
+        "styleUrl": "#__managed_style_05B63807A442578DD8A9",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=1976d2&id=2000&scale=4"
+      },
+      "id": "0A89ACBA1A3FE4E7A2B9"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-92.903498, 18.023597, 0],
+            [-92.903264, 18.023566, 0],
+            [-92.903234, 18.023698, 0],
+            [-92.903484, 18.023734, 0],
+            [-92.903498, 18.023597, 0]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Edificio G",
+        "description": {
+          "@type": "html",
+          "value": "<div>Almacén, mantenimiento y recursos materiales.</div>"
+        },
+        "styleUrl": "#__managed_style_07188D693E42578DD8AC",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=1976d2&id=2000&scale=4"
+      },
+      "id": "0DF158A4503FE4EC1601"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-92.904051, 18.024172, 0],
+            [-92.903758, 18.024136, 0],
+            [-92.903727, 18.024339, 0],
+            [-92.904023, 18.024378, 0],
+            [-92.904051, 18.024172, 0]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Edificio A",
+        "description": {
+          "@type": "html",
+          "value": "<ul><li>División de Estudios Profesionales<br></li><li>Oficina de Titulación<br></li><li>Oficina<br></li></ul><div><br></div>"
+        },
+        "styleUrl": "#__managed_style_07188D693E42578DD8AC",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=1976d2&id=2000&scale=4"
+      },
+      "id": "0EB5A42F4C3FE4EE2498"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-92.904138, 18.023954, 0],
+            [-92.903839, 18.023917, 0],
+            [-92.903807, 18.024098, 0],
+            [-92.904113, 18.024141, 0],
+            [-92.904138, 18.023954, 0]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Edificio B",
+        "description": {
+          "@type": "html",
+          "value": "<ul><li>Dirección<br></li><li>Subdirección de Planeación y Vinculación<br></li><li>Subdirección de Servicios Administrativos<br></li><li>Secretarias de Carreras<br></li><li>Depto. Servicios Escolares<br></li><li>Depto. Recursos Humanos<br></li><li>Depto. Recursos Financieros<br></li><li>Depto. Planeación, Programación y Presupuestación<br></li><li>Baños de Hombres y Mujeres (Planta Baja y Planta Alta)<br></li></ul><br>"
+        },
+        "styleUrl": "#__managed_style_07188D693E42578DD8AC",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=1976d2&id=2000&scale=4"
+      },
+      "id": "04852AFC893FE4F06C4B"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-92.903416, 18.023438, 0],
+            [-92.903445, 18.023225, 0],
+            [-92.903023, 18.023167, 0],
+            [-92.902992, 18.023384, 0],
+            [-92.903416, 18.023438, 0]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Edificio K",
+        "description": {
+          "@type": "html",
+          "value": "<ul><li>División de Estudios de Posgrado e Investigación<br></li><li>Coordinación y Titulación de Posgrado<br></li><li>Oficinas 1 y 2<br></li><li>Sala de Uso Múltiple y Sala de Juntas<br></li><li>Aulas K-49 a K-64<br></li><li>Espacio K<br></li><li>Baños de Hombres y Mujeres (Planta Baja y Planta Alta)<br></li></ul><div><br></div>"
+        },
+        "styleUrl": "#__managed_style_07188D693E42578DD8AC",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=1976d2&id=2000&scale=4"
+      },
+      "id": "09032E0FC83FE5119181"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-92.903053, 18.022834, 0],
+            [-92.903016, 18.023059, 0],
+            [-92.903455, 18.023128, 0],
+            [-92.903489, 18.022909, 0],
+            [-92.903053, 18.022834, 0]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Edificio Ñ",
+        "description": {
+          "@type": "html",
+          "value": "<ul><li>Subdirección Académica<br></li><li>Depto. Desarrollo Académico<br></li><li>Coordinación de Psicología (1 y 2) y Tutorías<br></li><li>Revista Huella Científica<br></li><li>Aulas Ñ-67 a Ñ-80<br></li><li>Espacio 1<br></li><li>Baños de Hombres y Mujeres (Planta Baja y Planta Alta)<br></li></ul><br>"
+        },
+        "styleUrl": "#__managed_style_07188D693E42578DD8AC",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=1976d2&id=2000&scale=4"
+      },
+      "id": "0BAE56C1933FE5133167"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-92.903574, 18.022579, 0],
+            [-92.903128, 18.022527, 0],
+            [-92.903097, 18.022729, 0],
+            [-92.90354, 18.022796, 0],
+            [-92.903574, 18.022579, 0]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Edificio Z",
+        "description": {
+          "@type": "html",
+          "value": "<ul><li>Depto. Química, Bioquímica y Ambiental<br></li><li>Laboratorio LC86 (Z-86)<br></li><li>Cubículos Docentes<br></li><li>Aulas Z-83 a Z-85 y Z-87 a Z-94<br></li><li>Baños de Hombres y Mujeres (Planta Baja y Planta Alta)<br></li></ul><br>"
+        },
+        "styleUrl": "#__managed_style_07188D693E42578DD8AC",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=1976d2&id=2000&scale=4"
+      },
+      "id": "0179F89CED3FE5144FA3"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-92.903577, 18.023366, 0],
+            [-92.90355, 18.023563, 0],
+            [-92.903843, 18.023605, 0],
+            [-92.903874, 18.023407, 0],
+            [-92.903577, 18.023366, 0]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Edificio J",
+        "description": {
+          "@type": "html",
+          "value": "<ul><li>Conocido como la \"Pecera\".<br></li><li>Depto. Ciencias Básicas<br></li><li>Depto. Ciencias Económico-Administrativas<br></li><li>Taller Ciencias Básicas<br></li><li>Sala de Juntas<br></li><li>Cubículos Docentes 1 a 3<br></li><li>Baños de Hombres y Mujeres<br></li></ul><br>"
+        },
+        "styleUrl": "#__managed_style_07188D693E42578DD8AC",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=1976d2&id=2000&scale=4"
+      },
+      "id": "02354E26643FE5161AE0"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-92.904548, 18.02485, 0],
+            [-92.904585, 18.02462, 0],
+            [-92.904264, 18.024575, 0],
+            [-92.904225, 18.024799, 0],
+            [-92.904548, 18.02485, 0]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Edificio UG – Unidad Gestión Tecnológica",
+        "description": {
+          "@type": "html",
+          "value": "<ul><li>Sala Magna<br></li><li>Unidad Gestión Tecnológica<br></li><li>Depto. Gestión Tecnológica y Vinculación<br></li><li>Depto. Comunicación y Difusión<br></li><li>Coord. Inst. Educación Dual<br></li><li>Centro de Cómputo<br></li><li>Espacios 1 y 2<br></li><li>Aulas UG-95 a UG-100<br></li><li>Baños de Hombres y Mujeres<br></li></ul><br>"
+        },
+        "styleUrl": "#__managed_style_07188D693E42578DD8AC",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=1976d2&id=2000&scale=4"
+      },
+      "id": "01E7D07D8B3FE51F2504"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-92.90469, 18.023904, 0],
+            [-92.90454, 18.023884, 0],
+            [-92.904524, 18.023998, 0],
+            [-92.904687, 18.02402, 0],
+            [-92.90469, 18.023904, 0]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Cafetería (Edificio D)",
+        "styleUrl": "#__managed_style_05B63807A442578DD8A9",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=1976d2&id=2000&scale=4"
+      },
+      "id": "01434B55613FE523B380"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-92.904032, 18.023787, 0],
+            [-92.904433, 18.023837, 0],
+            [-92.904451, 18.023718, 0],
+            [-92.904071, 18.023666, 0],
+            [-92.904032, 18.023787, 0]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Edificio E",
+        "description": {
+          "@type": "html",
+          "value": "<div>Edificio de Ing. Industrial.</div>"
+        },
+        "styleUrl": "#__managed_style_07188D693E42578DD8AC",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=1976d2&id=2000&scale=4"
+      },
+      "id": "0B951A84AD3FE52452A4"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-92.904417, 18.024379, 0],
+            [-92.904074, 18.024339, 0],
+            [-92.904048, 18.024463, 0],
+            [-92.904396, 18.024501, 0],
+            [-92.904417, 18.024379, 0]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Edificio CP",
+        "description": {
+          "@type": "html",
+          "value": "<ul><li>Cubículos Docentes 1 y 2<br></li><li>Sindicato Docente<br></li></ul><br>"
+        },
+        "styleUrl": "#__managed_style_07188D693E42578DD8AC",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=1976d2&id=2000&scale=4"
+      },
+      "id": "0F4DCE01233FE524F624"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-92.904563, 18.023359, 0],
+            [-92.904578, 18.023238, 0],
+            [-92.904215, 18.023197, 0],
+            [-92.904185, 18.023303, 0],
+            [-92.904563, 18.023359, 0]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Edificio M",
+        "description": {
+          "@type": "html",
+          "value": "<div>Edificio de Ing. Sistemas Computacionales.</div>"
+        },
+        "styleUrl": "#__managed_style_07188D693E42578DD8AC",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=1976d2&id=2000&scale=4"
+      },
+      "id": "0A81A7D6003FE52C8F7C"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-92.904533, 18.023043, 0],
+            [-92.904581, 18.022802, 0],
+            [-92.904312, 18.02277, 0],
+            [-92.904262, 18.022994, 0],
+            [-92.904533, 18.023043, 0]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Edificio P",
+        "description": {
+          "@type": "html",
+          "value": "<ul><li><p><span>Departamento de Actividades Extraescolares.</span><br></p></li><li><p><span>Taller Cultural.</span><br></p></li><li><p><span>Laboratorio de Investigación II.</span><br></p></li><li><p><span>Laboratorio de Bioprocesos.</span><br></p></li></ul><div><br></div>"
+        },
+        "styleUrl": "#__managed_style_07188D693E42578DD8AC",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=1976d2&id=2000&scale=4"
+      },
+      "id": "05B5A749C53FE52F34D3"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-92.904144, 18.022524, 0],
+            [-92.904038, 18.02251, 0],
+            [-92.903971, 18.022936, 0],
+            [-92.904077, 18.022952, 0],
+            [-92.904144, 18.022524, 0]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Edificio Q",
+        "description": {
+          "@type": "html",
+          "value": "<div>Bodega y área de limpieza<br></div><div><br></div>"
+        },
+        "styleUrl": "#__managed_style_07188D693E42578DD8AC",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=1976d2&id=2000&scale=4"
+      },
+      "id": "08C854E1113FE53204F0"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-92.90397, 18.023377, 0],
+            [-92.903957, 18.023515, 0],
+            [-92.904407, 18.023565, 0],
+            [-92.904428, 18.023442, 0],
+            [-92.90397, 18.023377, 0]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Edificio I",
+        "description": {
+          "@type": "html",
+          "value": "<div>Edificio de Ing. Química y Bioquímica.</div>"
+        },
+        "styleUrl": "#__managed_style_07188D693E42578DD8AC",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=1976d2&id=2000&scale=4"
+      },
+      "id": "0516DC97983FE533F100"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-92.905117, 18.02311, 0],
+            [-92.904733, 18.023058, 0],
+            [-92.904717, 18.023194, 0],
+            [-92.905103, 18.02325, 0],
+            [-92.905117, 18.02311, 0]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Edificio O",
+        "description": {
+          "@type": "html",
+          "value": "<ul><li><p><span>Laboratorio de Microbiología.</span><br></p></li><li><p><span>Laboratorio de Investigación I.</span><br></p></li><li><p><span>Baños de Hombres Edificio O.</span><br></p></li><li><p><span>Baños de Mujeres Edificio O.</span><br></p></li></ul><div><br></div>"
+        },
+        "styleUrl": "#__managed_style_07188D693E42578DD8AC",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=1976d2&id=2000&scale=4"
+      },
+      "id": "0BA4F1CC1B3FE534D72B"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-92.904871, 18.023575, 0],
+            [-92.904496, 18.023526, 0],
+            [-92.904466, 18.023662, 0],
+            [-92.904866, 18.023718, 0],
+            [-92.904871, 18.023575, 0]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Edificio H",
+        "description": {
+          "@type": "html",
+          "value": "<ul><li>Edificio de Ing. Civil<br></li><li>Sindicato Administrativo<br></li><li>Reloj Checador (RC)<br></li></ul><div><br></div>"
+        },
+        "styleUrl": "#__managed_style_07188D693E42578DD8AC",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=1976d2&id=2000&scale=4"
+      },
+      "id": "0BDA65AA643FE5364200"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-92.904051, 18.022981, 0],
+            [-92.903699, 18.02294, 0],
+            [-92.903683, 18.023051, 0],
+            [-92.904039, 18.0231, 0],
+            [-92.904051, 18.022981, 0]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Edificio N",
+        "description": {
+          "@type": "html",
+          "value": "<div>Edificio de Lic. Administración.</div>"
+        },
+        "styleUrl": "#__managed_style_07188D693E42578DD8AC",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=1976d2&id=2000&scale=4"
+      },
+      "id": "09E8038BA03FE53990B9"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-92.902504, 18.023457, 7.29291]
+      },
+      "properties": {
+        "name": "Centro de Información",
+        "styleUrl": "#__managed_style_0B90980E0B4257B7F053",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=26a69a&id=2047&scale=4"
+      },
+      "id": "0744187D583FE53C5F4C"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-92.90292, 18.023814, 6.907006]
+      },
+      "properties": {
+        "name": "Centro de Cómputo",
+        "visibility": false,
+        "styleUrl": "#__managed_style_0B63076ED74257ABEDD0",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "label-scale": 1.5,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=1976d2&id=2000&scale=4"
+      },
+      "id": "067F5318243FE53DDED8"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-92.903858, 18.022012, 0],
+            [-92.90391, 18.021664, 0],
+            [-92.903622, 18.021619, 0],
+            [-92.903554, 18.021948, 0],
+            [-92.903858, 18.022012, 0]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Gimnasio - Auditorio",
+        "styleUrl": "#__managed_style_05B63807A442578DD8A9",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=1976d2&id=2000&scale=4"
+      },
+      "id": "0A1683001F3FE5405958"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-92.903836, 18.022396, 0],
+            [-92.903873, 18.022129, 0],
+            [-92.903527, 18.022078, 0],
+            [-92.903486, 18.022342, 0],
+            [-92.903836, 18.022396, 0]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Edificio X",
+        "description": {
+          "@type": "html",
+          "value": "<ul><li>Depto. e Instalaciones de Ingeniería Industrial<br></li><li>Sala de Juntas<br></li><li>Laboratorios L1 a L5<br></li><li>Baños de Hombres y Mujeres<br></li></ul><br>"
+        },
+        "styleUrl": "#__managed_style_07188D693E42578DD8AC",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=1976d2&id=2000&scale=4"
+      },
+      "id": "06D499D2CE3FE5411A17"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-92.90259, 18.020859, 0],
+            [-92.902152, 18.021667, 0],
+            [-92.903031, 18.022132, 0],
+            [-92.903554, 18.021326, 0],
+            [-92.90259, 18.020859, 0]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Cancha de Béisbol",
+        "styleUrl": "#__managed_style_05B63807A442578DD8A9",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=1976d2&id=2000&scale=4"
+      },
+      "id": "07260B35EF3FE542DA7E"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-92.902864, 18.021544, 6.288853]
+      },
+      "properties": {
+        "name": "Cancha de Béisbol",
+        "styleUrl": "#__managed_style_003AA74E014257B69761",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=42a5f5&id=2037&scale=4"
+      },
+      "id": "02F83F0F103FE5430AD4"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-92.905135, 18.022899, 0],
+            [-92.904814, 18.022862, 0],
+            [-92.904788, 18.022973, 0],
+            [-92.90512, 18.023024, 0],
+            [-92.905135, 18.022899, 0]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Edificio R",
+        "description": {
+          "@type": "html",
+          "value": "<ul><li><p><span>Laboratorio de Calidad y Cuantificación del Edificio R.</span><br></p></li></ul><div><br></div>"
+        },
+        "styleUrl": "#__managed_style_07188D693E42578DD8AC",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=1976d2&id=2000&scale=4"
+      },
+      "id": "0B9B18D3E93FE54476CC"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-92.904617, 18.022549, 0],
+            [-92.904587, 18.022686, 0],
+            [-92.905013, 18.022768, 0],
+            [-92.905037, 18.022637, 0],
+            [-92.904617, 18.022549, 0]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Edificio S",
+        "description": {
+          "@type": "html",
+          "value": "<ul><li><p><span>Laboratorio de Química General.</span><br></p></li><li><p><span>Departamento de Ciencias de la Tierra.</span><br></p></li></ul><div><br></div>"
+        },
+        "styleUrl": "#__managed_style_07188D693E42578DD8AC",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=1976d2&id=2000&scale=4"
+      },
+      "id": "08757690F83FE5456C94"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-92.904849, 18.022431, 0],
+            [-92.904894, 18.022144, 0],
+            [-92.904644, 18.022108, 0],
+            [-92.9046, 18.022389, 0],
+            [-92.904849, 18.022431, 0]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Edificio V",
+        "description": {
+          "@type": "html",
+          "value": "<ul><li>Oficina del Edificio V.<br></li><li>Laboratorio de Ingeniería Civil del Edificio V.<br></li><li>Laboratorio de Ingeniería Petrolera del Edificio V.<br></li><li>Laboratorio de Pruebas Hidráulicas del Edificio V.<br></li><li>Laboratorio de Pruebas de Concreto del Edificio V.<br></li><li>Taller de Soldadura del Edificio V.<br></li><li>Sala de Cómputo del Edificio V.<br></li><li>Sala V1 del Edificio V.<br></li><li>Área de Máquinas del Edificio V.<br></li></ul><br>"
+        },
+        "styleUrl": "#__managed_style_07188D693E42578DD8AC",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=1976d2&id=2000&scale=4"
+      },
+      "id": "0F804AEFCE3FE5462D23"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-92.903535, 18.024429, 7.061575]
+      },
+      "properties": {
+        "name": "Acceso 1",
+        "styleUrl": "#__managed_style_0485B8C2B94257B9FCF9",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=7b1fa2&id=2356&scale=4"
+      },
+      "id": "0F32E941D93FE5486913"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-92.905487, 18.023192, 7.34259]
+      },
+      "properties": {
+        "name": "Acceso 4",
+        "styleUrl": "#__managed_style_0915A746614257D54FFF",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=ab47bc&id=2356&scale=4"
+      },
+      "id": "01EE3965663FE549B91F"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-92.905252, 18.023592, 7.574207]
+      },
+      "properties": {
+        "name": "Acceso 3",
+        "styleUrl": "#__managed_style_0915A746614257D54FFF",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=ab47bc&id=2356&scale=4"
+      },
+      "id": "09496308BD3FE54A7D0F"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-92.905799, 18.022612, 7.213085]
+      },
+      "properties": {
+        "name": "Acceso 5",
+        "styleUrl": "#__managed_style_0915A746614257D54FFF",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=ab47bc&id=2356&scale=4"
+      },
+      "id": "021EF9CDCE3FE54AC799"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-92.904115, 18.022462, 0],
+            [-92.904157, 18.022219, 0],
+            [-92.903988, 18.022195, 0],
+            [-92.903951, 18.022442, 0],
+            [-92.904115, 18.022462, 0]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Edificio W",
+        "description": {
+          "@type": "html",
+          "value": "<ul><li>Laboratorio de Química Pesada<br></li><li>Laboratorio de Físico Química<br></li></ul><br>"
+        },
+        "styleUrl": "#__managed_style_07188D693E42578DD8AC",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=1976d2&id=2000&scale=4"
+      },
+      "id": "02E7449BA9425791554C"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-92.904732, 18.023459, 0],
+            [-92.905123, 18.023512, 0],
+            [-92.90514, 18.023418, 0],
+            [-92.904749, 18.023359, 0],
+            [-92.904732, 18.023459, 0]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Edificio L",
+        "description": {
+          "@type": "html",
+          "value": "<ul><li>EAula y Rack de Redes<br></li><li>Aulas L-44 a L-46<br></li><li>Club de Programación<br></li><li>Sindicato No Docente<br></li><li>Espacio L</li></ul><br><div><br></div>"
+        },
+        "styleUrl": "#__managed_style_07188D693E42578DD8AC",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=1976d2&id=2000&scale=4"
+      },
+      "id": "0C6F3681C04257B01F46"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-92.902104, 18.022743, 5.937199]
+      },
+      "properties": {
+        "name": "Cancha de Fútbol y Pista de Atletismo",
+        "styleUrl": "#__managed_style_0913336BB54257B45C8C",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=42a5f5&id=2300&scale=4"
+      },
+      "id": "051C44E2534257B3443C"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-92.902814, 18.022668, 6.288875]
+      },
+      "properties": {
+        "name": "Cancha Futbolito",
+        "styleUrl": "#__managed_style_07799F38924257B51E3F",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=42a5f5&id=2331&scale=4"
+      },
+      "id": "0AFA89222A4257B4B384"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-92.903002, 18.022244, 6.752457]
+      },
+      "properties": {
+        "name": "Canchas de baloncesto",
+        "styleUrl": "#__managed_style_0F77B4558E4257B616BC",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=42a5f5&id=2038&scale=4"
+      },
+      "id": "000E9B88124257B59AB8"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-92.903872, 18.024494, 6.577063]
+      },
+      "properties": {
+        "name": "Estacionamiento Administrativo",
+        "styleUrl": "#__managed_style_0A085A74FA4257B8CDF8",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=26a69a&id=2244&scale=4"
+      },
+      "id": "0AB31908C84257B84E6E"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-92.904194, 18.02421, 6.372492]
+      },
+      "properties": {
+        "name": "Campana",
+        "styleUrl": "#__managed_style_090BC5169D4257BAF917",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=5c6bc0&id=2026&scale=4"
+      },
+      "id": "0E5632B5944257BA40D3"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-92.903659, 18.024013, 6.653178]
+      },
+      "properties": {
+        "name": "Monumento a Carlos Pellicer Cámara",
+        "styleUrl": "#__managed_style_024EBF844B4257BBF450",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=303f9f&id=2165&scale=4"
+      },
+      "id": "0162BE4FD24257BB2D18"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-92.904895, 18.024336, 8.53104]
+      },
+      "properties": {
+        "name": "Acceso 2",
+        "styleUrl": "#__managed_style_0915A746614257D54FFF",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=ab47bc&id=2356&scale=4"
+      },
+      "id": "0B8500BB124257BD9461"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-92.905017, 18.023775, 7.257232]
+      },
+      "properties": {
+        "name": "Estacionamiento Personal",
+        "styleUrl": "#__managed_style_0A085A74FA4257B8CDF8",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=26a69a&id=2244&scale=4"
+      },
+      "id": "0CF2D0F46B4257BED8BC"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-92.905441, 18.022803, 6.752469]
+      },
+      "properties": {
+        "name": "Estacionamiento Estudiantes",
+        "styleUrl": "#__managed_style_0A085A74FA4257B8CDF8",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=26a69a&id=2244&scale=4"
+      },
+      "id": "0CCAB6304E4257BF2E14"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-92.904627, 18.021867, 7.815745]
+      },
+      "properties": {
+        "name": "Acceso 6",
+        "styleUrl": "#__managed_style_0915A746614257D54FFF",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=ab47bc&id=2356&scale=4"
+      },
+      "id": "08290324764257BFFEBC"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-92.904279, 18.021935, 7.012254]
+      },
+      "properties": {
+        "name": "Estacionamiento Auditorio",
+        "styleUrl": "#__managed_style_0A085A74FA4257B8CDF8",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=26a69a&id=2244&scale=4"
+      },
+      "id": "04637FDE044257C236A9"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-92.90433, 18.02262, 6.75246]
+      },
+      "properties": {
+        "name": "Cancha de baloncesto",
+        "styleUrl": "#__managed_style_0F77B4558E4257B616BC",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=42a5f5&id=2038&scale=4"
+      },
+      "id": "0F3D7043CC4257C2EBDF"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-92.904558, 18.022418, 0],
+            [-92.904414, 18.022409, 0],
+            [-92.904403, 18.02252, 0],
+            [-92.904549, 18.022545, 0],
+            [-92.904558, 18.022418, 0]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Edificio T",
+        "description": {
+          "@type": "html",
+          "value": "<ul><li>Cuarto de máquinas</li></ul><br>"
+        },
+        "styleUrl": "#__managed_style_07188D693E42578DD8AC",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=1976d2&id=2000&scale=4"
+      },
+      "id": "0FB26E13FA4257C39810"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-92.902903, 18.0235, 7.097627]
+      },
+      "properties": {
+        "name": "Techumbre",
+        "styleUrl": "#__managed_style_08EF8183FA4257D15F98",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=26a69a&id=2341&scale=4"
+      },
+      "id": "01212C92564257D04374"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-92.90328, 18.023878, 6.901062]
+      },
+      "properties": {
+        "name": "Plaza Informática",
+        "styleUrl": "#__managed_style_029878C9F34257D1E590",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=26a69a&id=2002&scale=4"
+      },
+      "id": "05382014FA4257D183D9"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-92.905373, 18.022321, 0],
+            [-92.90506, 18.022298, 0],
+            [-92.905043, 18.022409, 0],
+            [-92.905353, 18.022442, 0],
+            [-92.905373, 18.022321, 0]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Edificio U",
+        "description": {
+          "@type": "html",
+          "value": "<ul><li>Lab. Ciencias de los Alimentos<br></li><li>Lab. Ambiental<br></li><li>Planta Purificadora Jaguar<br></li></ul><br>"
+        },
+        "styleUrl": "#__managed_style_07188D693E42578DD8AC",
+        "fill-opacity": 0.25098039215686274,
+        "fill": "#ffffff",
+        "stroke-opacity": 1,
+        "stroke": "#fbc02d",
+        "stroke-width": 3.2,
+        "icon-offset": [64, 128],
+        "icon-offset-units": ["pixels", "insetPixels"],
+        "icon": "https://earth.google.com/earth/document/icon?color=1976d2&id=2000&scale=4"
+      },
+      "id": "028F964E9B4257D48D80"
+    }
+  ]
+}
